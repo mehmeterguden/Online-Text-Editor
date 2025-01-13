@@ -1,0 +1,249 @@
+@layer components {
+  .btn-toolbar {
+    @apply inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg
+    text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700
+    transition-colors duration-200 relative group;
+  }
+
+  .btn-toolbar:hover .tooltip {
+    @apply opacity-100 visible;
+  }
+
+  .tooltip {
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs
+    text-white bg-gray-900 dark:bg-gray-700 rounded whitespace-nowrap opacity-0 invisible
+    transition-all duration-200 z-50;
+  }
+
+  .tooltip::after {
+    content: '';
+    @apply absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent
+    border-t-gray-900 dark:border-t-gray-700;
+  }
+
+  .input {
+    @apply block w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+    focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
+    transition-all duration-200;
+  }
+
+  .select {
+    @apply block w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600
+    bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100
+    focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
+    transition-all duration-200 appearance-none bg-no-repeat bg-right pr-8;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-size: 1.5em 1.5em;
+  }
+
+  .toggle {
+    @apply relative w-11 h-6 rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer
+    transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500
+    dark:focus:ring-blue-400;
+  }
+
+  .toggle:checked {
+    @apply bg-blue-500 dark:bg-blue-400;
+  }
+
+  .toggle:checked::after {
+    @apply translate-x-6;
+  }
+
+  .toggle::after {
+    content: '';
+    @apply absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm
+    transition-transform duration-200;
+  }
+
+  .checkbox {
+    @apply h-5 w-5 rounded-md border-2 border-gray-300 dark:border-gray-600
+    text-blue-500 dark:text-blue-400
+    focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400
+    focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800
+    transition-all duration-200 cursor-pointer;
+  }
+
+  .card-base {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200
+    dark:border-gray-700 overflow-hidden;
+  }
+
+  /* Editor Stats */
+  .editor-stats {
+    @apply flex items-center justify-between px-6 py-3 text-sm bg-gray-50 dark:bg-gray-900
+    border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .editor-stats-group {
+    @apply flex items-center gap-8 flex-1;
+  }
+
+  .editor-stats-item {
+    @apply flex items-center gap-2 text-gray-600 dark:text-gray-400 whitespace-nowrap;
+  }
+
+  .editor-stats-label {
+    @apply font-medium;
+  }
+
+  .editor-stats-value {
+    @apply text-gray-900 dark:text-gray-100 font-semibold;
+  }
+
+  /* Editor Container */
+  .editor-container {
+    @apply relative rounded-lg overflow-hidden bg-white dark:bg-gray-800;
+  }
+
+  .editor-loading {
+    @apply absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800
+    transition-opacity duration-300;
+  }
+
+  .editor-loading-spinner {
+    @apply w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full
+    animate-spin;
+  }
+
+  /* Format ve Markdown Görünümleri */
+  .format-view {
+    @apply prose dark:prose-invert max-w-none p-6;
+  }
+
+  .format-view h1 { @apply text-4xl font-bold mb-4; }
+  .format-view h2 { @apply text-3xl font-bold mb-3; }
+  .format-view h3 { @apply text-2xl font-bold mb-3; }
+  .format-view h4 { @apply text-xl font-bold mb-2; }
+  .format-view h5 { @apply text-lg font-bold mb-2; }
+  .format-view h6 { @apply text-base font-bold mb-2; }
+
+  .format-view .center {
+    @apply text-center;
+  }
+
+  /* Markdown Görünümü */
+  .markdown-view {
+    @apply font-mono text-sm p-6 bg-gray-50 dark:bg-gray-900;
+  }
+
+  .markdown-view pre {
+    @apply bg-white dark:bg-gray-800 p-4 rounded-lg overflow-x-auto;
+  }
+
+  /* HTML Önizleme */
+  .html-preview {
+    @apply p-6 border-t border-gray-200 dark:border-gray-700;
+  }
+
+  /* Ayarlar Popup */
+  .settings-popup {
+    @apply fixed inset-0 z-50 flex items-start justify-end p-4
+    bg-black/20 dark:bg-black/40 backdrop-blur-sm;
+  }
+
+  .settings-content {
+    @apply w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl
+    transform transition-transform duration-200 mt-16;
+  }
+
+  .settings-header {
+    @apply flex items-center justify-between p-4 border-b
+    border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900;
+  }
+
+  .settings-body {
+    @apply p-6 max-h-[calc(100vh-12rem)] overflow-y-auto;
+  }
+
+  .settings-section {
+    @apply space-y-4 pb-6 mb-6 border-b border-gray-200 dark:border-gray-700
+    last:border-0 last:mb-0 last:pb-0;
+  }
+
+  .settings-section-title {
+    @apply text-base font-semibold text-gray-900 dark:text-gray-100 mb-4;
+  }
+
+  /* Araç Çubukları ve Butonlar */
+  .toolbar-section {
+    @apply flex flex-wrap gap-4 p-4 bg-white dark:bg-gray-800 rounded-lg
+    border border-gray-200 dark:border-gray-700;
+  }
+
+  .toolbar-group {
+    @apply flex items-center gap-2;
+  }
+
+  .toolbar-divider {
+    @apply w-px h-8 bg-gray-200 dark:bg-gray-700 mx-2;
+  }
+
+  /* Tooltip */
+  .tooltip-content {
+    @apply absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2
+    px-3 py-2 text-sm bg-gray-900 dark:bg-gray-700 text-white rounded-lg
+    opacity-0 invisible transition-all duration-200 whitespace-pre-wrap
+    max-w-xs text-center;
+  }
+
+  .tooltip-arrow {
+    @apply absolute -bottom-1 left-1/2 transform -translate-x-1/2
+    border-4 border-transparent border-t-gray-900 dark:border-t-gray-700;
+  }
+
+  /* Suggestions */
+  .monaco-editor .suggest-widget {
+    @apply border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden
+    shadow-lg bg-white dark:bg-gray-800;
+  }
+
+  .monaco-editor .suggest-widget .monaco-list {
+    @apply bg-transparent;
+  }
+
+  .monaco-editor .suggest-widget .monaco-list .monaco-list-row {
+    @apply px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer;
+  }
+
+  .monaco-editor .suggest-widget .monaco-list .monaco-list-row.focused {
+    @apply bg-blue-50 dark:bg-blue-900;
+  }
+
+  .monaco-editor .suggest-widget .details-container {
+    @apply border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900
+    px-3 py-2;
+  }
+
+  /* Tooltips */
+  [data-tip] {
+    @apply relative;
+  }
+
+  [data-tip]::after {
+    content: attr(data-tip);
+    @apply absolute z-50 bottom-full left-1/2 transform -translate-x-1/2 mb-2
+    px-2 py-1 text-xs font-medium text-white bg-gray-900 dark:bg-gray-700
+    rounded shadow-lg whitespace-nowrap opacity-0 invisible
+    transition-all duration-200;
+  }
+
+  [data-tip]::before {
+    content: '';
+    @apply absolute z-50 bottom-full left-1/2 transform -translate-x-1/2
+    border-4 border-transparent border-t-gray-900 dark:border-t-gray-700
+    mb-1 opacity-0 invisible transition-all duration-200;
+  }
+
+  [data-tip]:hover::after,
+  [data-tip]:hover::before {
+    @apply opacity-100 visible;
+  }
+
+  /* Search and Replace */
+  .search-replace {
+    @apply border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900
+    p-4;
+  }
+} 

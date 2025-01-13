@@ -1,0 +1,182 @@
+@layer utilities {
+  .bg-accent-hover {
+    @apply bg-light-accent bg-opacity-50 dark:bg-dark-accent dark:bg-opacity-50;
+  }
+
+  .bg-accent-selection {
+    @apply bg-light-accent bg-opacity-50 text-light-text
+           dark:bg-dark-accent dark:bg-opacity-50 dark:text-dark-text;
+  }
+}
+
+@layer components {
+  /* Modern Tema Renkleri */
+  :root {
+    /* Açık Tema */
+    --light-bg: #ffffff;
+    --light-bg-secondary: #f8fafc;
+    --light-text: #1e293b;
+    --light-text-secondary: #64748b;
+    --light-border: #e2e8f0;
+    --light-accent: #2563eb;
+    --light-accent-hover: #1d4ed8;
+    --light-accent-bg: #eff6ff;
+    --light-success: #16a34a;
+    --light-warning: #d97706;
+    --light-error: #dc2626;
+    --light-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --light-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+    /* Koyu Tema */
+    --dark-bg: #1e1e2e;
+    --dark-bg-secondary: #181825;
+    --dark-text: #cdd6f4;
+    --dark-text-secondary: #a6adc8;
+    --dark-border: #313244;
+    --dark-accent: #89b4fa;
+    --dark-accent-hover: #74c7ec;
+    --dark-accent-bg: rgba(137, 180, 250, 0.1);
+    --dark-success: #a6e3a1;
+    --dark-warning: #fab387;
+    --dark-error: #f38ba8;
+    --dark-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.4);
+    --dark-shadow-md: 0 6px 8px -2px rgb(0 0 0 / 0.5);
+  }
+
+  /* Özel Monaco Editor Stilleri */
+  .monaco-editor {
+    @apply rounded-lg overflow-hidden border shadow-sm transition-colors duration-200
+           border-light-border bg-light-bg
+           dark:border-dark-border dark:bg-dark-bg;
+  }
+
+  .monaco-editor .margin {
+    @apply hidden;
+  }
+
+  .monaco-editor .monaco-editor-background,
+  .monaco-editor .monaco-editor-background.margin-view-overlays,
+  .monaco-editor .inputarea.ime-input {
+    @apply bg-light-bg dark:bg-dark-bg;
+  }
+
+  /* Monaco içerik alanı */
+  .monaco-editor .monaco-scrollable-element {
+    @apply bg-light-bg dark:bg-dark-bg;
+  }
+
+  .monaco-editor .view-lines {
+    @apply bg-light-bg dark:bg-dark-bg;
+    padding: 0 !important;
+    line-height: inherit !important;
+  }
+
+  .monaco-editor .view-line {
+    @apply bg-light-bg dark:bg-dark-bg;
+    padding: 0 !important;
+    line-height: inherit !important;
+    min-height: 0 !important;
+  }
+
+  .monaco-editor .view-lines.monaco-mouse-cursor-text {
+    padding: 0 !important;
+    line-height: inherit !important;
+  }
+
+  .monaco-editor .view-overlays .current-line {
+    @apply bg-light-accent-bg dark:bg-dark-accent-bg;
+  }
+
+  /* Tooltip Stilleri */
+  [data-tip] {
+    @apply relative inline-block;
+  }
+
+  [data-tip]:before {
+    content: attr(data-tip);
+    @apply absolute z-50 px-2 py-1 text-xs font-medium rounded shadow-md whitespace-normal max-w-xs
+           text-light-text bg-light-bg border border-light-border
+           dark:text-dark-text dark:bg-dark-bg dark:border-dark-border
+           opacity-0 invisible transition-all duration-200;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(100% + 5px);
+    width: max-content;
+  }
+
+  [data-tip]:hover:before {
+    @apply opacity-100 visible;
+  }
+
+  /* Tooltip pozisyonları */
+  [data-tip].tooltip-right:before {
+    left: calc(100% + 5px);
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  [data-tip].tooltip-left:before {
+    right: calc(100% + 5px);
+    left: auto;
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+
+  [data-tip].tooltip-bottom:before {
+    bottom: auto;
+    top: calc(100% + 5px);
+  }
+
+  /* Özel Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-light-bg-secondary rounded-full
+           dark:bg-dark-bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-light-border rounded-full transition-colors duration-200
+           dark:bg-dark-border;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-400 dark:bg-primary-300;
+  }
+
+  /* Seçim Rengi */
+  ::selection {
+    @apply bg-primary-100 dark:bg-primary-900 text-primary-900 dark:text-primary-100;
+  }
+}
+
+/* Animasyonlar */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+} 

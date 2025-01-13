@@ -1,0 +1,72 @@
+/* Tooltip Styles */
+
+
+/* Number Input Styles */
+input[type="number"] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  position: relative;
+  padding-right: 1.5rem;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-input-wrapper {
+  position: relative;
+  width: 5rem;
+}
+
+.number-input-controls {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid theme('colors.gray.300');
+  background: theme('colors.gray.100');
+}
+
+.dark .number-input-controls {
+  border-left-color: theme('colors.gray.600');
+  background: theme('colors.gray.700');
+}
+
+.number-input-up,
+.number-input-down {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: theme('colors.gray.500');
+}
+
+.dark .number-input-up,
+.dark .number-input-down {
+  color: theme('colors.gray.400');
+}
+
+.number-input-up:hover,
+.number-input-down:hover {
+  color: theme('colors.blue.500');
+  background-color: theme('colors.gray.200');
+}
+
+.dark .number-input-up:hover,
+.dark .number-input-down:hover {
+  background-color: theme('colors.gray.600');
+}
+
+.number-input-up {
+  border-bottom: 1px solid theme('colors.gray.300');
+}
+
+.dark .number-input-up {
+  border-bottom-color: theme('colors.gray.600');
+} 

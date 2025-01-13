@@ -1,0 +1,152 @@
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    @apply bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text min-h-screen;
+  }
+}
+
+@layer components {
+  .editor-container {
+    @apply h-full flex flex-col gap-4 p-6;
+  }
+
+  .editor-wrapper {
+    @apply flex-1 min-h-[400px] rounded-xl border shadow-lg overflow-hidden
+           bg-light-bg border-light-border
+           dark:bg-dark-bg dark:border-dark-border;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium
+           rounded-lg border transition-all duration-200 select-none;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary-500 hover:bg-primary-600 border-transparent
+           dark:bg-primary-400 dark:hover:bg-primary-300
+           shadow-md hover:shadow-lg active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply text-light-text bg-light-bg hover:bg-light-bg-secondary border-light-border
+           dark:text-dark-text dark:bg-dark-bg dark:hover:bg-dark-bg-secondary dark:border-dark-border
+           shadow-md hover:shadow-lg active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply text-light-text hover:bg-light-bg-secondary border-transparent
+           dark:text-dark-text dark:hover:bg-dark-bg-secondary
+           active:scale-[0.98];
+  }
+
+  .btn-toolbar {
+    @apply btn btn-secondary text-xs px-3 py-1.5;
+  }
+
+  .btn-action {
+    @apply btn btn-primary;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 text-sm rounded-lg border transition-colors duration-200
+           text-light-text bg-light-bg border-light-border
+           focus:outline-none focus:ring-2 ring-opacity-20 ring-primary-500 focus:border-primary-500
+           dark:text-dark-text dark:bg-dark-bg dark:border-dark-border
+           dark:ring-primary-400 dark:focus:border-primary-400;
+  }
+
+  .select {
+    @apply w-full px-3 py-2 text-sm rounded-lg border appearance-none cursor-pointer
+           text-light-text bg-light-bg border-light-border
+           focus:outline-none focus:ring-2 ring-opacity-20 ring-primary-500 focus:border-primary-500
+           dark:text-dark-text dark:bg-dark-bg dark:border-dark-border
+           dark:ring-primary-400 dark:focus:border-primary-400;
+  }
+
+  .checkbox {
+    @apply w-4 h-4 rounded border transition-colors duration-200 cursor-pointer
+           text-primary-500 bg-light-bg border-light-border
+           focus:outline-none focus:ring-2 ring-opacity-20 ring-primary-500
+           dark:text-primary-400 dark:bg-dark-bg dark:border-dark-border
+           dark:ring-primary-400;
+  }
+
+  .card {
+    @apply rounded-lg border shadow-sm transition-all duration-200
+           bg-light-bg border-light-border
+           dark:bg-dark-bg dark:border-dark-border;
+  }
+
+  .card-hover {
+    @apply hover:shadow-md hover:border-opacity-20 hover:border-primary-500
+           dark:hover:border-primary-400;
+  }
+
+  .card-base {
+    @apply card;
+  }
+
+  .card-interactive {
+    @apply card card-hover;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toolbar-btn:hover {
+  background-color: var(--hover-color);
+}
+
+.toolbar-select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.toolbar-select:hover {
+  border-color: var(--primary-color);
+}
+
+.divider {
+  margin: 0 0.5rem;
+  color: var(--border-color);
+}
+
+/* Highlight için stil */
+.highlighted-text {
+  background-color: rgba(97, 175, 239, 0.3);
+  border-radius: 2px;
+}
+
+.dark .highlighted-text {
+  background-color: rgba(97, 175, 239, 0.2);
+} 
