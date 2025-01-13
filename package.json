@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 1234",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-alignment": "^44.1.0",
