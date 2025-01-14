@@ -126,13 +126,13 @@ const letterSpacingOptions = [
 ]
 
 export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: EditorSettingsPopupProps) {
-  const { theme } = useTheme()
-  const [previewTheme, setPreviewTheme] = useState(theme)
+  const { isDark } = useTheme()
+  const [previewTheme, setPreviewTheme] = useState(isDark ? 'vs-dark' : 'vs-light')
   
   // Ayarlar açıldığında mevcut temayı kaydet
   useEffect(() => {
     if (isOpen) {
-      setPreviewTheme(theme)
+      setPreviewTheme(isDark ? 'vs-dark' : 'vs-light')
     }
   }, [isOpen])
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import MonacoEditor from '@monaco-editor/react';
+import { useTheme } from '../hooks/useTheme';
 
 interface EditorProps {
   value: string;
@@ -7,6 +8,8 @@ interface EditorProps {
 }
 
 export function Editor({ value, onChange }: EditorProps) {
+  const { isDark } = useTheme();
+
   return (
     <div className="w-full h-[calc(100vh-8rem)]">
       <MonacoEditor
@@ -14,7 +17,7 @@ export function Editor({ value, onChange }: EditorProps) {
         defaultLanguage="plaintext"
         value={value}
         onChange={(value) => onChange(value || '')}
-        theme="light"
+        theme={isDark ? 'vs-dark' : 'light'}
         options={{
           minimap: { enabled: false },
           fontSize: 16,
@@ -44,12 +47,7 @@ export function Editor({ value, onChange }: EditorProps) {
           links: false,
           mouseWheelZoom: true,
           formatOnPaste: true,
-          formatOnType: true,
-          fontSize: {
-            mobile: 16,
-            tablet: 14,
-            desktop: 14
-          }
+          formatOnType: true
         }}
       />
     </div>
