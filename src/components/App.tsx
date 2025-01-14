@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Toolbar } from './Toolbar'
 import { Editor } from './Editor'
+import { Header } from './layout/Header'
 import { getFeatureById, allCleaningFeatures } from '../features/cleaning'
 
 export function App() {
@@ -99,21 +100,24 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
-      <div className="max-w-6xl mx-auto space-y-4">
-        <Toolbar
-          onConvertCase={handleConvertCase}
-          onSortLines={handleSortLines}
-          onConvertCharacters={handleConvertCharacters}
-          onUrlEncodeDecode={handleUrlEncodeDecode}
-          onAddPrefix={handleAddPrefix}
-          onAddSuffix={handleAddSuffix}
-          onFormatText={handleFormatText}
-          onShowMarkdown={handleShowMarkdown}
-          onCleanText={handleCleanText}
-          text={text}
-        />
-        <Editor value={text} onChange={setText} />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Header />
+      <div className="p-4">
+        <div className="max-w-6xl mx-auto space-y-4">
+          <Toolbar
+            onConvertCase={handleConvertCase}
+            onSortLines={handleSortLines}
+            onConvertCharacters={handleConvertCharacters}
+            onUrlEncodeDecode={handleUrlEncodeDecode}
+            onAddPrefix={handleAddPrefix}
+            onAddSuffix={handleAddSuffix}
+            onFormatText={handleFormatText}
+            onShowMarkdown={handleShowMarkdown}
+            onCleanText={handleCleanText}
+            text={text}
+          />
+          <Editor value={text} onChange={setText} />
+        </div>
       </div>
     </div>
   )
