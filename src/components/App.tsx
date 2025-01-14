@@ -100,10 +100,10 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      <main className="w-full">
-        <div className="bg-white shadow-sm">
+      <div className="p-4">
+        <div className="max-w-6xl mx-auto space-y-4">
           <Toolbar
             onConvertCase={handleConvertCase}
             onSortLines={handleSortLines}
@@ -116,11 +116,9 @@ export function App() {
             onCleanText={handleCleanText}
             text={text}
           />
-        </div>
-        <div className="bg-white shadow-sm">
           <Editor value={text} onChange={setText} />
         </div>
-      </main>
+      </div>
     </div>
   )
 } 

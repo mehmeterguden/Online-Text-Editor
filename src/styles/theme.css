@@ -18,40 +18,42 @@
     --light-text: #1e293b;
     --light-text-secondary: #64748b;
     --light-border: #e2e8f0;
-    --light-accent: #2563eb;
-    --light-accent-hover: #1d4ed8;
-    --light-accent-bg: #eff6ff;
-    --light-success: #16a34a;
-    --light-warning: #d97706;
-    --light-error: #dc2626;
+    --light-accent: #3b82f6;
+    --light-accent-hover: #2563eb;
+    --light-accent-bg: #f0f7ff;
+    --light-success: #22c55e;
+    --light-warning: #f59e0b;
+    --light-error: #ef4444;
     --light-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
     --light-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 
     /* Koyu Tema */
-    --dark-bg: #1e1e2e;
-    --dark-bg-secondary: #181825;
-    --dark-text: #cdd6f4;
-    --dark-text-secondary: #a6adc8;
-    --dark-border: #313244;
-    --dark-accent: #89b4fa;
-    --dark-accent-hover: #74c7ec;
-    --dark-accent-bg: rgba(137, 180, 250, 0.1);
-    --dark-success: #a6e3a1;
-    --dark-warning: #fab387;
-    --dark-error: #f38ba8;
+    --dark-bg: #0f172a;
+    --dark-bg-secondary: #1e293b;
+    --dark-text: #f1f5f9;
+    --dark-text-secondary: #94a3b8;
+    --dark-border: #334155;
+    --dark-accent: #60a5fa;
+    --dark-accent-hover: #3b82f6;
+    --dark-accent-bg: rgba(96, 165, 250, 0.1);
+    --dark-success: #4ade80;
+    --dark-warning: #fbbf24;
+    --dark-error: #f87171;
     --dark-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.4);
     --dark-shadow-md: 0 6px 8px -2px rgb(0 0 0 / 0.5);
   }
 
   /* Özel Monaco Editor Stilleri */
   .monaco-editor {
-    @apply rounded-lg overflow-hidden border shadow-sm transition-colors duration-200
+    @apply rounded-lg overflow-hidden border-2 shadow-sm transition-colors duration-200
            border-light-border bg-light-bg
            dark:border-dark-border dark:bg-dark-bg;
+    padding: 1rem;
   }
 
   .monaco-editor .margin {
-    @apply hidden;
+    @apply block border-r border-light-border dark:border-dark-border;
+    background-color: transparent !important;
   }
 
   .monaco-editor .monaco-editor-background,
@@ -67,24 +69,29 @@
 
   .monaco-editor .view-lines {
     @apply bg-light-bg dark:bg-dark-bg;
-    padding: 0 !important;
-    line-height: inherit !important;
+    padding: 0.5rem !important;
+    line-height: 1.6 !important;
   }
 
   .monaco-editor .view-line {
     @apply bg-light-bg dark:bg-dark-bg;
-    padding: 0 !important;
-    line-height: inherit !important;
-    min-height: 0 !important;
+    padding: 0 0.5rem !important;
+    line-height: 1.6 !important;
+    min-height: 1.6em !important;
   }
 
   .monaco-editor .view-lines.monaco-mouse-cursor-text {
-    padding: 0 !important;
-    line-height: inherit !important;
+    padding: 0.5rem !important;
+    line-height: 1.6 !important;
   }
 
   .monaco-editor .view-overlays .current-line {
     @apply bg-light-accent-bg dark:bg-dark-accent-bg;
+  }
+
+  /* Seçili metin için stil */
+  .monaco-editor .selected-text {
+    @apply bg-light-accent bg-opacity-20 dark:bg-dark-accent dark:bg-opacity-20;
   }
 
   /* Tooltip Stilleri */

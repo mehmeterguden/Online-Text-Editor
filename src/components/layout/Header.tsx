@@ -1,11 +1,25 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 export function Header() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check if user prefers dark mode
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(darkModeMediaQuery.matches);
+
+    // Listen for changes in system dark mode preference
+    const handleChange = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
+    darkModeMediaQuery.addEventListener('change', handleChange);
+
+    return () => darkModeMediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 w-full">
-      <div className="w-full">
-        <div className="flex items-center justify-center h-14 sm:h-16">
-          <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
+    <header className="bg-white dark:bg-gray-800 shadow-sm">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-center h-16">
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
             Metin Editörü
           </h1>
         </div>
