@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import lightLogo from '../../../src/favicon_light.png';
-import darkLogo from '../../../src/favicon_dark.png';
+import lightLogo from '../../favicon_light.png';
+import darkLogo from '../../favicon_dark.png';
 
 export function Header() {
   const [isDarkMode, setIsDarkMode] = useState(false);
