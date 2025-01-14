@@ -46,25 +46,11 @@ function App() {
   const [editor, setEditor] = useState<any>(null)
   const [monacoInstance, setMonacoInstance] = useState<any>(null)
 
-  // Monaco editörün temasını güncelle
-  useEffect(() => {
-    if (editor && monacoInstance) {
-      const currentTheme = theme === 'dark' ? 'vs-dark' : 'vs-light'
-      monacoInstance.editor.setTheme(currentTheme)
-    }
-  }, [theme, editor, monacoInstance])
-
   const handleEditorDidMount = (editor: any, monaco: any) => {
     setEditor(editor)
     setMonacoInstance(monaco)
     editor.focus()
     
-    // Set initial value
-    const initialValue = editor.getValue()
-    if (initialValue !== undefined) {
-      setText(initialValue)
-    }
-
     // Tema tanımlamaları
     monaco.editor.defineTheme('vs-dark', {
       base: 'vs-dark',
@@ -76,26 +62,26 @@ function App() {
         { token: 'number', foreground: 'fca5a5' }
       ],
       colors: {
-        'editor.background': '#1f2937',
+        'editor.background': '#28293e',
         'editor.foreground': '#e5e7eb',
-        'editor.lineHighlightBackground': '#313244',
+        'editor.lineHighlightBackground': '#2d2d2d',
         'editorCursor.foreground': '#89b4fa',
         'editor.selectionBackground': '#45475a80',
         'editor.inactiveSelectionBackground': '#45475a40',
-        'editorSuggestWidget.background': '#181825',
-        'editorSuggestWidget.border': '#313244',
-        'editorSuggestWidget.foreground': '#cdd6f4',
-        'editorSuggestWidget.selectedBackground': '#45475a80',
+        'editorSuggestWidget.background': '#28293e',
+        'editorSuggestWidget.border': '#2d2d2d',
+        'editorSuggestWidget.foreground': '#e5e7eb',
+        'editorSuggestWidget.selectedBackground': '#2d2d2d',
         'editorSuggestWidget.highlightForeground': '#89b4fa',
         'editorSuggestWidget.focusHighlightForeground': '#89dceb',
-        'list.hoverBackground': '#313244',
-        'list.focusBackground': '#45475a80',
-        'list.activeSelectionBackground': '#45475aa0',
+        'list.hoverBackground': '#2d2d2d',
+        'list.focusBackground': '#2d2d2d',
+        'list.activeSelectionBackground': '#3d3d3d',
         'list.highlightForeground': '#89b4fa',
         'editorLineNumber.foreground': '#6c7086',
         'editorLineNumber.activeForeground': '#89b4fa',
-        'editorIndentGuide.background': '#313244',
-        'editorIndentGuide.activeBackground': '#45475a',
+        'editorIndentGuide.background': '#2d2d2d',
+        'editorIndentGuide.activeBackground': '#3d3d3d',
         'editor.lineHighlightBorder': '#00000000',
         'editor.selectionHighlightBackground': '#45475a40',
         'editor.wordHighlightBackground': '#45475a40',
@@ -143,21 +129,32 @@ function App() {
         'editorBracketMatch.border': '#2563eb'
       }
     })
+    
+    // İlk yükleme temasını ayarla
+    const initialTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
+    monaco.editor.setTheme(initialTheme)
+    
+    // Monaco editörün tema değişikliğini dinle
+    const handleThemeChange = () => {
+      const newTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
+      monaco.editor.setTheme(newTheme)
+    }
 
-    const currentTheme = theme === 'dark' ? 'vs-dark' : 'vs-light'
-    monaco.editor.setTheme(currentTheme)
-
-    editor.onDidChangeModelContent(() => {
-      log('info', 'Editor content changed')
-    })
-    editor.onDidChangeModelDecorations(() => {
-      const markers = monaco.editor.getModelMarkers({})
-      if (markers.length > 0) {
-        log('warning', 'Editor validation issues found', markers)
-      }
-    })
-    log('info', 'Editor mounted')
+    window.addEventListener('themeChange', handleThemeChange)
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('themeChange', handleThemeChange)
+    }
   }
+
+  // Monaco editörün temasını güncelle
+  useEffect(() => {
+    if (editor && monacoInstance) {
+      const editorTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
+      monacoInstance.editor.setTheme(editorTheme)
+    }
+  }, [theme, editor, monacoInstance])
 
   const handleUndo = useCallback(() => {
     if (editor) {
@@ -283,28 +280,27 @@ function App() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-200">
-      {/* Header */}
-      <header className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border dark:border-dark-border">
-        <div className="max-w-[1400px] mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h1 className="text-lg font-semibold text-light-text dark:text-dark-text">
+      <header className="bg-light-bg dark:bg-dark-bg border-b border-light-border dark:border-dark-border">
+        <div className="max-w-[1400px] mx-auto px-4">
+          <div className="flex items-center justify-between h-14">
+            <h1 className="text-2xl font-bold text-light-text dark:text-dark-text bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent mb-0">
               Metin Editörü
             </h1>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowSettings(!showSettings)}
-              className="btn-toolbar"
-            >
-              <FiSettings className="w-5 h-5 text-light-text-secondary dark:text-dark-text-secondary hover:text-blue-500 dark:hover:text-blue-400" />
-            </button>
-            <button
-              onClick={toggleTheme}
-              className="btn-toolbar"
-            >
-              <FiSun className="w-5 h-5 hidden dark:block text-dark-text-secondary hover:text-yellow-400" />
-              <FiMoon className="w-5 h-5 block dark:hidden text-light-text-secondary hover:text-blue-500" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowSettings(!showSettings)}
+                className="btn-toolbar"
+              >
+                <FiSettings className="w-5 h-5 text-light-text-secondary dark:text-dark-text-secondary hover:text-blue-500 dark:hover:text-blue-400" />
+              </button>
+              <button
+                onClick={toggleTheme}
+                className="btn-toolbar"
+              >
+                <FiSun className="w-5 h-5 hidden dark:block text-dark-text-secondary hover:text-yellow-400" />
+                <FiMoon className="w-5 h-5 block dark:hidden text-light-text-secondary hover:text-blue-500" />
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -649,46 +645,162 @@ function App() {
 
         {/* SEO Bölümü */}
         <section className="max-w-[1400px] mx-auto px-4 py-12 mt-12 border-t border-light-border dark:border-dark-border">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <h2 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text mb-6 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
                 Neler Yapabilirsiniz?
               </h2>
-              <ul className="space-y-2 text-light-text-secondary dark:text-dark-text-secondary">
-                <li>✓ Metinlerinizi profesyonel düzeyde düzenleyin</li>
-                <li>✓ HTML ve özel karakterleri tek tıkla temizleyin</li>
-                <li>✓ Türkçe-İngilizce karakter dönüşümlerini otomatikleştirin</li>
-                <li>✓ Markdown formatında içerikler oluşturun</li>
-                <li>✓ Metinlerinizi akıllıca sıralayın ve filtreleyin</li>
-                <li>✓ URL kodlama/çözümleme işlemlerini kolayca yapın</li>
+              <ul className="space-y-4 text-light-text-secondary dark:text-dark-text-secondary">
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                    <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                  </span>
+                  <span>Profesyonel metin düzenleme araçlarıyla içeriklerinizi mükemmelleştirin</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                    <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                  </span>
+                  <span>HTML etiketlerini ve özel karakterleri anında temizleyerek metinlerinizi sadeleştirin</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                    <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                  </span>
+                  <span>Türkçe ve İngilizce karakter dönüşümlerini tek tıkla gerçekleştirin</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                    <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                  </span>
+                  <span>Gelişmiş arama ve değiştirme özellikleriyle metinlerinizi hızlıca düzenleyin</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                    <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                  </span>
+                  <span>Akıllı sıralama ve filtreleme araçlarıyla içeriğinizi organize edin</span>
+                </li>
               </ul>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">
-                Kapsamlı Metin Düzenleme Özellikleri
+
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text mb-6 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
+                Kapsamlı Özellikler
               </h2>
-              <ul className="space-y-2 text-light-text-secondary dark:text-dark-text-secondary">
-                <li>✓ Akıllı metin biçimlendirme ve düzenleme araçları</li>
-                <li>✓ Gelişmiş büyük/küçük harf dönüştürme seçenekleri</li>
-                <li>✓ HTML, XML ve özel karakter temizleme</li>
-                <li>✓ Çok yönlü metin sıralama ve filtreleme</li>
-                <li>✓ Türkçe karakter dönüşümleri ve URL kodlama</li>
-                <li>✓ Markdown formatı desteği</li>
-              </ul>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 className="font-medium mb-1 text-light-text dark:text-dark-text">Akıllı Dönüşümler</h3>
+                      <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Gelişmiş metin dönüştürme ve formatlama araçları</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 className="font-medium mb-1 text-light-text dark:text-dark-text">Satır Yönetimi</h3>
+                      <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Profesyonel satır düzenleme ve organizasyon</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 className="font-medium mb-1 text-light-text dark:text-dark-text">Kod Temizleme</h3>
+                      <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Otomatik HTML ve karakter temizleme</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors">
+                  <div className="flex items-start gap-3 mb-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 className="font-medium mb-1 text-light-text dark:text-dark-text">Metin Analizi</h3>
+                      <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Kapsamlı metin istatistikleri ve raporlama</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h2 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">
+
+            <div className="space-y-6">
+              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text mb-6 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
                 Neden Bu Metin Editörü?
               </h2>
-              <ul className="space-y-2 text-light-text-secondary dark:text-dark-text-secondary">
-                <li>✓ Modern ve sezgisel kullanıcı arayüzü</li>
-                <li>✓ Anlık işlem ve yüksek performans</li>
-                <li>✓ Tamamen ücretsiz ve reklamsız kullanım</li>
-                <li>✓ %100 gizlilik ve veri güvenliği</li>
-                <li>✓ Düzenli güncellenen özellikler</li>
-                <li>✓ Şeffaf ve açık kaynak kodlu geliştirme</li>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-4 p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-medium text-light-text dark:text-dark-text mb-1">Modern ve Kullanıcı Dostu</h3>
+                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Sezgisel arayüz tasarımı ve gelişmiş özelliklerle profesyonel metin düzenleme deneyimi</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4 p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-medium text-light-text dark:text-dark-text mb-1">Yüksek Performans</h3>
+                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Anlık işlemler ve optimize edilmiş algoritmaları ile hızlı ve verimli çalışma</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4 p-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+                  <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-medium text-light-text dark:text-dark-text mb-1">Güvenli ve Özel</h3>
+                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Tüm işlemler tarayıcınızda gerçekleşir, verileriniz tamamen sizde kalır</p>
+                  </div>
+                </li>
               </ul>
             </div>
+          </div>
+
+          {/* Nasıl Kullanılır Butonu */}
+          <div className="mt-16 text-center">
+            <button
+              onClick={() => setShowHowTo(true)}
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
+            >
+              <span className="absolute inset-0 w-full h-full rounded-xl bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-500 dark:to-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+              <span className="relative flex items-center gap-2">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Nasıl Kullanılır?
+                <span className="ml-2 text-sm bg-white/20 px-2 py-1 rounded-lg">Hemen Öğren</span>
+              </span>
+            </button>
           </div>
         </section>
 
@@ -705,14 +817,7 @@ function App() {
                   Metinlerinizi düzenlemek, biçimlendirmek ve dönüştürmek için profesyonel çözüm.
                   Kullanıcı dostu arayüzü ve gelişmiş özellikleriyle metin düzenleme işlerinizi kolaylaştırır.
                 </p>
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setShowPrivacyPolicy(true)}
-                    className="text-light-text-secondary hover:text-light-text dark:text-dark-text-secondary dark:hover:text-dark-text transition-colors"
-                  >
-                    Gizlilik Politikası
-                  </button>
-                </div>
+                
               </div>
 
               {/* Özellikler */}
@@ -735,11 +840,11 @@ function App() {
                 <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-4">
                   Yardım
                 </h3>
-                <ul className="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
+                <ul className="space-y-3">
                   <li>
                     <button
                       onClick={() => setShowHowTo(true)}
-                      className="hover:text-light-text dark:hover:text-dark-text transition-colors"
+                      className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 transition-colors font-medium"
                     >
                       Nasıl Kullanılır?
                     </button>
@@ -747,18 +852,18 @@ function App() {
                   <li>
                     <button
                       onClick={() => setShowSettings(true)}
-                      className="hover:text-light-text dark:hover:text-dark-text transition-colors"
+                      className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 transition-colors font-medium"
                     >
                       Editör Ayarları
                     </button>
                   </li>
                   <li>
-                    <a
-                      href="/faq"
-                      className="hover:text-light-text dark:hover:text-dark-text transition-colors"
+                    <button
+                      onClick={() => setShowPrivacyPolicy(true)}
+                      className="text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text transition-colors text-sm"
                     >
-                      Sık Sorulan Sorular
-                    </a>
+                      Gizlilik Politikası
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -813,95 +918,143 @@ function App() {
                 
                 <div className="prose dark:prose-invert max-w-none space-y-6">
                   <section>
-                    <h3>1. Veri Toplama ve Kullanım Politikası</h3>
+                    <h3>1. Giriş ve Tanımlar</h3>
                     <p>
-                      Metin Editörü olarak, kullanıcılarımızın gizliliğine ve veri güvenliğine en üst düzeyde önem vermekteyiz. 
-                      Uygulamamız, kullanıcıların metin düzenleme işlemlerini tamamen yerel (local) olarak, kullanıcının kendi web tarayıcısında gerçekleştirmektedir.
+                      Bu gizlilik politikası, Metin Editörü ("uygulama", "biz", "bizim") tarafından sağlanan hizmetlerin kullanımı sırasında uygulanan veri işleme prensiplerini açıklamaktadır. Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuat kapsamında hazırlanmıştır.
                     </p>
+                  </section>
+
+                  <section>
+                    <h3>2. Veri Sorumlusu</h3>
                     <p>
-                      <strong>Veri Toplama:</strong> Uygulamamız:
+                      Metin Editörü, kişisel verilerin işlenmesi konusunda veri sorumlusu olarak hareket etmektedir. İletişim bilgilerimiz:
                     </p>
                     <ul>
-                      <li>Hiçbir kişisel veri toplamamaktadır</li>
-                      <li>Kullanıcıların düzenlediği metinleri sunucularımızda saklamamaktadır</li>
-                      <li>Kullanıcı davranışlarını takip etmemektedir</li>
-                      <li>IP adresi kayıtları tutmamaktadır</li>
-                      <li>Oturum bilgilerini saklamamaktadır</li>
+                      <li>E-posta: iletisim@metineditoru.com</li>
                     </ul>
                   </section>
 
                   <section>
-                    <h3>2. Çerezler ve Yerel Depolama</h3>
-                    <p>
-                      Uygulamamız minimum düzeyde çerez kullanmaktadır:
-                    </p>
+                    <h3>3. Toplanan Veriler ve Kullanım Amaçları</h3>
+                    <h4 className="text-base font-medium mt-4 mb-2">3.1. Otomatik Olarak Toplanan Veriler</h4>
                     <ul>
-                      <li><strong>Zorunlu Çerezler:</strong> Sadece uygulamanın temel işlevselliği için gerekli olan çerezler kullanılmaktadır</li>
-                      <li><strong>Yerel Depolama:</strong> Kullanıcı tercihlerini (tema seçimi gibi) sadece kullanıcının kendi tarayıcısında saklamaktayız</li>
-                      <li><strong>Analitik Çerezler:</strong> Kullanılmamaktadır</li>
-                      <li><strong>Pazarlama Çerezleri:</strong> Kullanılmamaktadır</li>
-                      <li><strong>Üçüncü Taraf Çerezleri:</strong> Kullanılmamaktadır</li>
+                      <li>Tarayıcı teması tercihi (açık/koyu tema)</li>
+                      <li>Editör ayarları (yazı tipi, boyut, vb.)</li>
+                    </ul>
+                    
+                    <h4 className="text-base font-medium mt-4 mb-2">3.2. Kullanıcı Tarafından Sağlanan Veriler</h4>
+                    <ul>
+                      <li>Düzenlenen metin içeriği (yalnızca tarayıcı belleğinde geçici olarak tutulur)</li>
+                      <li>Editör özelleştirme tercihleri</li>
+                    </ul>
+
+                    <h4 className="text-base font-medium mt-4 mb-2">3.3. Kullanım Amaçları</h4>
+                    <ul>
+                      <li>Editör hizmetinin sağlanması ve işlevselliğinin sürdürülmesi</li>
+                      <li>Kullanıcı tercihlerinin hatırlanması ve kullanıcı deneyiminin iyileştirilmesi</li>
+                      <li>Teknik sorunların tespit edilmesi ve çözülmesi</li>
                     </ul>
                   </section>
 
                   <section>
-                    <h3>3. Veri Güvenliği ve İşleme</h3>
-                    <p>
-                      Tüm metin düzenleme işlemleri kullanıcının tarayıcısında gerçekleştirilir:
-                    </p>
+                    <h3>4. Veri İşleme Prensipleri</h3>
+                    <h4 className="text-base font-medium mt-4 mb-2">4.1. Yerel İşleme</h4>
                     <ul>
-                      <li>Metinler tamamen tarayıcı belleğinde işlenir</li>
-                      <li>Hiçbir veri sunucularımıza iletilmez</li>
-                      <li>Düzenlenen metinler otomatik olarak kaydedilmez</li>
-                      <li>Sayfa yenilendiğinde veya kapatıldığında tüm veriler silinir</li>
+                      <li>Tüm metin düzenleme işlemleri kullanıcının tarayıcısında gerçekleştirilir</li>
+                      <li>Düzenlenen metinler sunucularımıza gönderilmez veya saklanmaz</li>
+                      <li>Hiçbir kullanıcı verisi üçüncü taraflarla paylaşılmaz</li>
+                    </ul>
+
+                    <h4 className="text-base font-medium mt-4 mb-2">4.2. Yerel Depolama Kullanımı</h4>
+                    <ul>
+                      <li>Kullanıcı tercihleri tarayıcının yerel depolama alanında (localStorage) saklanır</li>
+                      <li>Yerel depolama verileri yalnızca kullanıcının cihazında tutulur</li>
+                      <li>Veriler şifrelenmeden saklanır ve tarayıcı geçmişi/önbellek temizlendiğinde silinir</li>
                     </ul>
                   </section>
 
                   <section>
-                    <h3>4. Kullanıcı Hakları</h3>
+                    <h3>5. Kullanıcı Hakları</h3>
                     <p>
-                      KVKK ve GDPR kapsamında kullanıcılarımız aşağıdaki haklara sahiptir:
+                      KVKK'nın 11. maddesi uyarınca kullanıcılarımız aşağıdaki haklara sahiptir:
                     </p>
                     <ul>
-                      <li>Veri işlenip işlenmediğini öğrenme hakkı</li>
-                      <li>Kişisel verilerin işlenme amacını öğrenme hakkı</li>
-                      <li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme hakkı</li>
-                      <li>Kişisel verilerin düzeltilmesini isteme hakkı</li>
-                      <li>Kişisel verilerin silinmesini isteme hakkı</li>
-                    </ul>
-                    <p>
-                      Ancak uygulamamız hiçbir kişisel veri toplamadığı ve işlemediği için, bu hakların kullanılmasına gerek kalmamaktadır.
-                    </p>
-                  </section>
-
-                  <section>
-                    <h3>5. Üçüncü Taraf Hizmetleri</h3>
-                    <p>
-                      Uygulamamız:
-                    </p>
-                    <ul>
-                      <li>Üçüncü taraf analitik hizmetleri kullanmamaktadır</li>
-                      <li>Reklam ağları ile çalışmamaktadır</li>
-                      <li>Sosyal medya entegrasyonu içermemektedir</li>
-                      <li>Kullanıcı verilerini üçüncü taraflarla paylaşmamaktadır</li>
+                      <li>Kişisel verilerin işlenip işlenmediğini öğrenme</li>
+                      <li>Kişisel veriler işlenmişse buna ilişkin bilgi talep etme</li>
+                      <li>Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                      <li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme</li>
+                      <li>Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme</li>
+                      <li>KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerin silinmesini veya yok edilmesini isteme</li>
                     </ul>
                   </section>
 
                   <section>
-                    <h3>6. Değişiklikler ve Güncellemeler</h3>
+                    <h3>6. Güvenlik Önlemleri</h3>
                     <p>
-                      Bu gizlilik politikası, uygulamada yapılacak değişiklikler veya yasal gereklilikler doğrultusunda güncellenebilir. 
-                      Önemli değişiklikler olması durumunda, kullanıcılarımız ana sayfamızda bilgilendirilecektir.
+                      Uygulamamız, kullanıcı verilerinin güvenliğini sağlamak için aşağıdaki önlemleri almaktadır:
+                    </p>
+                    <ul>
+                      <li>Tüm metin işleme faaliyetleri kullanıcının tarayıcısında gerçekleştirilir</li>
+                      <li>Hiçbir veri sunuculara iletilmez veya depolanmaz</li>
+                      <li>Yerel depolama verileri yalnızca gerekli kullanıcı tercihlerini içerir</li>
+                      <li>Uygulama, güvenli HTTPS protokolü üzerinden sunulur</li>
+                      <li>Düzenli güvenlik değerlendirmeleri ve güncellemeleri yapılır</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>7. Çerezler ve Benzer Teknolojiler</h3>
+                    <p>
+                      Uygulamamız çerez kullanmamaktadır. Kullanıcı tercihleri yalnızca tarayıcının yerel depolama alanında (localStorage) saklanır. Bu veriler:
+                    </p>
+                    <ul>
+                      <li>Tema tercihi (açık/koyu)</li>
+                      <li>Editör ayarları (yazı tipi, boyut, vb.)</li>
+                      <li>Arayüz tercihleri</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>8. Üçüncü Taraf Hizmetleri</h3>
+                    <p>
+                      Uygulamamız hiçbir üçüncü taraf hizmet kullanmamaktadır:
+                    </p>
+                    <ul>
+                      <li>Analitik araçları kullanılmaz</li>
+                      <li>Reklam servisleri kullanılmaz</li>
+                      <li>Sosyal medya entegrasyonu bulunmaz</li>
+                      <li>Kullanıcı davranış takibi yapılmaz</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>9. Veri Saklama ve Silme</h3>
+                    <p>
+                      Uygulamamızda veri saklama politikası aşağıdaki şekildedir:
+                    </p>
+                    <ul>
+                      <li>Düzenlenen metinler yalnızca tarayıcı belleğinde geçici olarak tutulur</li>
+                      <li>Tarayıcı kapatıldığında veya sekme yenilendiğinde metin içeriği silinir</li>
+                      <li>Kullanıcı tercihleri tarayıcı yerel depolama alanında saklanır ve kullanıcı tarafından silinebilir</li>
+                      <li>Sunucularımızda hiçbir kullanıcı verisi saklanmaz</li>
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h3>10. Politika Güncellemeleri</h3>
+                    <p>
+                      Bu gizlilik politikası, yasal gereklilikler veya hizmet değişiklikleri doğrultusunda güncellenebilir. Önemli değişiklikler olması durumunda, kullanıcılarımız uygulama arayüzünde bilgilendirilecektir.
                     </p>
                   </section>
 
                   <section>
-                    <h3>7. İletişim</h3>
+                    <h3>11. İletişim</h3>
                     <p>
-                      Gizlilik politikamız hakkında sorularınız veya endişeleriniz için bizimle iletişime geçebilirsiniz:
-                      <br />
-                      E-posta: iletisim@metineditoru.com
+                      Gizlilik politikamız hakkında sorularınız veya talepleriniz için bizimle iletişime geçebilirsiniz:
                     </p>
+                    <ul>
+                      <li>E-posta: iletisim@metineditoru.com</li>
+                    </ul>
                   </section>
 
                   <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mt-8">
@@ -1139,68 +1292,23 @@ function App() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                                   </svg>
                                 </span>
-                                <h4 className="text-xl font-medium">Otomatik Kaydetme ve Geri Yükleme</h4>
+                                <h4 className="text-xl font-medium">Geri Alma ve İleri Alma</h4>
                               </div>
                               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                                Çalışmalarınız otomatik olarak kaydedilir ve tarayıcı kapansa bile verileriniz 
-                                korunur. Sınırsız geri alma/ileri alma özelliği ile değişikliklerinizi 
-                                güvenle yönetebilirsiniz.
-                          </p>
-                          <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-3">
-                                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                                    <span className="w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-2 text-blue-600 dark:text-blue-400">1</span>
-                                    Özellikler:
-                                  </div>
-                                  <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 font-mono text-sm">
-                                    <p>• Otomatik kaydetme (30 saniyede bir)</p>
-                                    <p>• Yerel depolama kullanımı</p>
-                                    <p>• Oturum geri yükleme</p>
-                                    <p>• Değişiklik geçmişi</p>
-                                  </div>
+                                Sınırsız geri alma/ileri alma özelliği ile düzenleme geçmişinizi yönetebilirsiniz. 
+                                Düzenlediğiniz metin tarayıcı belleğinde tutulur ve tarayıcıyı kapatana kadar korunur.
+                              </p>
+                              <div className="space-y-3">
+                                <div className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                                  <span className="w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-2 text-blue-600 dark:text-blue-400">1</span>
+                                  Kısayol Tuşları:
                                 </div>
-                                <div className="space-y-3">
-                                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                                    <span className="w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-2 text-green-600 dark:text-green-400">2</span>
-                                    Kısayollar:
-                                  </div>
-                                  <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 font-mono text-sm">
-                                    <p>• Ctrl + S: Manuel kaydetme</p>
-                                    <p>• Ctrl + Z: Geri alma</p>
-                                    <p>• Ctrl + Y: İleri alma</p>
-                                    <p>• Ctrl + Shift + Z: Alternatif ileri alma</p>
-                                  </div>
+                                <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 font-mono text-sm">
+                                  <p>• Geri Al: Ctrl + Z</p>
+                                  <p>• İleri Al: Ctrl + Y</p>
+                                  <p>• Geçmişi Temizle: Ctrl + K</p>
                                 </div>
                               </div>
-                              <div className="mt-6">
-                                <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Güvenlik Özellikleri:</h5>
-                                <ul className="grid grid-cols-2 gap-3">
-                                  <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Veri şifreleme
-                                  </li>
-                                  <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Çevrimdışı çalışma
-                                  </li>
-                                  <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Yedekleme
-                                  </li>
-                                  <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Veri kurtarma
-                                  </li>
-                        </ul>
-                            </div>
                             </div>
 
                             <div className="border border-gray-200 dark:border-gray-700 rounded-2xl p-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/80">
@@ -2013,20 +2121,20 @@ Armut
                                     Resmi dokümanlar
                                   </li>
                                   <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Akademik metinler
                                   </li>
                                   <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Teknik raporlar
                                   </li>
                                   <li className="flex items-center text-gray-600 dark:text-gray-400">
-                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                    <svg className="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     İş yazışmaları
                                   </li>
