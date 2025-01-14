@@ -17,13 +17,8 @@ export function Header() {
 
   return (
     <header className="bg-white dark:bg-gray-800 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 py-4">
-        <div className="flex items-center space-x-3">
-          <img
-            src={isDarkMode ? '/logo-dark.png' : '/logo-light.png'}
-            alt="Metin Editörü Logo"
-            className="w-8 h-8"
-          />
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-center h-16">
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
             Metin Editörü
           </h1>
