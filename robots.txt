@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /
+Allow: /$
+
+# Sitemaps
+Sitemap: https://metineditoru.com/sitemap.xml
+Sitemap: https://www.metineditoru.com/sitemap.xml
+
+# Host directives for both versions
+Host: metineditoru.com
+Host: www.metineditoru.com
+
+# Crawl-delay
+Crawl-delay: 5 

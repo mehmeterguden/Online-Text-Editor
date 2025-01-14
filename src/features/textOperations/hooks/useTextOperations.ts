@@ -54,28 +54,35 @@ export function useTextOperations() {
     return result
   }, [text])
 
-  const sortLines = useCallback((type: 'asc' | 'desc' | 'length' | 'random') => {
+  const sortLines = useCallback((type: 'asc' | 'desc' | 'length-asc' | 'length-desc' | 'random') => {
     if (!text) return text
+
     const lines = text.split('\n')
+    let result: string[]
 
     switch (type) {
       case 'asc':
-        lines.sort((a, b) => a.localeCompare(b))
+        result = lines.sort((a, b) => a.localeCompare(b))
         break
       case 'desc':
-        lines.sort((a, b) => b.localeCompare(a))
+        result = lines.sort((a, b) => b.localeCompare(a))
         break
-      case 'length':
-        lines.sort((a, b) => a.length - b.length)
+      case 'length-asc':
+        result = lines.sort((a, b) => a.length - b.length)
+        break
+      case 'length-desc':
+        result = lines.sort((a, b) => b.length - a.length)
         break
       case 'random':
-        lines.sort(() => Math.random() - 0.5)
+        result = lines.sort(() => Math.random() - 0.5)
         break
+      default:
+        result = lines
     }
 
-    const result = lines.join('\n')
-    setText(result)
-    return result
+    const sortedText = result.join('\n')
+    setText(sortedText)
+    return sortedText
   }, [text])
 
   const convertCharacters = useCallback((type: 'tr-en' | 'en-tr') => {

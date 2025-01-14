@@ -42,8 +42,8 @@ export interface EditorSettings {
 
 export const defaultEditorSettings: EditorSettings = {
   // Görünüm Ayarları
-  fontSize: 14,
-  fontFamily: 'JetBrains Mono',
+  fontSize: 15,
+  fontFamily: 'Consolas',
   lineHeight: 1.5,
   letterSpacing: 0,
   
@@ -64,8 +64,8 @@ export const defaultEditorSettings: EditorSettings = {
   // İmleç ve Seçim
   cursorStyle: 'line',
   cursorWidth: 2,
-  cursorSmoothCaretAnimation: true,
-  smoothScrolling: true,
+  cursorSmoothCaretAnimation: false,
+  smoothScrolling: false,
   
   // Vurgulama
   selectionHighlight: true,

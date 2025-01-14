@@ -25,6 +25,30 @@ export const spaceCleaningFeatures: BasicCleaningFeature[] = [
     }
   },
   {
+    id: 'normalize-spaces',
+    name: 'Fazla boşlukları sil (Tab hariç)',
+    description: 'İki veya daha fazla ardışık boşluk karakterini (tab dahil) tek bir boşluğa dönüştürür. Satır atlamaları korunur.',
+    category: 'basic',
+    subCategory: 'space',
+    isActive: true,
+    icon: FiDelete.name,
+    action: (text: string) => {
+      if (!text) return text;
+      
+      // Split by newlines to preserve them
+      const lines = text.split('\n');
+      
+      // Process each line separately
+      const processedLines = lines.map(line => {
+        // Replace tabs and multiple spaces with a single space
+        return line.replace(/[ \t]+/g, ' ');
+      });
+      
+      // Join back with newlines
+      return processedLines.join('\n');
+    }
+  },
+  {
     id: 'extra-spaces',
     name: 'Fazla boşlukları sil',
     description: 'Ardışık boşlukları tek boşluğa dönüştürür.',

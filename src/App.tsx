@@ -8,6 +8,8 @@ import { useEditorSettings } from './features/editor/hooks/useEditorSettings'
 import { useTheme } from './hooks/useTheme'
 import { FiDownload, FiPrinter, FiSearch, FiMoon, FiSun, FiTrash2, FiSettings, FiRotateCcw, FiRotateCw, FiX } from 'react-icons/fi'
 import { TestSystem } from './utils/testSystem'
+import { Loading } from './components/Loading'
+import { Toast } from './components/Toast'
 
 // Loglama fonksiyonu
 const log = (type: 'info' | 'warning' | 'error', message: string, data?: any) => {
@@ -17,6 +19,13 @@ const log = (type: 'info' | 'warning' | 'error', message: string, data?: any) =>
   if (data) {
     console.log('Data:', data)
   }
+}
+
+interface ToastState {
+  message: string
+  type: 'success' | 'info' | 'warning' | 'error'
+  details?: string
+  operation?: 'case' | 'sort' | 'clean' | 'convert' | 'url' | 'prefix' | 'suffix' | 'format' | 'number' | 'duplicate' | 'html' | 'delete' | 'edit' | 'copy' | 'refresh' | 'align' | 'transform'
 }
 
 function App() {
@@ -45,14 +54,43 @@ function App() {
 
   const [editor, setEditor] = useState<any>(null)
   const [monacoInstance, setMonacoInstance] = useState<any>(null)
+  const [toast, setToast] = useState<ToastState | null>(null)
 
   const handleEditorDidMount = (editor: any, monaco: any) => {
     setEditor(editor)
     setMonacoInstance(monaco)
-    editor.focus()
     
-    // Tema tanımlamaları
-    monaco.editor.defineTheme('vs-dark', {
+    editor.updateOptions({
+      readOnly: false,
+      copyWithSyntaxHighlighting: true,
+      enablePaste: true,
+      contextmenu: true,
+      quickSuggestions: false,
+      renderLineHighlight: 'none',
+      minimap: { enabled: editorSettings.minimap },
+      lineNumbers: editorSettings.lineNumbers ? 'on' : 'off',
+      wordWrap: editorSettings.wordWrap ? 'on' : 'off',
+      fontSize: editorSettings.fontSize,
+      fontFamily: editorSettings.fontFamily,
+      lineHeight: editorSettings.lineHeight,
+      letterSpacing: editorSettings.letterSpacing,
+      tabSize: editorSettings.tabSize,
+      renderWhitespace: editorSettings.renderWhitespace,
+      autoClosingBrackets: editorSettings.autoClosingBrackets ? 'always' : 'never',
+      autoClosingQuotes: editorSettings.autoClosingQuotes ? 'always' : 'never',
+      formatOnPaste: editorSettings.formatOnPaste,
+      formatOnType: editorSettings.formatOnType
+    })
+  }
+
+  // Monaco editörün temasını güncelle
+  useEffect(() => {
+    if (editor && monacoInstance) {
+      const editorTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
+      
+      // Karanlık tema için özel renk tanımlaması
+      if (editorTheme === 'vs-dark') {
+        monacoInstance.editor.defineTheme('vs-dark', {
       base: 'vs-dark',
       inherit: true,
       rules: [
@@ -90,68 +128,8 @@ function App() {
         'editorBracketMatch.border': '#89b4fa'
       }
     })
-
-    monaco.editor.defineTheme('vs-light', {
-      base: 'vs',
-      inherit: true,
-      rules: [
-        { token: 'comment', foreground: '6b7280' },
-        { token: 'keyword', foreground: '2563eb' },
-        { token: 'string', foreground: '059669' },
-        { token: 'number', foreground: 'dc2626' }
-      ],
-      colors: {
-        'editor.background': '#ffffff',
-        'editor.foreground': '#28293e',
-        'editor.lineHighlightBackground': '#f3f4f6',
-        'editorCursor.foreground': '#2563eb',
-        'editor.selectionBackground': '#bfdbfe80',
-        'editor.inactiveSelectionBackground': '#bfdbfe40',
-        'editorSuggestWidget.background': '#ffffff',
-        'editorSuggestWidget.border': '#e5e7eb',
-        'editorSuggestWidget.foreground': '#28293e',
-        'editorSuggestWidget.selectedBackground': '#bfdbfe80',
-        'editorSuggestWidget.highlightForeground': '#2563eb',
-        'editorSuggestWidget.focusHighlightForeground': '#1d4ed8',
-        'list.hoverBackground': '#f3f4f6',
-        'list.focusBackground': '#bfdbfe80',
-        'list.activeSelectionBackground': '#bfdbfea0',
-        'list.highlightForeground': '#2563eb',
-        'editorLineNumber.foreground': '#9ca3af',
-        'editorLineNumber.activeForeground': '#2563eb',
-        'editorIndentGuide.background': '#f3f4f6',
-        'editorIndentGuide.activeBackground': '#e5e7eb',
-        'editor.lineHighlightBorder': '#00000000',
-        'editor.selectionHighlightBackground': '#bfdbfe40',
-        'editor.wordHighlightBackground': '#bfdbfe40',
-        'editor.wordHighlightStrongBackground': '#bfdbfe40',
-        'editorBracketMatch.background': '#bfdbfe40',
-        'editorBracketMatch.border': '#2563eb'
       }
-    })
-    
-    // İlk yükleme temasını ayarla
-    const initialTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
-    monaco.editor.setTheme(initialTheme)
-    
-    // Monaco editörün tema değişikliğini dinle
-    const handleThemeChange = () => {
-      const newTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
-      monaco.editor.setTheme(newTheme)
-    }
-
-    window.addEventListener('themeChange', handleThemeChange)
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener('themeChange', handleThemeChange)
-    }
-  }
-
-  // Monaco editörün temasını güncelle
-  useEffect(() => {
-    if (editor && monacoInstance) {
-      const editorTheme = document.documentElement.classList.contains('dark') ? 'vs-dark' : 'vs-light'
+      
       monacoInstance.editor.setTheme(editorTheme)
     }
   }, [theme, editor, monacoInstance])
@@ -231,52 +209,347 @@ function App() {
 
   const stats = getTextStats()
 
-  // Test sistemi
-  useEffect(() => {
-    const runTests = async () => {
-      const testSystem = new TestSystem()
-      
-      // Editör ayarlarını test et
-      await testSystem.testEditorSettings(editorSettings)
-      
-      // Metin işlemlerini test et
-      await testSystem.testTextOperations(text, {
-        convertCase,
-        cleanWhitespace,
-        removeHtmlTags,
-        removeDuplicates,
-        sortLines,
-        convertCharacters,
-        urlEncodeDecode,
-        addLineNumbers
-      })
-
-      // Sonuçları göster
-      const results = testSystem.getResults()
-      console.log('Test Sonuçları:', results)
-
-      if (testSystem.hasErrors()) {
-        console.error('Test Hataları:', testSystem.getErrorReport())
-      }
-    }
-
-    runTests()
-  }, [])
 
   const handleEscapeKey = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setShowHowTo(false)
     }
-  }, [])
+  }, [showHowTo])
 
   useEffect(() => {
-    if (showHowTo) {
-      document.addEventListener('keydown', handleEscapeKey)
-    }
+    document.addEventListener('keydown', handleEscapeKey)
     return () => {
       document.removeEventListener('keydown', handleEscapeKey)
     }
-  }, [showHowTo, handleEscapeKey])
+  }, [handleEscapeKey])
+
+  const showToast = useCallback((
+    message: string, 
+    type: 'success' | 'info' | 'warning' | 'error', 
+    details?: string, 
+    operation?: 'case' | 'sort' | 'clean' | 'convert' | 'url' | 'prefix' | 'suffix' | 'format' | 'number' | 'duplicate' | 'html' | 'delete' | 'edit' | 'copy' | 'refresh' | 'align' | 'transform'
+  ) => {
+    setToast({ message, type, details, operation })
+  }, [])
+
+  const handleTextOperation = useCallback((
+    operation: string, 
+    operationType: 'case' | 'sort' | 'clean' | 'convert' | 'url' | 'prefix' | 'suffix' | 'format' | 'number' | 'duplicate' | 'html' | 'delete' | 'edit' | 'copy' | 'refresh' | 'align' | 'transform', 
+    affectedCount?: number, 
+    error?: string
+  ) => {
+    if (error) {
+      showToast(`${operation} başarısız oldu`, 'error', error, operationType)
+      return
+    }
+
+    let details = affectedCount 
+      ? `${affectedCount} ${getAffectedText(operationType, affectedCount)}` 
+      : undefined
+
+    showToast(`${operation} tamamlandı`, 'success', details, operationType)
+  }, [showToast])
+
+  const getAffectedText = (type: string, count: number) => {
+    switch (type) {
+      case 'case': return `karakter dönüştürüldü`
+      case 'sort': return `satır sıralandı`
+      case 'clean': return `öğe temizlendi`
+      case 'convert': return `karakter dönüştürüldü`
+      case 'url': return `karakter kodlandı/çözüldü`
+      case 'prefix':
+      case 'suffix': return `satır düzenlendi`
+      case 'format': return `satır formatlandı`
+      case 'number': return `satır numaralandırıldı`
+      case 'duplicate': return `tekrar eden satır kaldırıldı`
+      case 'html': return `HTML etiketi temizlendi`
+      case 'delete': return `öğe silindi`
+      case 'edit': return `öğe düzenlendi`
+      case 'copy': return `öğe kopyalandı`
+      case 'refresh': return `öğe yenilendi`
+      case 'align': return `satır hizalandı`
+      case 'transform': return `metin dönüştürüldü`
+      default: return `öğe etkilendi`
+    }
+  }
+
+  const handleConvertCase = useCallback((type: 'upper' | 'lower' | 'title' | 'sentence') => {
+    try {
+      const beforeLength = text.length
+      convertCase(type)
+      const operationNames = {
+        upper: 'Büyük harfe dönüştürme',
+        lower: 'Küçük harfe dönüştürme',
+        title: 'Başlık formatına dönüştürme',
+        sentence: 'Cümle formatına dönüştürme'
+      }
+      handleTextOperation(operationNames[type], 'case', beforeLength)
+    } catch (error) {
+      handleTextOperation('Harf dönüşümü', 'case', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, convertCase, handleTextOperation])
+
+  const handleSortLines = useCallback((type: 'asc' | 'desc' | 'length-asc' | 'length-desc' | 'random') => {
+    try {
+      const beforeLines = text.split('\n').length
+      sortLines(type)
+      const operationNames = {
+        'asc': 'A\'dan Z\'ye sıralama',
+        'desc': 'Z\'den A\'ya sıralama',
+        'length-asc': 'Kısadan uzuna sıralama',
+        'length-desc': 'Uzundan kısaya sıralama',
+        'random': 'Rastgele sıralama'
+      }
+      handleTextOperation(operationNames[type], 'sort', beforeLines)
+    } catch (error) {
+      handleTextOperation('Sıralama', 'sort', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, sortLines, handleTextOperation])
+
+  const handleConvertCharacters = useCallback((type: 'tr-en' | 'en-tr') => {
+    try {
+      const beforeLength = text.length
+      convertCharacters(type)
+      const operationNames = {
+        'tr-en': 'Türkçe karakterleri İngilizce karakterlere dönüştürme',
+        'en-tr': 'İngilizce karakterleri Türkçe karakterlere dönüştürme'
+      }
+      handleTextOperation(operationNames[type], 'convert', beforeLength)
+    } catch (error) {
+      handleTextOperation('Karakter dönüşümü', 'convert', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, convertCharacters, handleTextOperation])
+
+  const handleUrlEncodeDecode = useCallback((type: 'encode' | 'decode') => {
+    try {
+      const beforeLength = text.length
+      urlEncodeDecode(type)
+      const operationNames = {
+        'encode': 'URL kodlama',
+        'decode': 'URL çözme'
+      }
+      handleTextOperation(operationNames[type], 'url', beforeLength)
+    } catch (error) {
+      handleTextOperation('URL işlemi', 'url', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, urlEncodeDecode, handleTextOperation])
+
+  const handleAddPrefix = useCallback((prefix: string) => {
+    try {
+      const beforeLines = text.split('\n').length
+      addPrefix(prefix)
+      handleTextOperation('Ön ek ekleme', 'prefix', beforeLines)
+    } catch (error) {
+      handleTextOperation('Ön ek ekleme', 'prefix', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, addPrefix, handleTextOperation])
+
+  const handleAddSuffix = useCallback((suffix: string) => {
+    try {
+      const beforeLines = text.split('\n').length
+      addSuffix(suffix)
+      handleTextOperation('Son ek ekleme', 'suffix', beforeLines)
+    } catch (error) {
+      handleTextOperation('Son ek ekleme', 'suffix', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, addSuffix, handleTextOperation])
+
+  const handleRemoveDuplicates = useCallback(() => {
+    try {
+      const beforeLines = text.split('\n').length
+      removeDuplicates()
+      handleTextOperation('Tekrar eden satırları kaldırma', 'duplicate', beforeLines)
+    } catch (error) {
+      handleTextOperation('Tekrar eden satırları kaldırma', 'duplicate', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, removeDuplicates, handleTextOperation])
+
+  const handleRemoveHtmlTags = useCallback(() => {
+    try {
+      const beforeLength = text.length
+      removeHtmlTags()
+      handleTextOperation('HTML etiketlerini temizleme', 'html', beforeLength)
+    } catch (error) {
+      handleTextOperation('HTML temizleme', 'html', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, removeHtmlTags, handleTextOperation])
+
+  const cleanText = useCallback((featureId: string) => {
+    try {
+      const beforeLength = text.length
+      switch (featureId) {
+        // Boşluk Temizleme
+        case 'empty-lines':
+          setText(text.split('\n').filter(line => line.trim() !== '').join('\n'))
+          handleTextOperation('Boş satırları temizleme', 'clean', beforeLength)
+          break
+        case 'normalize-spaces':
+          setText(text.split('\n').map(line => line.replace(/[ \t]+/g, ' ')).join('\n'))
+          handleTextOperation('Boşlukları normalleştirme', 'clean', beforeLength)
+          break
+        case 'extra-spaces':
+          setText(text.replace(/\s+/g, ' '))
+          handleTextOperation('Fazla boşlukları temizleme', 'clean', beforeLength)
+          break
+        case 'trim-lines':
+          setText(text.split('\n').map(line => line.trim()).join('\n'))
+          handleTextOperation('Satır başı/sonu boşluklarını temizleme', 'clean', beforeLength)
+          break
+        case 'tabs':
+          setText(text.replace(/\t/g, ''))
+          handleTextOperation('Tab karakterlerini temizleme', 'clean', beforeLength)
+          break
+        case 'all-spaces':
+          setText(text.replace(/\s/g, ''))
+          handleTextOperation('Tüm boşlukları temizleme', 'clean', beforeLength)
+          break
+
+        // Karakter Temizleme
+        case 'special-chars':
+          setText(text.replace(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]/g, ''))
+          handleTextOperation('Özel karakterleri temizleme', 'clean', beforeLength)
+          break
+        case 'punctuation':
+          setText(text.replace(/[.,!?;:'"()[\]{}]/g, ''))
+          handleTextOperation('Noktalama işaretlerini temizleme', 'clean', beforeLength)
+          break
+        case 'emoji-symbols':
+          setText(text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''))
+          handleTextOperation('Emoji ve sembolleri temizleme', 'clean', beforeLength)
+          break
+        case 'numbers':
+          setText(text.replace(/\d+/g, ''))
+          handleTextOperation('Sayıları temizleme', 'clean', beforeLength)
+          break
+        case 'non-ascii':
+          setText(text.replace(/[^\x00-\x7F]/g, ''))
+          handleTextOperation('ASCII olmayan karakterleri temizleme', 'clean', beforeLength)
+          break
+        case 'control-chars':
+          setText(text.replace(/[\x00-\x1F\x7F]/g, ''))
+          handleTextOperation('Kontrol karakterlerini temizleme', 'clean', beforeLength)
+          break
+        case 'diacritics':
+          setText(text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''))
+          handleTextOperation('Aksan işaretlerini temizleme', 'clean', beforeLength)
+          break
+        case 'currency':
+          setText(text.replace(/[$€£¥₺¢]/g, ''))
+          handleTextOperation('Para birimi sembollerini temizleme', 'clean', beforeLength)
+          break
+
+        // İçerik Temizleme
+        case 'html-tags':
+          setText(text.replace(/<[^>]*>/g, ''))
+          handleTextOperation('HTML etiketlerini temizleme', 'clean', beforeLength)
+          break
+        case 'xml-json':
+          setText(text.replace(/<\/?[^>]+(>|$)/g, '').replace(/[{}\[\]",]/g, ' ').replace(/\s+/g, ' ').trim())
+          handleTextOperation('XML/JSON yapılarını temizleme', 'clean', beforeLength)
+          break
+        case 'duplicate-lines':
+          setText([...new Set(text.split('\n'))].join('\n'))
+          handleTextOperation('Tekrar eden satırları temizleme', 'clean', beforeLength)
+          break
+        case 'urls':
+          setText(text.replace(/https?:\/\/[^\s]+/g, ''))
+          handleTextOperation('URL\'leri temizleme', 'clean', beforeLength)
+          break
+        case 'emails':
+          setText(text.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, ''))
+          handleTextOperation('E-posta adreslerini temizleme', 'clean', beforeLength)
+          break
+        case 'markdown':
+          let mdText = text
+          mdText = mdText.replace(/^#{1,6}\s+/gm, '')
+          mdText = mdText.replace(/[*_]{1,3}([^*_]+)[*_]{1,3}/g, '$1')
+          mdText = mdText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+          mdText = mdText.replace(/!\[([^\]]*)\]\([^)]+\)/g, '')
+          mdText = mdText.replace(/^>\s+/gm, '')
+          mdText = mdText.replace(/```[\s\S]*?```/g, '')
+          mdText = mdText.replace(/`([^`]+)`/g, '$1')
+          mdText = mdText.replace(/^[-*_]{3,}\s*$/gm, '')
+          setText(mdText)
+          handleTextOperation('Markdown biçimlendirmelerini temizleme', 'clean', beforeLength)
+          break
+        case 'css':
+          setText(text.replace(/style="[^"]*"/g, '').replace(/<style[^>]*>[\s\S]*?<\/style>/gi, ''))
+          handleTextOperation('CSS stillerini temizleme', 'clean', beforeLength)
+          break
+        case 'scripts':
+          setText(text.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '').replace(/\son\w+="[^"]*"/g, ''))
+          handleTextOperation('Script kodlarını temizleme', 'clean', beforeLength)
+          break
+
+        // Format Temizleme
+        case 'comments':
+          let commentText = text
+          commentText = commentText.replace(/\/\/.*$/gm, '')
+          commentText = commentText.replace(/\/\*[\s\S]*?\*\//g, '')
+          commentText = commentText.replace(/<!--[\s\S]*?-->/g, '')
+          setText(commentText)
+          handleTextOperation('Yorumları temizleme', 'clean', beforeLength)
+          break
+        case 'line-numbers':
+          setText(text.replace(/^\s*\d+[\.\)]\s*/gm, ''))
+          handleTextOperation('Satır numaralarını temizleme', 'clean', beforeLength)
+          break
+        case 'quoted-text':
+          setText(text.replace(/"[^"]*"|'[^']*'/g, ''))
+          handleTextOperation('Tırnak içindeki metinleri temizleme', 'clean', beforeLength)
+          break
+        case 'parentheses-text':
+          setText(text.replace(/\([^)]*\)/g, '').replace(/\[[^\]]*\]/g, '').replace(/\{[^}]*\}/g, ''))
+          handleTextOperation('Parantez içindeki metinleri temizleme', 'clean', beforeLength)
+          break
+        case 'code-blocks':
+          let codeText = text
+          codeText = codeText.replace(/```[\s\S]*?```/g, '')
+          codeText = codeText.replace(/`[^`]*`/g, '')
+          codeText = codeText.replace(/<pre>[\s\S]*?<\/pre>/g, '')
+          codeText = codeText.replace(/<code>[\s\S]*?<\/code>/g, '')
+          setText(codeText)
+          handleTextOperation('Kod bloklarını temizleme', 'clean', beforeLength)
+          break
+        case 'ansi-colors':
+          setText(text.replace(/\u001b\[\d{1,2}m/g, ''))
+          handleTextOperation('ANSI renk kodlarını temizleme', 'clean', beforeLength)
+          break
+        case 'indentation':
+          setText(text.replace(/^[ \t]+/gm, ''))
+          handleTextOperation('Girinti temizleme', 'clean', beforeLength)
+          break
+        case 'line-breaks':
+          setText(text.replace(/\r\n|\r/g, '\n'))
+          handleTextOperation('Satır sonu karakterlerini normalleştirme', 'clean', beforeLength)
+          break
+
+        // Pattern Temizleme
+        case 'dates':
+          setText(text.replace(/\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}|\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}/g, ''))
+          handleTextOperation('Tarih formatlarını temizleme', 'clean', beforeLength)
+          break
+        case 'numeric-lines':
+          setText(text.split('\n').filter(line => !/^\s*\d+(\.\d+)?\s*$/.test(line)).join('\n'))
+          handleTextOperation('Sadece sayı içeren satırları temizleme', 'clean', beforeLength)
+          break
+        case 'alpha-lines':
+          setText(text.split('\n').filter(line => !/^[A-Za-z\s]+$/.test(line)).join('\n'))
+          handleTextOperation('Sadece harf içeren satırları temizleme', 'clean', beforeLength)
+          break
+        case 'uppercase-lines':
+          setText(text.split('\n').filter(line => !/^[A-Z\s]+$/.test(line)).join('\n'))
+          handleTextOperation('Sadece büyük harf içeren satırları temizleme', 'clean', beforeLength)
+          break
+        case 'lowercase-lines':
+          setText(text.split('\n').filter(line => !/^[a-z\s]+$/.test(line)).join('\n'))
+          handleTextOperation('Sadece küçük harf içeren satırları temizleme', 'clean', beforeLength)
+          break
+      }
+    } catch (error) {
+      handleTextOperation('Metin temizleme', 'clean', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, setText, handleTextOperation])
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-200">
@@ -374,13 +647,16 @@ function App() {
             <div className="editor-container">
               <Editor
                 height="50vh"
-                defaultLanguage="markdown"
+                defaultLanguage="plaintext"
                 value={text}
                 onChange={handleEditorChange}
                 onMount={handleEditorDidMount}
+                loading={<Loading />}
                 options={{
                   ...editorSettings,
-                  fontFamily: editorSettings.fontFamily,
+                  fontFamily: `${editorSettings.fontFamily}, monospace`,
+                  fontLigatures: true,
+                  disableMonospaceOptimizations: true,
                   minimap: { enabled: editorSettings.minimap },
                   padding: { top: 0, bottom: 24 },
                   lineNumbers: editorSettings.lineNumbers ? 'on' : 'off',
@@ -393,9 +669,11 @@ function App() {
                   hideCursorInOverviewRuler: true,
                   renderLineHighlight: 'none',
                   contextmenu: false,
-                  cursorBlinking: 'smooth',
-                  cursorSmoothCaretAnimation: editorSettings.cursorSmoothCaretAnimation ? 'on' : 'off',
-                  smoothScrolling: editorSettings.smoothScrolling,
+                  cursorBlinking: 'blink',
+                  cursorSmoothCaretAnimation: 'off',
+                  smoothScrolling: false,
+                  cursorStyle: 'line',
+                  cursorWidth: 2,
                   mouseWheelZoom: editorSettings.mouseWheelZoom,
                   wordWrap: editorSettings.wordWrap ? 'on' : 'off',
                   wordWrapColumn: 80,
@@ -441,147 +719,15 @@ function App() {
 
           {/* Araç Çubukları */}
           <Toolbar
-            onConvertCase={convertCase}
-            onSortLines={sortLines}
-            onConvertCharacters={convertCharacters}
-            onUrlEncodeDecode={urlEncodeDecode}
-            onAddPrefix={addPrefix}
-            onAddSuffix={addSuffix}
+            onConvertCase={handleConvertCase}
+            onSortLines={handleSortLines}
+            onConvertCharacters={handleConvertCharacters}
+            onUrlEncodeDecode={handleUrlEncodeDecode}
+            onAddPrefix={handleAddPrefix}
+            onAddSuffix={handleAddSuffix}
             onFormatText={formatText}
             onShowMarkdown={showMarkdown}
-            onCleanText={(featureId) => {
-              switch (featureId) {
-                // Boşluk Temizleme
-                case 'empty-lines':
-                  setText(text.split('\n').filter(line => line.trim() !== '').join('\n'));
-                  break;
-                case 'extra-spaces':
-                  setText(text.replace(/\s+/g, ' '));
-                  break;
-                case 'trim-lines':
-                  setText(text.split('\n').map(line => line.trim()).join('\n'));
-                  break;
-                case 'tabs':
-                  setText(text.replace(/\t/g, ''));
-                  break;
-                case 'all-spaces':
-                  setText(text.replace(/\s/g, ''));
-                  break;
-
-                // Karakter Temizleme
-                case 'special-chars':
-                  setText(text.replace(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]/g, ''));
-                  break;
-                case 'punctuation':
-                  setText(text.replace(/[.,!?;:'"()[\]{}]/g, ''));
-                  break;
-                case 'emoji-symbols':
-                  setText(text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''));
-                  break;
-                case 'numbers':
-                  setText(text.replace(/\d+/g, ''));
-                  break;
-                case 'non-ascii':
-                  setText(text.replace(/[^\x00-\x7F]/g, ''));
-                  break;
-                case 'control-chars':
-                  setText(text.replace(/[\x00-\x1F\x7F]/g, ''));
-                  break;
-                case 'diacritics':
-                  setText(text.normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
-                  break;
-                case 'currency':
-                  setText(text.replace(/[$€£¥₺¢]/g, ''));
-                  break;
-
-                // İçerik Temizleme
-                case 'html-tags':
-                  setText(text.replace(/<[^>]*>/g, ''));
-                  break;
-                case 'xml-json':
-                  setText(text.replace(/<\/?[^>]+(>|$)/g, '').replace(/[{}\[\]",]/g, ' ').replace(/\s+/g, ' ').trim());
-                  break;
-                case 'duplicate-lines':
-                  setText([...new Set(text.split('\n'))].join('\n'));
-                  break;
-                case 'urls':
-                  setText(text.replace(/https?:\/\/[^\s]+/g, ''));
-                  break;
-                case 'emails':
-                  setText(text.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, ''));
-                  break;
-                case 'markdown':
-                  let mdText = text;
-                  mdText = mdText.replace(/^#{1,6}\s+/gm, '');
-                  mdText = mdText.replace(/[*_]{1,3}([^*_]+)[*_]{1,3}/g, '$1');
-                  mdText = mdText.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-                  mdText = mdText.replace(/!\[([^\]]*)\]\([^)]+\)/g, '');
-                  mdText = mdText.replace(/^>\s+/gm, '');
-                  mdText = mdText.replace(/```[\s\S]*?```/g, '');
-                  mdText = mdText.replace(/`([^`]+)`/g, '$1');
-                  mdText = mdText.replace(/^[-*_]{3,}\s*$/gm, '');
-                  setText(mdText);
-                  break;
-                case 'css':
-                  setText(text.replace(/style="[^"]*"/g, '').replace(/<style[^>]*>[\s\S]*?<\/style>/gi, ''));
-                  break;
-                case 'scripts':
-                  setText(text.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '').replace(/\son\w+="[^"]*"/g, ''));
-                  break;
-
-                // Format Temizleme
-                case 'comments':
-                  let commentText = text;
-                  commentText = commentText.replace(/\/\/.*$/gm, '');
-                  commentText = commentText.replace(/\/\*[\s\S]*?\*\//g, '');
-                  commentText = commentText.replace(/<!--[\s\S]*?-->/g, '');
-                  setText(commentText);
-                  break;
-                case 'line-numbers':
-                  setText(text.replace(/^\s*\d+[\.\)]\s*/gm, ''));
-                  break;
-                case 'quoted-text':
-                  setText(text.replace(/"[^"]*"|'[^']*'/g, ''));
-                  break;
-                case 'parentheses-text':
-                  setText(text.replace(/\([^)]*\)/g, '').replace(/\[[^\]]*\]/g, '').replace(/\{[^}]*\}/g, ''));
-                  break;
-                case 'code-blocks':
-                  let codeText = text;
-                  codeText = codeText.replace(/```[\s\S]*?```/g, '');
-                  codeText = codeText.replace(/`[^`]*`/g, '');
-                  codeText = codeText.replace(/<pre>[\s\S]*?<\/pre>/g, '');
-                  codeText = codeText.replace(/<code>[\s\S]*?<\/code>/g, '');
-                  setText(codeText);
-                  break;
-                case 'ansi-colors':
-                  setText(text.replace(/\u001b\[\d{1,2}m/g, ''));
-                  break;
-                case 'indentation':
-                  setText(text.replace(/^[ \t]+/gm, ''));
-                  break;
-                case 'line-breaks':
-                  setText(text.replace(/\r\n|\r/g, '\n'));
-                  break;
-
-                // Pattern Temizleme
-                case 'dates':
-                  setText(text.replace(/\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}|\d{4}[\/.-]\d{1,2}[\/.-]\d{1,2}/g, ''));
-                  break;
-                case 'numeric-lines':
-                  setText(text.split('\n').filter(line => !/^\s*\d+(\.\d+)?\s*$/.test(line)).join('\n'));
-                  break;
-                case 'alpha-lines':
-                  setText(text.split('\n').filter(line => !/^[A-Za-z\s]+$/.test(line)).join('\n'));
-                  break;
-                case 'uppercase-lines':
-                  setText(text.split('\n').filter(line => !/^[A-Z\s]+$/.test(line)).join('\n'));
-                  break;
-                case 'lowercase-lines':
-                  setText(text.split('\n').filter(line => !/^[a-z\s]+$/.test(line)).join('\n'));
-                  break;
-              }
-            }}
+            onCleanText={cleanText}
             text={text}
           />
 
@@ -589,7 +735,7 @@ function App() {
           <SearchReplace 
             text={text} 
             onTextChange={setText} 
-            onHighlight={(match) => {
+            onHighlight={(match, shouldScroll) => {
               if (!editor || !monacoInstance) return;
               
               // Önceki tüm dekorasyonları temizle
@@ -615,10 +761,12 @@ function App() {
                   }
                 }]);
 
-                // Editörü ilgili pozisyona kaydır
-                const position = editor.getModel().getPositionAt(match.start);
-                editor.setPosition(position);
-                editor.revealLineInCenter(position.lineNumber);
+                // Sadece kullanıcı özellikle istediğinde editörü kaydır
+                if (shouldScroll) {
+                  const position = editor.getModel().getPositionAt(match.start);
+                  editor.setPosition(position);
+                  editor.revealLineInCenter(position.lineNumber);
+                }
               }
             }}
           />
@@ -2806,6 +2954,16 @@ Armut
           </div>
         )}
       </main>
+      
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          details={toast.details}
+          operation={toast.operation}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   )
 }

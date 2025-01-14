@@ -4,7 +4,7 @@ import {
   FiType, FiTrash, FiList, FiHash, FiLink, FiChevronDown, 
   FiCornerDownRight, FiMinus, FiDelete, FiX, FiCode,
   FiHash as FiNumber, FiAlignLeft, FiCalendar, FiMail,
-  FiGlobe, FiFileText, FiSlash, FiFilter
+  FiGlobe, FiFileText, FiSlash, FiFilter, FiShuffle
 } from 'react-icons/fi'
 
 import {
@@ -19,7 +19,7 @@ const { SubMenu } = Menu
 
 interface ToolbarProps {
   onConvertCase: (type: 'upper' | 'lower' | 'title' | 'sentence') => void
-  onSortLines: (type: 'asc' | 'desc' | 'length' | 'random') => void
+  onSortLines: (type: 'asc' | 'desc' | 'length-asc' | 'length-desc' | 'random') => void
   onConvertCharacters: (type: 'tr-en' | 'en-tr') => void
   onUrlEncodeDecode: (type: 'encode' | 'decode') => void
   onAddPrefix: (prefix: string) => void
@@ -160,6 +160,12 @@ export function Toolbar({
     {
       id: 'empty-lines',
       label: 'Boş Satırları Temizle',
+      icon: <FiDelete className="w-4 h-4" />,
+      category: 'Boşluk Temizleme'
+    },
+    {
+      id: 'normalize-spaces',
+      label: 'Boşlukları Tek Boşluğa Çevir',
       icon: <FiDelete className="w-4 h-4" />,
       category: 'Boşluk Temizleme'
     },
@@ -397,20 +403,22 @@ export function Toolbar({
           <div className="flex flex-col items-center gap-2">
             <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Büyük/Küçük Harf</span>
             <div className="flex gap-2">
-              <button
+              <button 
+                className="btn-toolbar" 
                 onClick={() => onConvertCase('upper')}
-                className="btn-toolbar"
-                title="Büyük Harfe Çevir"
+                aria-label="Büyük harfe dönüştür"
               >
                 <FiType className="w-4 h-4" /> ABC
               </button>
-              <button
+
+              <button 
+                className="btn-toolbar" 
                 onClick={() => onConvertCase('lower')}
-                className="btn-toolbar"
-                title="Küçük Harfe Çevir"
+                aria-label="Küçük harfe dönüştür"
               >
-                <FiType className="w-4 h-4" /> abc
+                <FiType className="w-4 h-4 transform rotate-180" /> abc
               </button>
+
               <button
                 onClick={() => onConvertCase('sentence')}
                 className="btn-toolbar"
@@ -483,14 +491,14 @@ export function Toolbar({
                 <FiLink className="w-4 h-4" /> Z→A
               </button>
               <button
-                onClick={() => onSortLines('length')}
+                onClick={() => onSortLines('length-asc')}
                 className="btn-toolbar"
                 data-tip="Satırları kısadan uzuna sırala"
               >
                 <FiLink className="w-4 h-4" /> 123
               </button>
               <button
-                onClick={() => onSortLines('length')}
+                onClick={() => onSortLines('length-desc')}
                 className="btn-toolbar"
                 data-tip="Satırları uzundan kısaya sırala"
               >

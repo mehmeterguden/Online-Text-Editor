@@ -346,18 +346,6 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                       </span>
                     </label>
 
-                    <label className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={settings.cursorSmoothCaretAnimation}
-                        onChange={(e) => onUpdate({ cursorSmoothCaretAnimation: e.target.checked })}
-                        className="checkbox"
-                        data-tip="İmleç hareketlerini yumuşat"
-                      />
-                      <span className="text-sm text-gray-700 dark:text-gray-300">
-                        İmleç Animasyonu
-                      </span>
-                    </label>
 
                     <label className="flex items-center space-x-3">
                       <input
@@ -378,7 +366,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                         checked={settings.bracketPairColorization}
                         onChange={(e) => onUpdate({ bracketPairColorization: e.target.checked })}
                         className="checkbox"
-                        data-tip="Eşleşen parantezleri renklendir"
+                        data-tip="Parantez çiftlerini renklendir"
                       />
                       <span className="text-sm text-gray-700 dark:text-gray-300">
                         Parantez Renklendirme

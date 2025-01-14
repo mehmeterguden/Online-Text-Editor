@@ -48,80 +48,92 @@ export class TestSystem {
   }
 
   async testTextOperations(text: string, operations: any) {
-    const testText = 'Sample text for testing\nWith multiple lines\nAnd some HTML <b>tags</b>\nDuplicate line\nDuplicate line'
-    
-    // Set the initial text for testing
-    operations.setText(testText)
+    try {
+      // Test başlangıç metnini ayarla
+      if (typeof operations.setText === 'function') {
+        operations.setText(text)
+      } else if (operations.text !== undefined) {
+        operations.text = text
+      } else {
+        throw new Error('setText fonksiyonu veya text özelliği bulunamadı')
+      }
 
-    // Metin İşlemleri Testleri
-    this.testOperation('convertCase - upper', () => {
-      const result = operations.convertCase('upper')
-      return result === testText.toUpperCase()
-    })
+      // Metin işleme testleri
+      this.testOperation('Büyük/Küçük Harf Dönüşümü', () => {
+        const upperCase = operations.convertCase('upper')
+        return upperCase === text.toUpperCase()
+      })
 
-    operations.setText(testText) // Reset text for next test
-    this.testOperation('convertCase - lower', () => {
-      const result = operations.convertCase('lower')
-      return result === testText.toLowerCase()
-    })
+      operations.setText(text) // Reset text for next test
+      this.testOperation('convertCase - lower', () => {
+        const result = operations.convertCase('lower')
+        return result === text.toLowerCase()
+      })
 
-    operations.setText(testText)
-    this.testOperation('cleanWhitespace', () => {
-      const result = operations.cleanWhitespace()
-      return !result.match(/[ \t]+$/gm) && !result.match(/\n{3,}/g)
-    })
+      operations.setText(text)
+      this.testOperation('cleanWhitespace', () => {
+        const result = operations.cleanWhitespace()
+        return !result.match(/[ \t]+$/gm) && !result.match(/\n{3,}/g)
+      })
 
-    operations.setText(testText)
-    this.testOperation('removeHtmlTags', () => {
-      const result = operations.removeHtmlTags()
-      return !result.match(/<[^>]*>/g)
-    })
+      operations.setText(text)
+      this.testOperation('removeHtmlTags', () => {
+        const result = operations.removeHtmlTags()
+        return !result.match(/<[^>]*>/g)
+      })
 
-    operations.setText(testText)
-    this.testOperation('removeDuplicates', () => {
-      const result = operations.removeDuplicates()
-      const lines = result.split('\n')
-      return lines.length === new Set(lines).size
-    })
+      operations.setText(text)
+      this.testOperation('removeDuplicates', () => {
+        const result = operations.removeDuplicates()
+        const lines = result.split('\n')
+        return lines.length === new Set(lines).size
+      })
 
-    operations.setText(testText)
-    this.testOperation('sortLines - asc', () => {
-      const result = operations.sortLines('asc')
-      const lines = result.split('\n')
-      return lines.slice().sort((a: string, b: string) => a.localeCompare(b)).join('\n') === result
-    })
+      operations.setText(text)
+      this.testOperation('sortLines - asc', () => {
+        const result = operations.sortLines('asc')
+        const lines = result.split('\n')
+        return lines.slice().sort((a: string, b: string) => a.localeCompare(b)).join('\n') === result
+      })
 
-    operations.setText(testText)
-    this.testOperation('sortLines - desc', () => {
-      const result = operations.sortLines('desc')
-      const lines = result.split('\n')
-      return lines.slice().sort((a: string, b: string) => b.localeCompare(a)).join('\n') === result
-    })
+      operations.setText(text)
+      this.testOperation('sortLines - desc', () => {
+        const result = operations.sortLines('desc')
+        const lines = result.split('\n')
+        return lines.slice().sort((a: string, b: string) => b.localeCompare(a)).join('\n') === result
+      })
 
-    operations.setText('çğıöşüÇĞİÖŞÜ test text')
-    this.testOperation('convertCharacters - tr-en', () => {
-      const result = operations.convertCharacters('tr-en')
-      return !result.match(/[çğıöşüÇĞİÖŞÜ]/g)
-    })
+      operations.setText('çğıöşüÇĞİÖŞÜ test text')
+      this.testOperation('convertCharacters - tr-en', () => {
+        const result = operations.convertCharacters('tr-en')
+        return !result.match(/[çğıöşüÇĞİÖŞÜ]/g)
+      })
 
-    operations.setText(testText)
-    this.testOperation('urlEncodeDecode - encode', () => {
-      const result = operations.urlEncodeDecode('encode')
-      return result === encodeURIComponent(testText)
-    })
+      operations.setText(text)
+      this.testOperation('urlEncodeDecode - encode', () => {
+        const result = operations.urlEncodeDecode('encode')
+        return result === encodeURIComponent(text)
+      })
 
-    operations.setText(encodeURIComponent(testText))
-    this.testOperation('urlEncodeDecode - decode', () => {
-      const result = operations.urlEncodeDecode('decode')
-      return result === testText
-    })
+      operations.setText(encodeURIComponent(text))
+      this.testOperation('urlEncodeDecode - decode', () => {
+        const result = operations.urlEncodeDecode('decode')
+        return result === text
+      })
 
-    operations.setText(testText)
-    this.testOperation('addLineNumbers', () => {
-      const result = operations.addLineNumbers()
-      const lines = result.split('\n')
-      return lines.every((line: string, i: number) => line.startsWith(`${i + 1}. `))
-    })
+      operations.setText(text)
+      this.testOperation('addLineNumbers', () => {
+        const result = operations.addLineNumbers()
+        const lines = result.split('\n')
+        return lines.every((line: string, i: number) => line.startsWith(`${i + 1}. `))
+      })
+    } catch (error) {
+      this.results.push({ 
+        feature: 'testTextOperations', 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      })
+    }
   }
 
   private testSetting(name: string, test: () => boolean) {

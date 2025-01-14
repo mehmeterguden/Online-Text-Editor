@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce'
 interface SearchReplaceProps {
   text: string
   onTextChange: (text: string) => void
-  onHighlight?: (match: SearchMatch | null, editor?: any) => void
+  onHighlight?: (match: SearchMatch | null, shouldScroll?: boolean) => void
 }
 
 interface SearchOptions {
@@ -85,7 +85,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
     if (newMatches.length > 0) {
       const newMatch = newMatches[currentMatchIndex] || newMatches[0]
       setCurrentMatch(newMatch)
-      if (onHighlight) onHighlight(newMatch)
+      if (onHighlight) onHighlight(newMatch, false)
     } else {
       setCurrentMatch(null)
       if (onHighlight) onHighlight(null)
@@ -109,7 +109,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
     const nextIndex = (currentMatchIndex + 1) % matches.length
     setCurrentMatchIndex(nextIndex)
     setCurrentMatch(matches[nextIndex])
-    if (onHighlight) onHighlight(matches[nextIndex])
+    if (onHighlight) onHighlight(matches[nextIndex], true)
   }, [matches, currentMatchIndex, onHighlight])
 
   // Önceki eşleşmeye git
@@ -118,7 +118,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
     const prevIndex = (currentMatchIndex - 1 + matches.length) % matches.length
     setCurrentMatchIndex(prevIndex)
     setCurrentMatch(matches[prevIndex])
-    if (onHighlight) onHighlight(matches[prevIndex])
+    if (onHighlight) onHighlight(matches[prevIndex], true)
   }, [matches, currentMatchIndex, onHighlight])
 
   // İlk eşleşmeyi değiştir
@@ -205,7 +205,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
                           const newIndex = num - 1;
                           setCurrentMatchIndex(newIndex);
                           setCurrentMatch(matches[newIndex]);
-                          if (onHighlight) onHighlight(matches[newIndex]);
+                          if (onHighlight) onHighlight(matches[newIndex], true);
                         }
                       }}
                       onBlur={() => {
