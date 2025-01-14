@@ -102,14 +102,14 @@ function App() {
       ],
       colors: {
         'editor.background': '#ffffff',
-        'editor.foreground': '#1f2937',
+        'editor.foreground': '#28293e',
         'editor.lineHighlightBackground': '#f3f4f6',
         'editorCursor.foreground': '#2563eb',
         'editor.selectionBackground': '#bfdbfe80',
         'editor.inactiveSelectionBackground': '#bfdbfe40',
         'editorSuggestWidget.background': '#ffffff',
         'editorSuggestWidget.border': '#e5e7eb',
-        'editorSuggestWidget.foreground': '#1f2937',
+        'editorSuggestWidget.foreground': '#28293e',
         'editorSuggestWidget.selectedBackground': '#bfdbfe80',
         'editorSuggestWidget.highlightForeground': '#2563eb',
         'editorSuggestWidget.focusHighlightForeground': '#1d4ed8',
@@ -2448,7 +2448,7 @@ Armut
                                   </div>
                               <div className="bg-white dark:bg-gray-900 p-4 rounded-xl border border-gray-200 dark:border-gray-700 font-mono text-sm">
                                 <p>• Beyaz arka plan (#FFFFFF)</p>
-                                <p>• Koyu metin rengi (#1F2937)</p>
+                                <p>• Koyu metin rengi (#28293e)</p>
                                 <p>• Mavi vurgular (#3B82F6)</p>
                                 <p>• Gri kenar çizgileri (#E5E7EB)</p>
                                 </div>
