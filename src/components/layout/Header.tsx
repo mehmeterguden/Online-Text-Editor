@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import lightLogo from '../../favicon_light.png';
+import darkLogo from '../../favicon_dark.png';
 
 export function Header() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -20,7 +22,7 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center space-x-3">
           <img
-            src={isDarkMode ? '/src/favicon_dark.png' : '/src/favicon_light.png'}
+            src={isDarkMode ? darkLogo : lightLogo}
             alt="Metin Editörü Logo"
             className="w-8 h-8"
           />
