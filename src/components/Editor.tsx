@@ -8,7 +8,7 @@ interface EditorProps {
 
 export function Editor({ value, onChange }: EditorProps) {
   return (
-    <div className="w-full h-[calc(100vh-16rem)] sm:h-[calc(100vh-18rem)]">
+    <div className="w-full h-[calc(100vh-8rem)]">
       <MonacoEditor
         height="100%"
         defaultLanguage="plaintext"
@@ -17,9 +17,9 @@ export function Editor({ value, onChange }: EditorProps) {
         theme="light"
         options={{
           minimap: { enabled: false },
-          fontSize: 14,
+          fontSize: 16,
           lineHeight: 24,
-          padding: { top: 16, bottom: 16 },
+          padding: { top: 8, bottom: 8 },
           scrollBeyondLastLine: false,
           wordWrap: 'on',
           wrappingStrategy: 'advanced',
@@ -28,8 +28,8 @@ export function Editor({ value, onChange }: EditorProps) {
           scrollbar: {
             vertical: 'visible',
             horizontal: 'visible',
-            verticalScrollbarSize: 12,
-            horizontalScrollbarSize: 12,
+            verticalScrollbarSize: 16,
+            horizontalScrollbarSize: 16,
           },
           overviewRulerLanes: 0,
           hideCursorInOverviewRuler: true,
@@ -38,13 +38,18 @@ export function Editor({ value, onChange }: EditorProps) {
           tabSize: 2,
           quickSuggestions: false,
           renderWhitespace: 'none',
-          contextmenu: false,
+          contextmenu: true,
           folding: false,
-          dragAndDrop: false,
+          dragAndDrop: true,
           links: false,
           mouseWheelZoom: true,
           formatOnPaste: true,
           formatOnType: true,
+          fontSize: {
+            mobile: 16,
+            tablet: 14,
+            desktop: 14
+          }
         }}
       />
     </div>
