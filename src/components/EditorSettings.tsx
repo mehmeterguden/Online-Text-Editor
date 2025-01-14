@@ -126,15 +126,22 @@ const letterSpacingOptions = [
 ]
 
 export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: EditorSettingsPopupProps) {
-  const { isDark } = useTheme()
-  const [previewTheme, setPreviewTheme] = useState(isDark ? 'vs-dark' : 'vs-light')
+  const { theme } = useTheme()
+  const [previewTheme, setPreviewTheme] = useState(theme)
   
   // Ayarlar açıldığında mevcut temayı kaydet
   useEffect(() => {
     if (isOpen) {
-      setPreviewTheme(isDark ? 'vs-dark' : 'vs-light')
+      setPreviewTheme(theme)
     }
-  }, [isOpen])
+  }, [isOpen, theme])
+
+  // Ayarlar kapatıldığında temayı geri yükle
+  useEffect(() => {
+    if (!isOpen) {
+      setPreviewTheme(theme)
+    }
+  }, [isOpen, theme])
 
   const handleReset = () => {
     onUpdate(defaultEditorSettings)
@@ -142,7 +149,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
 
   if (!isOpen) return null
 
-  const monacoTheme = previewTheme === 'dark' ? 'vs-dark' : 'vs-light'
+  const monacoTheme = previewTheme === 'dark' ? 'vs-dark' : 'light'
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 overflow-y-auto py-8">

@@ -8,7 +8,7 @@ interface EditorProps {
 }
 
 export function Editor({ value, onChange }: EditorProps) {
-  const { isDark } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div className="w-full h-[calc(100vh-8rem)]">
@@ -17,7 +17,7 @@ export function Editor({ value, onChange }: EditorProps) {
         defaultLanguage="plaintext"
         value={value}
         onChange={(value) => onChange(value || '')}
-        theme={isDark ? 'vs-dark' : 'light'}
+        theme={theme === 'dark' ? 'vs-dark' : 'light'}
         options={{
           minimap: { enabled: false },
           fontSize: 16,
