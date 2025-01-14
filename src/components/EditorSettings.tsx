@@ -618,7 +618,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                         { token: 'number', foreground: 'fca5a5' }
                       ],
                       colors: {
-                        'editor.background': '#1f2937',
+                        'editor.background': '#28293e',
                         'editor.foreground': '#e5e7eb',
                         'editor.lineHighlightBackground': '#313244',
                         'editorCursor.foreground': '#89b4fa',
@@ -657,14 +657,14 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                       ],
                       colors: {
                         'editor.background': '#ffffff',
-                        'editor.foreground': '#1f2937',
+                        'editor.foreground': '#28293e',
                         'editor.lineHighlightBackground': '#f3f4f6',
                         'editorCursor.foreground': '#2563eb',
                         'editor.selectionBackground': '#bfdbfe80',
                         'editor.inactiveSelectionBackground': '#bfdbfe40',
                         'editorSuggestWidget.background': '#ffffff',
                         'editorSuggestWidget.border': '#e5e7eb',
-                        'editorSuggestWidget.foreground': '#1f2937',
+                        'editorSuggestWidget.foreground': '#28293e',
                         'editorSuggestWidget.selectedBackground': '#bfdbfe80',
                         'editorSuggestWidget.highlightForeground': '#2563eb',
                         'editorSuggestWidget.focusHighlightForeground': '#1d4ed8',
