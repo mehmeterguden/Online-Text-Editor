@@ -20,7 +20,7 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center space-x-3">
           <img
-            src={isDarkMode ? '/favicon_dark.png' : '/favicon_light.png'}
+            src={isDarkMode ? '/src/favicon_dark.png' : '/src/favicon_light.png'}
             alt="Metin Editörü Logo"
             className="w-8 h-8"
           />
