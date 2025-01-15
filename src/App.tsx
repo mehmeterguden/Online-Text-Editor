@@ -909,7 +909,7 @@ function App() {
                       <svg className="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                       </svg>
-                    </span>
+                  </span>
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
                         Gelişmiş Düzenleme Araçları
@@ -918,23 +918,23 @@ function App() {
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Metin biçimlendirme ve düzenleme
-                        </li>
+                </li>
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Büyük/küçük harf dönüşümleri
-                        </li>
+                </li>
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Akıllı karakter değiştirme
-                        </li>
+                </li>
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           HTML etiket temizleme
-                        </li>
-                      </ul>
+                </li>
+              </ul>
+            </div>
                     </div>
                   </div>
-                </div>
 
                 <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
                   <div className="flex items-start gap-4">
@@ -968,8 +968,8 @@ function App() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+                    </div>
+                  </div>
 
             {/* Kapsamlı Özellikler */}
             <div className="space-y-8">
@@ -1006,18 +1006,18 @@ function App() {
                           Toplu metin işlemleri
                         </li>
                       </ul>
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
 
                 <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
                   <div className="flex items-start gap-4">
                     <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg className="w-7 h-7 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                      </svg>
-                    </span>
-                    <div>
+                    </svg>
+                  </span>
+                  <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
                         Metin Organizasyonu
                       </h3>
@@ -1025,11 +1025,11 @@ function App() {
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Satır sıralama ve filtreleme
-                        </li>
+                </li>
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Alfabetik düzenleme
-                        </li>
+                </li>
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Sayısal sıralama
@@ -1037,8 +1037,8 @@ function App() {
                         <li className="flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
                           Özel sıralama seçenekleri
-                        </li>
-                      </ul>
+                </li>
+              </ul>
                     </div>
                   </div>
                 </div>
@@ -1067,7 +1067,7 @@ function App() {
         {/* Footer */}
         <footer className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-border dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
               {/* Hakkımızda */}
               <div>
                 <h3 className="text-xl font-semibold text-light-text dark:text-dark-text mb-4">

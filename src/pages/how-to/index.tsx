@@ -9,6 +9,7 @@ import URLAraclari from './url-araclari'
 import AramaVeDegistirme from './arama-ve-degistirme'
 import EditorAyarlari from './editor-ayarlari'
 import Kisayollar from './kisayollar'
+import { Helmet } from 'react-helmet'
 
 export const HowTo = () => {
   const [activeSection, setActiveSection] = useState('temel-ozellikler')
@@ -43,8 +44,86 @@ export const HowTo = () => {
     }
   }
 
+  // JSON-LD Schema
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Metin Editörü Kullanım Kılavuzu",
+    "description": "Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber.",
+    "totalTime": "PT5M",
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "İnternet Tarayıcısı"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Metin Düzenleme ve Biçimlendirme",
+        "text": "Metninizi editöre yapıştırın veya yazın. Gelişmiş düzenleme araçlarıyla metninizi profesyonelce biçimlendirin.",
+        "url": "https://metineditoru.com/nasil-kullanilir/#temel-ozellikler"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Türkçe-İngilizce Karakter Dönüşümü",
+        "text": "Tek tıkla Türkçe karakterleri İngilizce karakterlere veya tam tersine dönüştürün.",
+        "url": "https://metineditoru.com/nasil-kullanilir/#karakter-donusumu"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "HTML ve Özel Karakter Temizleme",
+        "text": "Metninizi HTML etiketlerinden ve özel karakterlerden arındırın, temiz bir metin elde edin.",
+        "url": "https://metineditoru.com/nasil-kullanilir/#temizleme-araclari"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Metin Sıralama ve Organizasyon",
+        "text": "Metinlerinizi alfabetik veya sayısal olarak sıralayın, satırları düzenleyin.",
+        "url": "https://metineditoru.com/nasil-kullanilir/#siralama-araclari"
+      }
+    ],
+    "about": {
+      "@type": "Thing",
+      "name": "Metin Editörü",
+      "description": "Profesyonel metin düzenleme ve dönüştürme aracı",
+      "url": "https://metineditoru.com"
+    }
+  }
+
   return (
     <Layout>
+      <Helmet>
+        <title>Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı</title>
+        <meta name="description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı" />
+        <meta property="og:description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
+        <meta property="og:url" content="https://metineditoru.com/nasil-kullanilir/" />
+        <meta property="og:locale" content="tr_TR" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı" />
+        <meta name="twitter:description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://metineditoru.com/nasil-kullanilir/" />
+
+        {/* JSON-LD Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify(howToSchema)}
+        </script>
+
+        {/* Additional Meta Tags */}
+        <meta name="keywords" content="metin editörü, metin düzenleme aracı, türkçe karakter dönüştürme, html temizleme, metin biçimlendirme, büyük küçük harf dönüşümü, satır sıralama, url kodlama" />
+        <meta name="author" content="Metin Editörü" />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Turkish" />
+      </Helmet>
+
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-12 gap-8">
           {/* Sol Menü */}

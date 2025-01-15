@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /nasil-kullanilir/
+Allow: /nasil-kullanilir/*
+
+Sitemap: https://metineditoru.com/sitemap.xml 
