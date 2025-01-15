@@ -1,45 +1,48 @@
 import { useState, useEffect } from 'react'
 
-export function useTheme() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+type Theme = 'light' | 'dark'
+
+export const useTheme = () => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    // Önce localStorage'a bakıyoruz
     const savedTheme = localStorage.getItem('theme')
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      return savedTheme
+    if (savedTheme) {
+      return savedTheme as Theme
     }
     
-    try {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      return prefersDark ? 'dark' : 'light'
-    } catch (error) {
-      return 'light'
+    // İlk giriş ise sistem temasını kontrol ediyoruz
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark'
     }
+    
+    return 'light'
   })
 
   useEffect(() => {
-    const root = document.documentElement
-    root.classList.remove('light', 'dark')
-    root.classList.add(theme)
+    // Tema değiştiğinde DOM'u güncelle
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    
+    // Kullanıcının seçimini kaydet
     localStorage.setItem('theme', theme)
-
-    const event = new CustomEvent('themeChange', { detail: theme })
-    window.dispatchEvent(event)
   }, [theme])
 
+  // Sistem teması değiştiğinde sadece localStorage boşsa güncelle
   useEffect(() => {
-    try {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      const handleChange = (e: MediaQueryListEvent) => {
-        const savedTheme = localStorage.getItem('theme')
-        if (!savedTheme) {
-          setTheme(e.matches ? 'dark' : 'light')
-        }
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Sadece localStorage'da tema kaydı yoksa güncelle
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light')
       }
-
-      mediaQuery.addEventListener('change', handleChange)
-      return () => mediaQuery.removeEventListener('change', handleChange)
-    } catch (error) {
-      console.warn('System theme detection is not supported')
     }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
   const toggleTheme = () => {
