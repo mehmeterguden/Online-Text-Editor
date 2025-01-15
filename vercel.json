@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    {
+      "source": "/nasil-kullanilir",
+      "destination": "/nasil-kullanilir.html"
+    },
+    {
+      "source": "/nasil-kullanilir/",
+      "destination": "/nasil-kullanilir.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false
+} 
