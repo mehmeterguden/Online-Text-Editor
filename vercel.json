@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/nasil-kullanilir",
-      "destination": "/"
+      "destination": "/nasil-kullanilir/"
     },
     {
       "source": "/nasil-kullanilir/",
@@ -36,5 +36,5 @@
       ]
     }
   ],
-  "trailingSlash": false
+  "trailingSlash": true
 } 
