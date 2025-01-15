@@ -63,7 +63,6 @@ function App() {
     editor.updateOptions({
       readOnly: false,
       copyWithSyntaxHighlighting: true,
-      enablePaste: true,
       contextmenu: true,
       quickSuggestions: false,
       renderLineHighlight: 'none',
@@ -79,7 +78,16 @@ function App() {
       autoClosingBrackets: editorSettings.autoClosingBrackets ? 'always' : 'never',
       autoClosingQuotes: editorSettings.autoClosingQuotes ? 'always' : 'never',
       formatOnPaste: editorSettings.formatOnPaste,
-      formatOnType: editorSettings.formatOnType
+      formatOnType: editorSettings.formatOnType,
+      // Yapıştırma kısıtlamalarını kaldır
+      preventDefaultOnPaste: false
+    })
+
+    // Yapıştırma olayını engelleme
+    editor.onKeyDown((e: any) => {
+      if (e.ctrlKey && e.code === 'KeyV') {
+        e.preventDefault = () => {}
+      }
     })
   }
 
@@ -561,17 +569,19 @@ function App() {
             </h1>
             <div className="flex items-center gap-2">
               <button
-                onClick={() => setShowSettings(!showSettings)}
-                className="btn-toolbar"
-              >
-                <FiSettings className="w-5 h-5 text-light-text-secondary dark:text-dark-text-secondary hover:text-blue-500 dark:hover:text-blue-400" />
-              </button>
-              <button
                 onClick={toggleTheme}
                 className="btn-toolbar"
+                aria-label={`${theme === 'dark' ? 'Açık' : 'Koyu'} temaya geç`}
               >
-                <FiSun className="w-5 h-5 hidden dark:block text-dark-text-secondary hover:text-yellow-400" />
-                <FiMoon className="w-5 h-5 block dark:hidden text-light-text-secondary hover:text-blue-500" />
+                {theme === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+              </button>
+              <button
+                onClick={() => setShowSettings(true)}
+                className="btn-toolbar"
+                aria-label="Editör ayarlarını aç"
+                aria-expanded={showSettings}
+              >
+                <FiSettings className="w-4 h-4" />
               </button>
             </div>
           </div>

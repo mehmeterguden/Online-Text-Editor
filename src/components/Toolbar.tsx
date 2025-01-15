@@ -97,6 +97,7 @@ export function Toolbar({
       onClick={() => feature.isActive && handleCleaningAction(feature.id)}
       title={feature.description}
       disabled={!feature.isActive}
+      aria-label={feature.name}
     >
       <FiCornerDownRight className="w-4 h-4 text-gray-400" />
       <span>{feature.name}</span>
@@ -141,6 +142,8 @@ export function Toolbar({
       <button 
         className="w-full px-4 py-2 text-left flex items-center justify-between bg-gray-50 dark:bg-gray-900"
         onClick={() => toggleSection(category as keyof typeof openSections)}
+        aria-label={`${title} bölümünü ${openSections[category as keyof typeof openSections] ? 'kapat' : 'aç'}`}
+        aria-expanded={openSections[category as keyof typeof openSections]}
       >
         <div className="flex items-center gap-2">
           {icon}
@@ -423,6 +426,7 @@ export function Toolbar({
                 onClick={() => onConvertCase('sentence')}
                 className="btn-toolbar"
                 title="Cümle Başı Büyük"
+                aria-label="Cümle başı büyük"
               >
                 <FiType className="w-4 h-4" /> Abc
               </button>
@@ -430,6 +434,7 @@ export function Toolbar({
                 onClick={() => onConvertCase('title')}
                 className="btn-toolbar"
                 title="Kelime Başları Büyük"
+                aria-label="Kelime başları büyük"
               >
                 <FiType className="w-4 h-4" /> Abc Def
               </button>
@@ -446,6 +451,8 @@ export function Toolbar({
                 className="btn-toolbar flex items-center gap-2"
                 title="Temizleme Araçları"
                 onClick={() => setIsCleaningMenuOpen(!isCleaningMenuOpen)}
+                aria-label="Temizleme araçlarını aç/kapat"
+                aria-expanded={isCleaningMenuOpen}
               >
                 <FiTrash className="w-4 h-4" />
                 <span>Temizle</span>
@@ -480,6 +487,7 @@ export function Toolbar({
                 onClick={() => onSortLines('asc')}
                 className="btn-toolbar"
                 data-tip="Metni A'dan Z'ye sırala"
+                aria-label="Metni A'dan Z'ye sırala"
               >
                 <FiLink className="w-4 h-4" /> A→Z
               </button>
@@ -487,6 +495,7 @@ export function Toolbar({
                 onClick={() => onSortLines('desc')}
                 className="btn-toolbar"
                 data-tip="Metni Z'den A'ya sırala"
+                aria-label="Metni Z'den A'ya sırala"
               >
                 <FiLink className="w-4 h-4" /> Z→A
               </button>
@@ -494,6 +503,7 @@ export function Toolbar({
                 onClick={() => onSortLines('length-asc')}
                 className="btn-toolbar"
                 data-tip="Satırları kısadan uzuna sırala"
+                aria-label="Satırları kısadan uzuna sırala"
               >
                 <FiLink className="w-4 h-4" /> 123
               </button>
@@ -501,6 +511,7 @@ export function Toolbar({
                 onClick={() => onSortLines('length-desc')}
                 className="btn-toolbar"
                 data-tip="Satırları uzundan kısaya sırala"
+                aria-label="Satırları uzundan kısaya sırala"
               >
                 <FiLink className="w-4 h-4" /> 321
               </button>
@@ -508,6 +519,7 @@ export function Toolbar({
                 onClick={() => onSortLines('random')}
                 className="btn-toolbar"
                 data-tip="Satırları rastgele sırala"
+                aria-label="Satırları rastgele sırala"
               >
                 <FiLink className="w-4 h-4" />
               </button>
@@ -524,6 +536,7 @@ export function Toolbar({
                 onClick={() => onConvertCharacters('tr-en')}
                 className="btn-toolbar"
                 title="Türkçe → İngilizce"
+                aria-label="Türkçe karakterleri İngilizce karakterlere dönüştür"
               >
                 <FiLink className="w-4 h-4" /> TR→EN
               </button>
@@ -531,6 +544,7 @@ export function Toolbar({
                 onClick={() => onConvertCharacters('en-tr')}
                 className="btn-toolbar"
                 title="İngilizce → Türkçe"
+                aria-label="İngilizce karakterleri Türkçe karakterlere dönüştür"
               >
                 <FiLink className="w-4 h-4" /> EN→TR
               </button>
@@ -547,6 +561,7 @@ export function Toolbar({
                 onClick={() => onUrlEncodeDecode('encode')}
                 className="btn-toolbar"
                 title="URL Encode"
+                aria-label="URL karakterlerini kodla"
               >
                 <FiLink className="w-4 h-4" /> Encode
               </button>
@@ -554,6 +569,7 @@ export function Toolbar({
                 onClick={() => onUrlEncodeDecode('decode')}
                 className="btn-toolbar"
                 title="URL Decode"
+                aria-label="URL kodlamasını çöz"
               >
                 <FiLink className="w-4 h-4" /> Decode
               </button>
@@ -581,6 +597,7 @@ export function Toolbar({
                 onClick={() => onAddPrefix(prefix)}
                 className="btn-toolbar"
                 title="Başa Ekle"
+                aria-label="Satır başına metin ekle"
               >
                 <FiLink className="w-4 h-4" /> Ekle
               </button>
@@ -603,6 +620,7 @@ export function Toolbar({
                 onClick={() => onAddSuffix(suffix)}
                 className="btn-toolbar"
                 title="Sona Ekle"
+                aria-label="Satır sonuna metin ekle"
               >
                 <FiLink className="w-4 h-4" /> Ekle
               </button>

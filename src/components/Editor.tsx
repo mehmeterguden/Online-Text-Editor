@@ -1,6 +1,6 @@
 import { useTheme } from '../hooks/useTheme'
 import { EditorSettings } from '../features/editor/types'
-import MonacoEditor from '@monaco-editor/react'
+import { Editor } from '@monaco-editor/react'
 
 interface TextEditorProps {
   value: string
@@ -36,16 +36,24 @@ export function TextEditor({ value, onChange, settings }: TextEditorProps) {
     colorDecorators: settings.syntaxHighlighting,
     selectionHighlight: settings.syntaxHighlighting,
     matchBrackets: settings.syntaxHighlighting ? 'always' : 'never',
+    readOnly: false,
+    contextmenu: true,
+    quickSuggestions: false,
+    ariaLabel: 'Metin editörü',
+    preventDefaultOnPaste: false
   }
 
   return (
-    <MonacoEditor
+    <Editor
       value={value}
       onChange={(value) => onChange(value || '')}
       language="plaintext"
-      theme="vs"
+      theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
       options={monacoOptions}
       className="w-full h-[calc(100vh-12rem)] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700"
+      onPaste={(e) => {
+        e?.preventDefault = () => {}
+      }}
     />
   )
 } 
