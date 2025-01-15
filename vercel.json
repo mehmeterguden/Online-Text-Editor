@@ -2,11 +2,15 @@
   "rewrites": [
     {
       "source": "/nasil-kullanilir",
-      "destination": "/nasil-kullanilir.html"
+      "destination": "/"
     },
     {
       "source": "/nasil-kullanilir/",
-      "destination": "/nasil-kullanilir.html"
+      "destination": "/"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
     }
   ],
   "headers": [
