@@ -8,12 +8,15 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# SPA için tüm istekleri index.html'e yönlendir
+# SPA için gelişmiş yönlendirme kuralları
 RewriteBase /
-RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.html [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ /index.html [QSA,L]
+
+# 404 hatasını index.html'e yönlendir
+ErrorDocument 404 /index.html
 
 # CORS ayarları
 Header set Access-Control-Allow-Origin "*"
