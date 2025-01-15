@@ -559,6 +559,71 @@ function App() {
     }
   }, [text, setText, handleTextOperation])
 
+  const handleThemeChange = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    toggleTheme()
+    showToast(
+      `Tema ${newTheme === 'dark' ? 'koyu' : 'açık'} moda geçirildi`,
+      'success',
+      undefined,
+      'transform'
+    )
+  }
+
+  const handleReplaceText = useCallback((searchText: string, replaceText: string, replaceAll: boolean = false) => {
+    try {
+      const beforeLength = text.length
+      if (replaceAll) {
+        const regex = new RegExp(searchText, 'g')
+        const matches = text.match(regex)
+        const count = matches ? matches.length : 0
+        
+        if (count > 0) {
+          setText(text.replace(regex, replaceText))
+          showToast(
+            `"${searchText}" metni "${replaceText}" ile ${count} yerde değiştirildi`,
+            'success',
+            undefined,
+            'transform'
+          )
+        } else {
+          showToast(
+            `"${searchText}" metni bulunamadı`,
+            'error',
+            undefined,
+            'transform'
+          )
+        }
+      } else {
+        const firstOccurrence = text.indexOf(searchText)
+        if (firstOccurrence !== -1) {
+          // Kaçıncı kelime olduğunu bul
+          const beforeText = text.slice(0, firstOccurrence)
+          const occurrenceCount = (beforeText.match(new RegExp(searchText, 'g')) || []).length + 1
+          
+          const newText = text.slice(0, firstOccurrence) + replaceText + text.slice(firstOccurrence + searchText.length)
+          setText(newText)
+          showToast(
+            `"${searchText}" metninin ${occurrenceCount}. görünümü "${replaceText}" ile değiştirildi`,
+            'success',
+            undefined,
+            'transform'
+          )
+        } else {
+          showToast(
+            `"${searchText}" metni bulunamadı`,
+            'error',
+            undefined,
+            'transform'
+          )
+        }
+      }
+      handleTextOperation('Metin değiştirme', 'edit', beforeLength)
+    } catch (error) {
+      handleTextOperation('Metin değiştirme', 'edit', undefined, error instanceof Error ? error.message : 'Bilinmeyen hata')
+    }
+  }, [text, setText, handleTextOperation])
+
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-200">
       <header className="bg-light-bg dark:bg-dark-bg border-b border-light-border dark:border-dark-border">
@@ -569,7 +634,7 @@ function App() {
             </h1>
             <div className="flex items-center gap-2">
               <button
-                onClick={toggleTheme}
+                onClick={handleThemeChange}
                 className="btn-toolbar"
                 aria-label={`${theme === 'dark' ? 'Açık' : 'Koyu'} temaya geç`}
               >
