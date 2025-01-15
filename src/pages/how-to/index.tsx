@@ -109,19 +109,25 @@ export const HowTo = () => {
         <meta name="twitter:title" content="Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı" />
         <meta name="twitter:description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
         
-        {/* Canonical URL */}
+        {/* Canonical URL ve Alternatif URL'ler */}
         <link rel="canonical" href="https://metineditoru.com/nasil-kullanilir/" />
+        <link rel="alternate" href="https://www.metineditoru.com/nasil-kullanilir/" />
+        <link rel="alternate" href="http://metineditoru.com/nasil-kullanilir/" />
+        <link rel="alternate" href="http://www.metineditoru.com/nasil-kullanilir/" />
+
+        {/* HTTPS Yönlendirmesi */}
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+        {/* Additional Meta Tags */}
+        <meta name="keywords" content="metin editörü, metin düzenleme aracı, türkçe karakter dönüştürme, html temizleme, metin biçimlendirme, büyük küçük harf dönüşümü, satır sıralama, url kodlama" />
+        <meta name="author" content="Metin Editörü" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta name="language" content="Turkish" />
 
         {/* JSON-LD Schema */}
         <script type="application/ld+json">
           {JSON.stringify(howToSchema)}
         </script>
-
-        {/* Additional Meta Tags */}
-        <meta name="keywords" content="metin editörü, metin düzenleme aracı, türkçe karakter dönüştürme, html temizleme, metin biçimlendirme, büyük küçük harf dönüşümü, satır sıralama, url kodlama" />
-        <meta name="author" content="Metin Editörü" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="Turkish" />
       </Helmet>
 
       <div className="max-w-7xl mx-auto">
