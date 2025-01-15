@@ -8,12 +8,14 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# SPA yönlendirmeleri
-RewriteBase /
-RewriteRule ^index\.html$ - [L]
+# Ana dizin ve nasil-kullanilir sayfası için özel kurallar
+RewriteRule ^nasil-kullanilir/?$ /index.html [L]
+RewriteRule ^nasil-kullanilir/(.*)$ /index.html [L]
+
+# Diğer tüm istekler için genel kural
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /index.html [QSA,L]
+RewriteRule ^(.*)$ /index.html [L]
 
 # CORS ayarları
 Header set Access-Control-Allow-Origin "*"
@@ -53,5 +55,5 @@ AddOutputFilterByType DEFLATE application/x-javascript
     ExpiresByType application/xhtml+xml "access plus 1 day"
 </IfModule>
 
-# Hata sayfaları
-ErrorDocument 404 /index.html 
+# Fallback - 404 sayfası yerine index.html'e yönlendir
+FallbackResource /index.html 
