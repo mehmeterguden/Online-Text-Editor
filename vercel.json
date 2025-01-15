@@ -1,12 +1,12 @@
 {
   "routes": [
-    { "src": "/how-to", "dest": "/nasil-kullanilir" },
-    { "src": "/how-to/(.*)", "dest": "/nasil-kullanilir/$1" },
+    { "src": "/nasil-kullanilir", "dest": "/nasil-kullanilir/" },
+    { "src": "/nasil-kullanilir/(.*)", "dest": "/nasil-kullanilir/" },
     { "src": "/(.*)", "dest": "/" }
   ],
   "rewrites": [
-    { "source": "/how-to", "destination": "/nasil-kullanilir" },
-    { "source": "/how-to/(.*)", "destination": "/nasil-kullanilir/$1" },
+    { "source": "/nasil-kullanilir", "destination": "/nasil-kullanilir/" },
+    { "source": "/nasil-kullanilir/(.*)", "destination": "/nasil-kullanilir/" },
     { "source": "/(.*)", "destination": "/" }
   ]
 } 
