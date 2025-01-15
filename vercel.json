@@ -1,0 +1,12 @@
+{
+  "routes": [
+    { "src": "/nasil-kullanilir", "dest": "/" },
+    { "src": "/nasil-kullanilir/(.*)", "dest": "/" },
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "rewrites": [
+    { "source": "/nasil-kullanilir", "destination": "/" },
+    { "source": "/nasil-kullanilir/(.*)", "destination": "/" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+} 
