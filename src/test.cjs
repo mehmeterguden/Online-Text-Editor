@@ -194,7 +194,7 @@ function generateReport(testResults) {
   report.push(`   └─ URL Decode (✅)`)
   report.push('')
 
-  report.push('6. Satır İşlemleri:')
+  report.push('6. Sıralama Araçları:')
   report.push(`   └─ Satır Numarası Ekleme (✅)`)
   report.push(`      └─ Test: "test" → "1. test"`)
   report.push('-'.repeat(80) + '\n')

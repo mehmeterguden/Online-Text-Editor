@@ -20,7 +20,7 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-center h-16">
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
-            Metin Editörü
+            Metin Editörü2
           </h1>
         </div>
       </div>

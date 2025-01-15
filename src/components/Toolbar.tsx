@@ -409,6 +409,7 @@ export function Toolbar({
               <button 
                 className="btn-toolbar" 
                 onClick={() => onConvertCase('upper')}
+                title="Büyük Harfe Dönüştür"
                 aria-label="Büyük harfe dönüştür"
               >
                 <FiType className="w-4 h-4" /> ABC
@@ -417,6 +418,7 @@ export function Toolbar({
               <button 
                 className="btn-toolbar" 
                 onClick={() => onConvertCase('lower')}
+                title="Küçük Harfe Dönüştür"
                 aria-label="Küçük harfe dönüştür"
               >
                 <FiType className="w-4 h-4 transform rotate-180" /> abc
