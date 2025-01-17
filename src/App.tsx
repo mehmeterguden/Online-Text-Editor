@@ -629,9 +629,9 @@ function App() {
       <header className="sticky top-0 z-50 bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-primary-500">
+          <h1 className="text-2xl font-bold text-primary-500">
               Metin Editörü
-            </Link>
+            </h1>
             <div className="flex items-center gap-3">
               <Link
                 to="/nasil-kullanilir/"
