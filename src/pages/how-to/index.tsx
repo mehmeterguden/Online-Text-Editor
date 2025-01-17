@@ -94,19 +94,19 @@ export const HowTo = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı</title>
+        <title>Nasıl Kullanılır? - Metin Editörü Kullanım Kılavuzu</title>
         <meta name="description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı" />
+        <meta property="og:title" content="Nasıl Kullanılır? - Metin Editörü Kullanım Kılavuzu" />
         <meta property="og:description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
         <meta property="og:url" content="https://metineditoru.com/nasil-kullanilir/" />
         <meta property="og:locale" content="tr_TR" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Metin Editörü Kullanım Kılavuzu | Profesyonel Metin Düzenleme Aracı" />
+        <meta name="twitter:title" content="Nasıl Kullanılır? - Metin Editörü Kullanım Kılavuzu" />
         <meta name="twitter:description" content="Metin Editörü'nün tüm özelliklerini öğrenin. Türkçe-İngilizce karakter dönüşümü, HTML temizleme, metin düzenleme ve daha fazlası için kapsamlı rehber." />
         
         {/* Canonical URL ve Alternatif URL'ler */}
