@@ -11,6 +11,7 @@ import { TestSystem } from './utils/testSystem'
 import { Loading } from './components/Loading'
 import { Toast } from './components/Toast'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 // Loglama fonksiyonu
 const log = (type: 'info' | 'warning' | 'error', message: string, data?: any) => {
@@ -78,9 +79,11 @@ function App() {
       autoClosingQuotes: editorSettings.autoClosingQuotes ? 'always' : 'never',
       formatOnPaste: editorSettings.formatOnPaste,
       formatOnType: editorSettings.formatOnType,
-      // Yapıştırma kısıtlamalarını kaldır
       preventDefaultOnPaste: false
     })
+
+    // Editöre otomatik odaklan
+    editor.focus()
 
     // Yapıştırma olayını engelleme
     editor.onKeyDown((e: any) => {
@@ -625,6 +628,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+      <Helmet>
+        <title>Metin Editörü - Online Metin Düzenleme ve Dönüştürme Aracı</title>
+      </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -1318,7 +1324,7 @@ function App() {
                   </section>
 
                   <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mt-8">
-                    Son Güncelleme: {new Date().toLocaleDateString('tr-TR')}
+                    Son Güncelleme: 13.02.2025
                   </p>
             </div>
           </div>

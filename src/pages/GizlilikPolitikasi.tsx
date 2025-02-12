@@ -61,7 +61,7 @@ export default function GizlilikPolitikasi() {
             Önemli değişiklikler olması durumunda kullanıcılarımız bilgilendirilecektir.
           </p>
           <p className="mt-2">
-            Son güncelleme: {new Date().toLocaleDateString('tr-TR')}
+            Son güncelleme: 13.02.2025
           </p>
         </section>
       </div>
