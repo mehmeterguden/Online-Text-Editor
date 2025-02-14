@@ -16,6 +16,17 @@ export default defineConfig({
           console.error('Failed to generate system report:', error)
         }
       }
+    },
+    {
+      name: 'handle-html',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url === '/nasil-kullanilir/') {
+            req.url = '/nasil-kullanilir.html'
+          }
+          next()
+        })
+      }
     }
   ],
   resolve: {

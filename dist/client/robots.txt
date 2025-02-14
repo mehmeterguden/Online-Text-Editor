@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /nasil-kullanilir
+Allow: /nasil-kullanilir/
+Allow: /nasil-kullanilir/*
+
+# Ana site ve tüm alt sayfalar
+Sitemap: https://metineditoru.com/sitemap.xml
+Sitemap: https://www.metineditoru.com/sitemap.xml 

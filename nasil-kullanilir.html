@@ -34,15 +34,16 @@
     
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWGKBRTKR0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-XWGKBRTKR0');
 </script>
+    
     <!-- Schema.org markup -->
     <script type="application/ld+json">
     {
@@ -77,7 +78,907 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="seo-content">
+      <header role="banner">
+        <nav aria-label="Ana navigasyon">
+          <h1>Metin Editörü</h1>
+          <ul role="menubar">
+            <li role="menuitem"><a href="/nasil-kullanilir">Yardım</a></li>
+            <li role="menuitem"><button aria-label="Editör ayarlarını aç">Ayarlar</button></li>
+            <li role="menuitem"><button aria-label="Karanlık/Aydınlık tema değiştir">Karanlık</button></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main role="main">
+        <nav aria-label="İçindekiler" role="navigation">
+          <h2>İçindekiler</h2>
+          <ul>
+            <li><a href="#temel-ozellikler">Temel Özellikler</a></li>
+            <li><a href="#buyuk-kucuk-harf">Büyük/Küçük Harf Dönüşümleri</a></li>
+            <li><a href="#temizleme-araclari">Temizleme Araçları</a></li>
+            <li><a href="#siralama-araclari">Sıralama Araçları</a></li>
+            <li><a href="#karakter-donusumu">Karakter Dönüşümü</a></li>
+            <li><a href="#url-araclari">URL Araçları</a></li>
+            <li><a href="#arama-degistirme">Arama ve Değiştirme</a></li>
+            <li><a href="#editor-ayarlari">Editör Ayarları</a></li>
+            <li><a href="#klavye-kisayollari">Klavye Kısayolları</a></li>
+          </ul>
+        </nav>
+
+        <article class="how-to-guide">
+          <section id="giris" aria-labelledby="giris-title">
+            <h2 id="giris-title">Nasıl Kullanılır?</h2>
+            <p>Metin Editörü'nün tüm özelliklerini keşfedin ve metinlerinizi profesyonelce düzenleyin.</p>
+          </section>
+
+          <section id="temel-ozellikler" aria-labelledby="temel-title">
+            <h2 id="temel-title" class="feature-title">
+              <span class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+              </span>
+              Güçlü Metin Düzenleme Araçları
+            </h2>
+            
+            <div class="feature-grid">
+              <p class="feature-description">Metinlerinizi kolayca düzenleyebileceğiniz kullanıcı dostu arayüzümüz ile tanışın.</p>
+              
+              <div class="feature-cards">
+                <article class="feature-card">
+                  <div class="card-header">
+                    <span class="card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                      </svg>
+                    </span>
+                    <h3>Hızlı ve Kolay Metin Düzenleme</h3>
+                  </div>
+                  <p>Modern ve kullanıcı dostu arayüz ile metinlerinizi kolayca düzenleyin.</p>
+                  <ul>
+                    <li>Sezgisel ve kolay arayüz</li>
+                    <li>Otomatik kaydetme ile güvenli düzenleme</li>
+                    <li>Geri alma ve ileri alma araçları</li>
+                  </ul>
+                </article>
+
+                <article class="feature-card">
+                  <div class="card-header">
+                    <span class="card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                    </span>
+                    <h3>Gelişmiş Arama ve Değiştirme</h3>
+                  </div>
+                  <p>Gelişmiş arama ve değiştirme özellikleriyle metinlerinizde hassas ve hızlı değişiklikler yapın.</p>
+                  <ul>
+                    <li>Akıllı ve hızlı arama motoru</li>
+                    <li>Toplu değiştirme seçenekleri</li>
+                    <li>Karmaşık aramalar için regex desteği</li>
+                  </ul>
+                </article>
+
+                <article class="feature-card">
+                  <div class="card-header">
+                    <span class="card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                      </svg>
+                    </span>
+                    <h3>Kolay Dosya Yönetimi</h3>
+                  </div>
+                  <p>Metin dosyalarınızı kolaylıkla yönetin ve paylaşın.</p>
+                  <ul>
+                    <li>Metin dosyalarını kolayca indirme</li>
+                    <li>Tarayıcıdan yazdırma desteği</li>
+                    <li>Belgelerinizi otomatik olarak yedekleyin</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section id="buyuk-kucuk-harf" aria-labelledby="harf-title">
+            <h2 id="harf-title" class="feature-title">
+              <span class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </span>
+              Büyük/Küçük Harf Dönüşümleri
+            </h2>
+
+            <div class="feature-content">
+              <p class="feature-description">Metinlerinizdeki harfleri büyük veya küçük harfe dönüştürerek düzenleyin. Metinlerinizi istediğiniz formata getirin.</p>
+
+              <div class="tools-grid">
+                <article class="tool-card">
+                  <div class="tool-header">
+                    <span class="tool-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                    </span>
+                    <h3>Büyük Harfe Dönüştür</h3>
+                  </div>
+                  <p>Metninizdeki tüm karakterleri büyük harfe dönüştürür. Metinlerinizi başlıklar veya vurgular için uygun hale getirir.</p>
+                  <div class="example">
+                    <div class="example-header">
+                      <svg class="example-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                      <h4>Örnek Kullanım</h4>
+                    </div>
+                    <div class="example-content">
+                      <div class="input">
+                        <span class="label">Girdi</span>
+                        <pre>Küçük harflerle bir metin.
+Büyük harflerle bir METİN.</pre>
+                      </div>
+                      <div class="arrow">
+                        <svg class="arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </div>
+                      <div class="output">
+                        <span class="label">Çıktı</span>
+                        <pre>KÜÇÜK HARFLERLE BİR METİN.
+BÜYÜK HARFLERLE BİR METİN.</pre>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="tool-card">
+                  <div class="tool-header">
+                    <span class="tool-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                    </span>
+                    <h3>Küçük Harfe Dönüştür</h3>
+                  </div>
+                  <p>Metninizdeki tüm karakterleri küçük harfe dönüştürür. Metinlerinizi standart ve okunabilir hale getirir.</p>
+                  <div class="example">
+                    <div class="example-header">
+                      <svg class="example-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                      <h4>Örnek Kullanım</h4>
+                    </div>
+                    <div class="example-content">
+                      <div class="input">
+                        <span class="label">Girdi</span>
+                        <pre>Küçük harflerle bir metin.
+Büyük harflerle bir METİN.</pre>
+                      </div>
+                      <div class="arrow">
+                        <svg class="arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </div>
+                      <div class="output">
+                        <span class="label">Çıktı</span>
+                        <pre>küçük harflerle bir metin.
+büyük harflerle bir metin.</pre>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="tool-card">
+                  <div class="tool-header">
+                    <span class="tool-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m10 0h-4m-3 4h3m-3-4h3"></path>
+                      </svg>
+                    </span>
+                    <h3>Cümle Başı Büyük</h3>
+                  </div>
+                  <p>Metninizdeki her cümlenin ilk harfini büyük yapar. Cümlelerinizi düzenli hale getirir.</p>
+                  <div class="example">
+                    <div class="example-header">
+                      <svg class="example-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                      <h4>Örnek Kullanım</h4>
+                    </div>
+                    <div class="example-content">
+                      <div class="input">
+                        <span class="label">Girdi</span>
+                        <pre>küçük harfle başlayan cümle. bir diğer cümle.</pre>
+                      </div>
+                      <div class="arrow">
+                        <svg class="arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </div>
+                      <div class="output">
+                        <span class="label">Çıktı</span>
+                        <pre>Küçük harfle başlayan cümle. Bir diğer cümle.</pre>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="tool-card">
+                  <div class="tool-header">
+                    <span class="tool-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                      </svg>
+                    </span>
+                    <h3>Kelime Başları Büyük</h3>
+                  </div>
+                  <p>Metninizdeki her kelimenin ilk harfini büyük yapar. Başlıklar veya özel isimler için uygun hale getirir.</p>
+                  <div class="example">
+                    <div class="example-header">
+                      <svg class="example-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                      <h4>Örnek Kullanım</h4>
+                    </div>
+                    <div class="example-content">
+                      <div class="input">
+                        <span class="label">Girdi</span>
+                        <pre>bu bir örnek metin olsun.
+her kelime başı küçük.</pre>
+                      </div>
+                      <div class="arrow">
+                        <svg class="arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                      </div>
+                      <div class="output">
+                        <span class="label">Çıktı</span>
+                        <pre>Bu Bir Örnek Metin Olsun.
+Her Kelime Başı Küçük.</pre>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section id="temizleme-araclari" class="mb-16">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+              <span class="bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-400 dark:to-indigo-500 w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+              </span>
+              Metin Temizleme Araçları
+            </h2>
+            <div class="space-y-8">
+              <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">Metinlerinizi gereksiz boşluklardan, karakterlerden ve formatlardan arındırın. Metin temizleme araçlarımız, verilerinizi daha düzenli ve okunabilir hale getirmenize yardımcı olur.</p>
+              
+              <div class="space-y-12">
+                <!-- Boşluk Temizleme Bölümü -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">1</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Boşluk Temizleme</h3>
+                  </div>
+
+                  <div class="space-y-8">
+                    <!-- Boş Satırları Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Boş satırları sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki ardışık boş satırları (yalnızca satır başı karakteri içeren satırları) temizler. Metinlerinizde satır boşluklarını düzenlemek için idealdir.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-blue-600 dark:text-blue-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Satır 1.
+
+
+Satır 2.
+
+Satır 3.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Satır 1.
+Satır 2.
+Satır 3.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Fazla Boşlukları Sil (Tab Hariç) -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Fazla boşlukları sil (Tab hariç)</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki tab karakterleri dışındaki birden fazla ardışık boşluğu tek boşluğa çevirir. Metin düzenlemede sıklıkla kullanılır.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-blue-600 dark:text-blue-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Boşluklar    çok    fazla.    Tab    karakteri    korundu.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Boşluklar çok fazla. Tab karakteri korundu.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- İçerik Temizleme Bölümü -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">4</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">İçerik Temizleme</h3>
+                  </div>
+
+                  <div class="space-y-8">
+                    <!-- Tekrarlayan Satırları Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Tekrarlayan satırları sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki birebir aynı olan tekrarlayan satırları kaldırır. Veri setlerindeki tekrarı önlemek için idealdir.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-red-600 dark:text-red-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Tekrar eden satır.
+Tekrar eden satır.
+Farklı bir satır.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Tekrar eden satır.
+Farklı bir satır.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- URL'leri Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">URL'leri sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki tüm URL (web adresi) bağlantılarını temizler. Web adreslerini metinden ayırmak için idealdir.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-red-600 dark:text-red-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">URL içeren metin: https://example.com
+Başka bir URL: www.test.org</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">URL içeren metin:
+Başka bir URL:</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Format Temizleme Bölümü -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">5</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Format Temizleme</h3>
+                  </div>
+
+                  <div class="space-y-8">
+                    <!-- Satır Numaralarını Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Satır numaralarını sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki satırların başındaki numaraları kaldırır. Kod veya liste gibi satır numaralı metinler için kullanışlıdır.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-yellow-600 dark:text-yellow-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">1. Satır bir.
+2. Satır iki.
+3. Satır üç.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Satır bir.
+Satır iki.
+Satır üç.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Tırnak İçindeki Metinleri Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Tırnak içindeki metinleri sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki tek veya çift tırnak içindeki metinleri temizler. Metin analizi ve düzenlemede faydalıdır.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-yellow-600 dark:text-yellow-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Metinde 'tırnak içi' var.
+Bir de "çift tırnak" var.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Metinde var.
+Bir de var.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pattern Temizleme Bölümü -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">6</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Pattern Temizleme</h3>
+                  </div>
+
+                  <div class="space-y-8">
+                    <!-- Tarih Formatındakileri Sil -->
+                    <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                      <h4 class="font-semibold text-lg mb-4 text-gray-900 dark:text-gray-100">Tarih formatındakileri sil</h4>
+                      <p class="text-gray-600 dark:text-gray-400 mb-6">Metninizdeki tarihleri (gün/ay/yıl, ay/gün/yıl vb.) temizler. Tarih içeren metinleri düzenlemek için idealdir.</p>
+                      
+                      <div class="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                          <svg class="w-5 h-5 text-pink-600 dark:text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                          </svg>
+                          <h5 class="font-medium text-pink-600 dark:text-pink-400">Örnek Kullanım</h5>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 text-xs font-medium px-2 py-1 rounded-full">Girdi</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Tarih 2023-10-26 var.
+Başka 10/27/2023 tarih var.</pre>
+                          </div>
+                          
+                          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400 text-xs font-medium px-2 py-1 rounded-full">Çıktı</span>
+                            <pre class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">Tarih var.
+Başka tarih var.</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="siralama-araclari" aria-labelledby="siralama-title">
+            <h2 id="siralama-title">Sıralama Araçları</h2>
+            <p>Metinlerinizi sıralama araçlarımızla kolayca düzenleyin. Verilerinizi alfabetik, uzunluk veya rastgele sıralama yöntemleri ile organize edin.</p>
+
+            <article class="tool">
+              <h3>A'dan Z'ye Sıralama</h3>
+              <p>Metninizi alfabetik olarak A'dan Z'ye doğru sıralar.</p>
+              <div class="example">
+                <h4>Örnek Kullanım</h4>
+                <div class="example-content">
+                  <h5>Girdi</h5>
+                  <pre>c satırı
+a satırı
+b satırı</pre>
+                  <h5>Çıktı</h5>
+                  <pre>a satırı
+b satırı
+c satırı</pre>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section id="karakter-donusumu" aria-labelledby="karakter-title">
+            <h2 id="karakter-title">Karakter Dönüşümü</h2>
+            <p>Metinlerinizdeki karakterleri dönüştürme araçlarıyla kolayca düzenleyin.</p>
+
+            <article class="tool">
+              <h3>Türkçe → İngilizce Dönüşümü</h3>
+              <p>Türkçe karakterleri İngilizce karakterlere dönüştürür.</p>
+              <div class="example">
+                <h4>Örnek Kullanım</h4>
+                <div class="example-content">
+                  <h5>Girdi</h5>
+                  <pre>Türkçe karakterler: ç, ğ, ı, i, ö, ş, ü</pre>
+                  <h5>Çıktı</h5>
+                  <pre>Turkce karakterler: c, g, i, i, o, s, u</pre>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section id="url-araclari" aria-labelledby="url-title">
+            <h2 id="url-title">URL Araçları</h2>
+            <p>URL'lerinizi kodlayın veya çözün.</p>
+
+            <article class="tool">
+              <h3>URL Encode</h3>
+              <p>URL'nizdeki özel karakterleri % kodlamasına dönüştürür.</p>
+              <div class="example">
+                <h4>Örnek Kullanım</h4>
+                <div class="example-content">
+                  <h5>Girdi</h5>
+                  <pre>https://example.com/sayfa?q=örnek yazı</pre>
+                  <h5>Çıktı</h5>
+                  <pre>https://example.com/sayfa?q=%C3%B6rnek%20yaz%C4%B1</pre>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section id="editor-ayarlari" aria-labelledby="ayarlar-title">
+            <h2 id="ayarlar-title">Kişiselleştirilebilir Editör Ayarları</h2>
+            <p>Metin editörü deneyiminizi kişiselleştirin ve tercihlerinize göre özelleştirin. Tema seçenekleri, yazı tipi ayarları ve görünüm seçenekleri ile size en uygun çalışma ortamını oluşturun.</p>
+
+            <article class="settings-group">
+              <h3>Tema Ayarları</h3>
+              <p>Açık ve koyu tema seçenekleriyle editörünüzün görünümünü özelleştirerek gözlerinizi koruyun.</p>
+              <ul>
+                <li>Tema Seçimi: Editörünüzün genel renk şemasını (açık veya koyu) belirleyebilirsiniz.</li>
+              </ul>
+            </article>
+
+            <article class="settings-group">
+              <h3>Yazı Tipi Ayarları</h3>
+              <p>Farklı yazı tipleri, boyutları ve satır yükseklikleri ile metinlerinizi özelleştirin.</p>
+              <ul>
+                <li>JetBrains Mono</li>
+                <li>Fira Code</li>
+                <li>Source Code Pro</li>
+                <li>Consolas</li>
+                <li>Monaco</li>
+                <li>Menlo</li>
+                <li>Ubuntu Mono</li>
+                <li>Roboto Mono</li>
+                <li>IBM Plex Mono</li>
+              </ul>
+            </article>
+
+            <article class="settings-group">
+              <h3>Görünüm Ayarları</h3>
+              <ul>
+                <li>Kelime Kaydırma</li>
+                <li>Satır Numaraları</li>
+                <li>Mini Harita</li>
+                <li>Yumuşak Kaydırma</li>
+                <li>Parantez Renklendirme</li>
+                <li>Girinti Kılavuzları</li>
+                <li>Otomatik Parantez Kapatma</li>
+                <li>Otomatik Tırnak Kapatma</li>
+                <li>Otomatik Sarmalama</li>
+                <li>Yapıştırırken Düzenle</li>
+                <li>Tıklanabilir Bağlantılar</li>
+                <li>Fare ile Yakınlaştırma</li>
+                <li>Belirsiz Karakterleri Vurgula</li>
+                <li>Görünmez Karakterleri Vurgula</li>
+                <li>ASCII Dışı Karakterleri Vurgula</li>
+              </ul>
+            </article>
+          </section>
+
+          <section id="klavye-kisayollari" aria-labelledby="kisayollar-title">
+            <h2 id="kisayollar-title" class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+              <span class="bg-gradient-to-r from-pink-500 to-pink-600 dark:from-pink-400 dark:to-pink-500 w-10 h-10 rounded-lg flex items-center justify-center mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
+                </svg>
+              </span>
+              Klavye Kısayolları
+            </h2>
+            <div class="space-y-8">
+              <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">Editörü daha hızlı ve verimli kullanmak için klavye kısayollarını öğrenin. Bu kısayollar, metin düzenleme sürecinizi hızlandıracak ve daha akıcı hale getirecektir.</p>
+              
+              <div class="space-y-12">
+                <!-- Temel Düzenleme Kısayolları -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">1</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Temel Düzenleme Kısayolları</h3>
+                  </div>
+
+                  <div class="space-y-6">
+                    <p class="text-gray-600 dark:text-gray-400">Bu kısayollar, editördeki en temel işlemleri hızlıca yapmanızı sağlar. Metin düzenleme süreçlerinizde sıklıkla kullanacağınız bu kısayollar, verimliliğinizi artırır.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Geri Al</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + Z / ⌘ + Z</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Son yapılan işlemi geri alır</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">İleri Al</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + Y / ⌘ + Shift + Z</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Geri alınan işlemi tekrar yapar</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Kes</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + X / ⌘ + X</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Seçili metni keser</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Kopyala</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + C / ⌘ + C</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Seçili metni kopyalar</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Yapıştır</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + V / ⌘ + V</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Kopyalanan metni yapıştırır</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Tümünü Seç</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + A / ⌘ + A</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Tüm metni seçer</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Arama ve Değiştirme Kısayolları -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">2</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Arama ve Değiştirme Kısayolları</h3>
+                  </div>
+
+                  <div class="space-y-6">
+                    <p class="text-gray-600 dark:text-gray-400">Bu kısayollar, metin içinde arama yapmayı, değiştirmeyi ve eşleşmeler arasında geçiş yapmayı kolaylaştırır.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Bul</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + F / ⌘ + F</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Arama penceresini açar</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Değiştir</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + H / ⌘ + H</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Değiştirme penceresini açar</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Sonraki Eşleşme</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">F3 / ⌘ + G</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Sonraki eşleşmeye gider</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Önceki Eşleşme</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Shift + F3 / ⌘ + Shift + G</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Önceki eşleşmeye gider</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Görünüm Kısayolları -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">3</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Görünüm Kısayolları</h3>
+                  </div>
+
+                  <div class="space-y-6">
+                    <p class="text-gray-600 dark:text-gray-400">Bu kısayollar, editörün görünümünü yakınlaştırarak ya da uzaklaştırarak kolayca ayarlamanızı sağlar.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Yakınlaştır</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + Fare Tekerleği Yukarı / ⌘ + Fare Tekerleği Yukarı</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Yazı boyutunu büyütür</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Uzaklaştır</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + Fare Tekerleği Aşağı / ⌘ + Fare Tekerleği Aşağı</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Yazı boyutunu küçültür</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Çoklu İmleç ve Seçim Kısayolları -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700">
+                  <div class="flex items-center mb-6">
+                    <span class="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mr-4 text-white font-bold text-xl shadow-lg">4</span>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Çoklu İmleç ve Seçim Kısayolları</h3>
+                  </div>
+
+                  <div class="space-y-6">
+                    <p class="text-gray-600 dark:text-gray-400">Bu kısayollar, metin içinde daha hızlı düzenlemeler yapmanızı ve birden fazla noktada değişiklikler yapmanızı sağlar.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Çoklu İmleç</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Alt + Tıklama / ⌥ + Tıklama</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Birden fazla noktada düzenleme yapar</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Kelime Seçimi</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + D / ⌘ + D</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Aynı kelimeleri seçer</p>
+                        </div>
+                      </div>
+
+                      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-6">
+                        <div class="space-y-4">
+                          <div class="flex justify-between items-center">
+                            <span class="font-medium text-gray-900 dark:text-gray-100">Satır Seçimi</span>
+                            <kbd class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Ctrl + L / ⌘ + L</kbd>
+                          </div>
+                          <p class="text-sm text-gray-600 dark:text-gray-400">Bulunulan satırı seçer</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+      </main>
+
+      <footer role="contentinfo">
+        <div class="footer-content">
+          <section class="footer-about">
+            <h2>Metin Editörü</h2>
+            <p>Metinlerinizi düzenlemek, biçimlendirmek ve dönüştürmek için profesyonel çözüm.</p>
+          </section>
+
+          <nav class="footer-links" aria-label="Alt navigasyon">
+            <h3>Özellikler</h3>
+            <ul>
+              <li>Metin Düzenleme</li>
+              <li>Büyük/Küçük Harf</li>
+              <li>Karakter Dönüşümü</li>
+              <li>Sıralama Araçları</li>
+              <li>URL Kodlama</li>
+              <li>HTML Temizleme</li>
+            </ul>
+          </nav>
+
+          <nav class="footer-links" aria-label="Alt navigasyon">
+            <h3>Bağlantılar</h3>
+            <ul>
+              <li><a href="/editor-ayarlari">Editör Ayarları</a></li>
+              <li><a href="/nasil-kullanilir">Nasıl Kullanılır?</a></li>
+              <li><a href="/gizlilik-politikasi">Gizlilik Politikası</a></li>
+            </ul>
+          </nav>
+
+          <section class="footer-contact">
+            <h3>İletişim</h3>
+            <p>Sorularınız ve önerileriniz için bizimle iletişime geçebilirsiniz.</p>
+            <a href="mailto:iletisim@metineditoru.com">E-posta Gönder</a>
+            <p>E-posta: iletisim@metineditoru.com</p>
+          </section>
+        </div>
+      </footer>
+    </div>
   </body>
 </html> 

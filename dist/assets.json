@@ -1,0 +1,93 @@
+{
+  "_chunk-!~{009}~.js": {
+    "file": "assets/static/Helmet.WH_JMgCz.css",
+    "src": "_chunk-!~{009}~.js"
+  },
+  "_chunk-BX8vBgRm.js": {
+    "file": "assets/chunks/chunk-BX8vBgRm.js",
+    "name": "executeOnRenderClientHook"
+  },
+  "_chunk-D9NGPsHN.js": {
+    "file": "assets/chunks/chunk-D9NGPsHN.js",
+    "name": "chunk-IR6S3I6Y"
+  },
+  "_chunk-DA2k84jD.js": {
+    "file": "assets/chunks/chunk-DA2k84jD.js",
+    "name": "Helmet",
+    "imports": [
+      "_chunk-D9NGPsHN.js"
+    ],
+    "css": [
+      "assets/static/Helmet.WH_JMgCz.css"
+    ]
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/client-routing-runtime/entry.js": {
+    "file": "assets/entries/entry-client-routing.DuBqqas_.js",
+    "name": "entries/entry-client-routing",
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/client-routing-runtime/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_chunk-BX8vBgRm.js"
+    ],
+    "dynamicImports": [
+      "src/pages/index.page.tsx",
+      "src/pages/nasil-kullanilir.page.tsx",
+      "src/renderer/_default.page.client.tsx",
+      "src/renderer/_default.page.server.tsx?extractAssets&lang.tsx"
+    ]
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/server-routing-runtime/entry.js": {
+    "file": "assets/entries/entry-server-routing.Dd_RWx7D.js",
+    "name": "entries/entry-server-routing",
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/server-routing-runtime/entry.js",
+    "isEntry": true,
+    "imports": [
+      "_chunk-BX8vBgRm.js"
+    ],
+    "dynamicImports": [
+      "src/pages/index.page.tsx",
+      "src/pages/nasil-kullanilir.page.tsx",
+      "src/renderer/_default.page.client.tsx",
+      "src/renderer/_default.page.server.tsx?extractAssets&lang.tsx"
+    ]
+  },
+  "src/pages/index.page.tsx": {
+    "file": "assets/entries/src_pages_index.page.Ct3AEa_z.js",
+    "name": "entries/src/pages/index.page",
+    "src": "src/pages/index.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-D9NGPsHN.js",
+      "_chunk-DA2k84jD.js"
+    ]
+  },
+  "src/pages/nasil-kullanilir.page.tsx": {
+    "file": "assets/entries/src_pages_nasil-kullanilir.page.BuUe8PcZ.js",
+    "name": "entries/src/pages/nasil-kullanilir.page",
+    "src": "src/pages/nasil-kullanilir.page.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-D9NGPsHN.js",
+      "_chunk-DA2k84jD.js"
+    ]
+  },
+  "src/renderer/_default.page.client.tsx": {
+    "file": "assets/entries/src_renderer_default.page.client.CyMpAZ-e.js",
+    "name": "entries/src/renderer/_default.page.client",
+    "src": "src/renderer/_default.page.client.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_chunk-D9NGPsHN.js"
+    ]
+  },
+  "src/renderer/_default.page.server.tsx?extractAssets&lang.tsx": {
+    "file": "assets/entries/src_renderer_default.page.server.extractAssets.l0sNRNKZ.js",
+    "name": "entries/src/renderer/_default.page.server.tsx_extractAssets_lang",
+    "src": "src/renderer/_default.page.server.tsx?extractAssets&lang.tsx",
+    "isEntry": true,
+    "isDynamicEntry": true
+  }
+}

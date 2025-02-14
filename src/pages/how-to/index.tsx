@@ -237,7 +237,7 @@ export const HowTo = () => {
           {/* Ana İçerik */}
           <div className="col-span-9">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-              Nasıl Kullanılır?
+              Metin Editörü Nasıl Kullanılır?
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-12">

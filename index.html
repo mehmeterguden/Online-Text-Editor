@@ -92,49 +92,209 @@
     </script>
   </head>
   <body>
-        <div style="display: none" aria-hidden="true">
-          <h1>Metin Editörü - Gelişmiş Online Metin Düzenleme ve Dönüştürme Aracı</h1>
-          <p>
-            Metin Editörü, metinlerinizi profesyonel bir şekilde düzenlemenizi, temizlemenizi ve dönüştürmenizi sağlayan ücretsiz bir online araçtır. 
-            Kullanıcı dostu arayüzü ve gelişmiş özellikleriyle metin düzenleme işlemlerinizi hızlı ve kolay bir şekilde gerçekleştirebilirsiniz.
-          </p>
-          <h2>Temel Özellikler</h2>
-          <ul>
-            <li>Metin temizleme ve düzenleme (gereksiz boşluklar, satır başı/sonu)</li>
-            <li>Türkçe-İngilizce karakter dönüştürme</li>
-            <li>HTML etiketlerini temizleme</li>
-            <li>URL kodlama ve çözme işlemleri</li>
-            <li>Satır düzenleme, sıralama ve numaralandırma</li>
-            <li>Boşluk ve sekme karakterlerini temizleme</li>
-            <li>Özel karakter işlemleri ve dönüşümleri</li>
+    <div style="display: none" aria-hidden="true" class="seo-content">
+      <header role="banner">
+        <nav aria-label="Ana navigasyon">
+          <h1 class="main-title">Metin Editörü</h1>
+          <ul role="menubar">
+            <li role="menuitem"><a href="/nasil-kullanilir" title="Metin Editörü nasıl kullanılır?">Yardım</a></li>
+            <li role="menuitem"><button aria-label="Editör ayarlarını aç">Ayarlar</button></li>
+            <li role="menuitem"><button aria-label="Karanlık/Aydınlık tema değiştir">Karanlık</button></li>
           </ul>
-          <h2>Gelişmiş Özellikler</h2>
-          <ul>
-            <li>Büyük/küçük harf dönüşümleri (tümü büyük, tümü küçük, başlık formatı)</li>
-            <li>Akıllı metin temizleme ve formatlama</li>
-            <li>Satırları alfabetik veya uzunluğa göre sıralama</li>
-            <li>Yinelenen satırları otomatik temizleme</li>
-            <li>Önek ve sonek ekleme özellikleri</li>
-            <li>Gelişmiş editör ayarları (yazı tipi, boyut, tema)</li>
+        </nav>
+      </header>
+
+      <main role="main">
+        <article class="editor-interface">
+          <section class="editor-stats" aria-label="Metin istatistikleri">
+            <div class="stats-container">
+              <dl>
+                <dt>Satır:</dt><dd>1</dd>
+                <dt>Cümle:</dt><dd>0</dd>
+                <dt>Kelime:</dt><dd>0</dd>
+                <dt>Karakter:</dt><dd>0</dd>
+              </dl>
+            </div>
+            <div class="editor-actions" role="toolbar" aria-label="Editör işlemleri">
+              <button aria-label="Son işlemi geri al">Geri Al</button>
+              <button aria-label="Son geri alınan işlemi tekrarla">İleri Al</button>
+              <button aria-label="Tüm metni temizle">Temizle</button>
+            </div>
+          </section>
+
+          <section class="editor-tools" aria-label="Metin düzenleme araçları">
+            <div class="tool-group">
+              <h3 id="case-tools">Büyük/Küçük Harf</h3>
+              <div role="toolbar" aria-labelledby="case-tools">
+                <button aria-label="Metni büyük harfe dönüştür">Büyük Harfe Dönüştür</button>
+                <button aria-label="Metni küçük harfe dönüştür">Küçük Harfe Dönüştür</button>
+                <button aria-label="Cümle başlarını büyük harf yap">Cümle Başı Büyük</button>
+                <button aria-label="Her kelimenin ilk harfini büyük yap">Kelime Başları Büyük</button>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <h3 id="cleaning-tools">Temizleme Araçları</h3>
+              <div role="toolbar" aria-labelledby="cleaning-tools">
+                <button aria-label="Metni temizle">Temizle</button>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <h3 id="sorting-tools">Sıralama Araçları</h3>
+              <div role="toolbar" aria-labelledby="sorting-tools">
+                <button aria-label="Metni A'dan Z'ye sırala">A→Z Sırala</button>
+                <button aria-label="Metni Z'den A'ya sırala">Z→A Sırala</button>
+                <button aria-label="Satırları kısadan uzuna sırala">Kısadan Uzuna Sırala</button>
+                <button aria-label="Satırları uzundan kısaya sırala">Uzundan Kısaya Sırala</button>
+                <button aria-label="Satırları rastgele sırala">Rastgele Sırala</button>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <h3 id="char-conversion">Karakter Dönüşümü</h3>
+              <div role="toolbar" aria-labelledby="char-conversion">
+                <button aria-label="Türkçe karakterleri İngilizce karakterlere dönüştür">TR→EN Dönüştür</button>
+                <button aria-label="İngilizce karakterleri Türkçe karakterlere dönüştür">EN→TR Dönüştür</button>
+              </div>
+            </div>
+
+            <div class="tool-group">
+              <h3 id="url-tools">URL Araçları</h3>
+              <div role="toolbar" aria-labelledby="url-tools">
+                <button aria-label="URL karakterlerini kodla">URL Encode</button>
+                <button aria-label="URL kodlamasını çöz">URL Decode</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="line-operations" aria-label="Satır işlemleri">
+            <div class="line-prefix">
+              <label for="prefix-input">Satır Başına Ekle</label>
+              <input type="text" id="prefix-input" placeholder="Ön ek..." aria-label="Satır başına eklenecek metin">
+              <button aria-label="Satır başlarına metni ekle">Ekle</button>
+            </div>
+
+            <div class="line-suffix">
+              <label for="suffix-input">Satır Sonuna Ekle</label>
+              <input type="text" id="suffix-input" placeholder="Son ek..." aria-label="Satır sonuna eklenecek metin">
+              <button aria-label="Satır sonlarına metni ekle">Ekle</button>
+            </div>
+          </section>
+
+          <section class="search-replace" aria-label="Arama ve değiştirme">
+            <div class="search-group">
+              <label for="search-text">Arama Metni</label>
+              <textarea id="search-text" placeholder="Aramak istediğiniz metni girin..." aria-label="Aranacak metin"></textarea>
+            </div>
+
+            <div class="replace-group">
+              <label for="replace-text">Değiştirme Metni</label>
+              <textarea id="replace-text" placeholder="Değiştirmek istediğiniz metni girin..." aria-label="Değiştirilecek metin"></textarea>
+            </div>
+
+            <div class="search-options" role="group" aria-label="Arama seçenekleri">
+              <label><input type="checkbox" aria-label="Büyük/küçük harf duyarlı arama yap">Büyük/küçük harf duyarlı</label>
+              <label><input type="checkbox" aria-label="Sadece tam kelime eşleşmelerini ara">Tam kelime</label>
+              <label><input type="checkbox" aria-label="Düzenli ifade kullanarak ara">Regex kullan</label>
+            </div>
+
+            <div class="search-actions" role="toolbar" aria-label="Arama işlemleri">
+              <button aria-label="Metinde ara">Bul (0)</button>
+              <button aria-label="Bulunan metni değiştir">Değiştir</button>
+              <button aria-label="Bulunan tüm metinleri değiştir">Tümünü Değiştir (0)</button>
+            </div>
+          </section>
+        </article>
+
+        <section class="features" aria-labelledby="features-title">
+          <h2 id="features-title">Profesyonel Metin Düzenleme</h2>
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3>Gelişmiş Düzenleme Araçları</h3>
+              <ul>
+                <li>Metin biçimlendirme ve düzenleme</li>
+                <li>Büyük/küçük harf dönüşümleri</li>
+                <li>Akıllı karakter değiştirme</li>
+                <li>HTML etiket temizleme</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Güvenli ve Hızlı İşlem</h3>
+              <ul>
+                <li>Tarayıcı tabanlı işlemler</li>
+                <li>Anlık sonuç alma</li>
+                <li>Veri güvenliği</li>
+                <li>Sunucu gecikmesi yok</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Akıllı Dönüşümler</h3>
+              <ul>
+                <li>Türkçe-İngilizce karakter dönüşümü</li>
+                <li>URL kodlama/çözme</li>
+                <li>Özel format düzenlemeleri</li>
+                <li>Toplu metin işlemleri</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Metin Organizasyonu</h3>
+              <ul>
+                <li>Satır sıralama ve filtreleme</li>
+                <li>Alfabetik düzenleme</li>
+                <li>Sayısal sıralama</li>
+                <li>Özel sıralama seçenekleri</li>
           </ul>
-          <h2>Kullanım Alanları</h2>
-          <ul>
-            <li>SEO ve web içerik düzenleme</li>
-            <li>Veri temizleme ve formatlama</li>
-            <li>Kod düzenleme ve temizleme</li>
-            <li>İçerik yazarlığı ve düzenleme</li>
-            <li>Metin dönüştürme işlemleri</li>
-            <li>Toplu metin işleme</li>
+            </article>
+          </div>
+
+          <div class="cta-section">
+            <a href="/nasil-kullanilir" class="cta-button" title="Metin Editörü kullanım kılavuzu">Nasıl Kullanılır?</a>
+          </div>
+        </section>
+      </main>
+
+      <footer role="contentinfo">
+        <div class="footer-content">
+          <section class="footer-about">
+            <h3>Metin Editörü</h3>
+            <p>Metinlerinizi düzenlemek, biçimlendirmek ve dönüştürmek için profesyonel çözüm. Kullanıcı dostu arayüzü ve gelişmiş özellikleriyle metin düzenleme işlerinizi kolaylaştırır.</p>
+          </section>
+
+          <section class="footer-features">
+            <h3>Özellikler</h3>
+            <ul>
+              <li>Metin Düzenleme</li>
+              <li>Büyük/Küçük Harf</li>
+              <li>Karakter Dönüşümü</li>
+              <li>Sıralama Araçları</li>
+              <li>URL Kodlama</li>
+              <li>HTML Temizleme</li>
           </ul>
-          <h2>Neden Metin Editörü?</h2>
-          <ul>
-            <li>Tamamen ücretsiz ve reklamsız</li>
-            <li>Hızlı ve kullanıcı dostu arayüz</li>
-            <li>Gelişmiş düzenleme özellikleri</li>
-            <li>Güvenli ve gizlilik odaklı</li>
-            <li>Tarayıcı tabanlı, kurulum gerektirmez</li>
-            <li>Sürekli güncellenen özellikler</li>
+          </section>
+
+          <nav class="footer-links" aria-label="Alt navigasyon">
+            <h3>Bağlantılar</h3>
+            <ul>
+              <li><button aria-label="Editör ayarlarını aç">Editör Ayarları</button></li>
+              <li><a href="/nasil-kullanilir" title="Metin Editörü nasıl kullanılır?">Nasıl Kullanılır?</a></li>
+              <li><button aria-label="Gizlilik politikasını görüntüle">Gizlilik Politikası</button></li>
           </ul>
+          </nav>
+
+          <section class="footer-contact">
+            <h3>İletişim</h3>
+            <p>Sorularınız ve önerileriniz için bizimle iletişime geçebilirsiniz.</p>
+            <div class="contact-info">
+              <a href="mailto:iletisim@metineditoru.com" class="contact-button">E-posta Gönder</a>
+              <p><strong>E-posta:</strong> iletisim@metineditoru.com</p>
+            </div>
+          </section>
+        </div>
+      </footer>
         </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
