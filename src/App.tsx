@@ -12,6 +12,7 @@ import { Loading } from './components/Loading'
 import { Toast } from './components/Toast'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { SuggestionButton } from './components/SuggestionButton'
 
 // Loglama fonksiyonu
 const log = (type: 'info' | 'warning' | 'error', message: string, data?: any) => {
@@ -627,9 +628,10 @@ function App() {
   }, [text, setText, handleTextOperation])
 
   return (
-    <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
+    <div className="min-h-screen bg-white dark:bg-dark">
       <Helmet>
-        <title>Metin Editörü - Online Metin Düzenleme ve Dönüştürme Aracı</title>
+        <title>Metin Editörü - Ücretsiz Online Metin Düzenleyici</title>
+        <meta name="description" content="Ücretsiz online metin düzenleyici. Metinlerinizi düzenleyin, dönüştürün ve biçimlendirin." />
       </Helmet>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border dark:border-dark-border">
@@ -899,6 +901,9 @@ function App() {
             </button>
           </div>
         </div>
+
+        {/* Tavsiye Ver Butonu */}
+        <SuggestionButton />
 
         {/* SEO Bölümü */}
         <section className="max-w-[1400px] mx-auto px-4 py-16 mt-12 border-t border-light-border dark:border-dark-border">

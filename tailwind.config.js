@@ -19,7 +19,7 @@ export default {
         'light-success': '#15803D',
         'light-warning': '#B45309',
         'light-error': '#B91C1C',
-        'dark-bg': '#1E1E2E',
+        'dark-bg': '#1e1e2e',
         'dark-bg-secondary': '#181825',
         'dark-text': '#E2E8F0',
         'dark-text-secondary': '#CBD5E1',
@@ -84,6 +84,11 @@ export default {
           '100%': { opacity: 0 },
         },
       },
+      backgroundColor: {
+        'dark': {
+          DEFAULT: '#1e1e2e',
+        }
+      }
     },
   },
   plugins: [
