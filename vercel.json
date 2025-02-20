@@ -9,6 +9,14 @@
       "destination": "/"
     },
     {
+      "source": "/c-compiler",
+      "destination": "/c-compiler/"
+    },
+    {
+      "source": "/c-compiler/",
+      "destination": "/"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }

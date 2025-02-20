@@ -17,25 +17,28 @@ export function TextEditor({ value, onChange, settings }: TextEditorProps) {
     fontFamily: settings.fontFamily,
     lineHeight: settings.lineHeight,
     letterSpacing: settings.letterSpacing,
-    lineNumbers: settings.lineNumbers ? 'on' : 'off',
-    wordWrap: settings.wordWrap ? 'on' : 'off',
+    lineNumbers: settings.lineNumbers ? 'on' as const : 'off' as const,
+    wordWrap: settings.wordWrap ? 'on' as const : 'off' as const,
     minimap: { enabled: settings.minimap },
+    maxTokenizationLineLength: 0, // Tokenization limitini kaldır
+    maxFileSize: 100 * 1024 * 1024, // 100MB dosya limiti
+    largeFileOptimizations: false, // Büyük dosya optimizasyonlarını kapat
     tabSize: settings.tabSize,
     renderWhitespace: settings.renderWhitespace,
     cursorStyle: settings.cursorStyle,
     cursorWidth: settings.cursorWidth,
-    cursorSmoothCaretAnimation: settings.cursorSmoothCaretAnimation,
+    cursorSmoothCaretAnimation: settings.cursorSmoothCaretAnimation ? 'on' as const : 'off' as const,
     smoothScrolling: settings.smoothScrolling,
     bracketPairColorization: { enabled: false },
     guides: { bracketPairs: settings.guides && settings.syntaxHighlighting },
     links: settings.links && settings.syntaxHighlighting,
     mouseWheelZoom: settings.mouseWheelZoom,
     unicodeHighlight: settings.unicodeHighlight,
-    occurrencesHighlight: settings.syntaxHighlighting,
+    occurrencesHighlight: settings.syntaxHighlighting ? 'singleFile' as const : 'off' as const,
     renderControlCharacters: settings.syntaxHighlighting,
     colorDecorators: settings.syntaxHighlighting,
     selectionHighlight: settings.syntaxHighlighting,
-    matchBrackets: settings.syntaxHighlighting ? 'always' : 'never',
+    matchBrackets: settings.syntaxHighlighting ? 'always' as const : 'never' as const,
     readOnly: false,
     contextmenu: true,
     quickSuggestions: false,
@@ -51,8 +54,17 @@ export function TextEditor({ value, onChange, settings }: TextEditorProps) {
       theme={theme === 'dark' ? 'vs-dark' : 'vs-light'}
       options={monacoOptions}
       className="w-full h-[calc(100vh-12rem)] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700"
-      onPaste={(e) => {
-        e?.preventDefault = () => {}
+      beforeMount={(monaco) => {
+        monaco.editor.defineTheme('vs-dark', {
+          base: 'vs-dark',
+          inherit: true,
+          rules: [],
+          colors: {}
+        });
+        // Yapıştırma işlemini engelleme
+        window.addEventListener('paste', (e) => {
+          if (e.preventDefault) e.preventDefault();
+        });
       }}
     />
   )
