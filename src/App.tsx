@@ -83,15 +83,36 @@ function App() {
       preventDefaultOnPaste: false
     })
 
+    // Sağ tıklama menüsü için olay dinleyici ekliyorum
+    editor.onContextMenu((event: any) => {
+      event.preventDefault();
+      const menu = [
+        { label: 'Kes', command: 'editor.action.clipboardCutAction' },
+        { label: 'Kopyala', command: 'editor.action.clipboardCopyAction' },
+        { label: 'Yapıştır', command: 'editor.action.clipboardPasteAction' }
+      ];
+
+      // Menüyü gösterme kodunu ekliyorum
+      const contextMenu = document.createElement('div');
+      contextMenu.className = 'custom-context-menu';
+      menu.forEach(item => {
+        editor.addAction({
+          id: item.command,
+          label: item.label,
+          keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_V],
+          contextMenuGroupId: '9_cutcopypaste',
+          run: () => editor.trigger('keyboard', item.command, null)
+        });
+      });
+
+      // Menüyü kapatma
+      document.addEventListener('click', () => {
+        contextMenu.remove();
+      }, { once: true });
+    });
+
     // Editöre otomatik odaklan
     editor.focus()
-
-    // Yapıştırma olayını engelleme
-    editor.onKeyDown((e: any) => {
-      if (e.ctrlKey && e.code === 'KeyV') {
-        e.preventDefault = () => {}
-      }
-    })
   }
 
   // Monaco editörün temasını güncelle
@@ -765,6 +786,7 @@ function App() {
                 loading={<Loading />}
                 options={{
                   ...editorSettings,
+                  contextmenu: true, // Sağ tıklama menüsünü etkinleştiriyorum
                   fontFamily: `${editorSettings.fontFamily}, monospace`,
                   fontLigatures: true,
                   disableMonospaceOptimizations: true,
@@ -779,7 +801,6 @@ function App() {
                   overviewRulerBorder: false,
                   hideCursorInOverviewRuler: true,
                   renderLineHighlight: 'none',
-                  contextmenu: false,
                   cursorBlinking: 'blink',
                   cursorSmoothCaretAnimation: 'off',
                   smoothScrolling: false,
