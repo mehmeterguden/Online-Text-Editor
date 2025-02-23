@@ -20,8 +20,6 @@ export function TextEditor({ value, onChange, settings }: TextEditorProps) {
     lineNumbers: settings.lineNumbers ? 'on' as const : 'off' as const,
     wordWrap: settings.wordWrap ? 'on' as const : 'off' as const,
     minimap: { enabled: settings.minimap },
-    maxTokenizationLineLength: 0, // Tokenization limitini kaldır
-    maxFileSize: 100 * 1024 * 1024, // 100MB dosya limiti
     largeFileOptimizations: false, // Büyük dosya optimizasyonlarını kapat
     tabSize: settings.tabSize,
     renderWhitespace: settings.renderWhitespace,

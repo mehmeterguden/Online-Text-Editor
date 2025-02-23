@@ -73,8 +73,6 @@ function App() {
       fontSize: editorSettings.fontSize,
       fontFamily: editorSettings.fontFamily,
       lineHeight: editorSettings.lineHeight,
-      maxTokenizationLineLength: 0, // Tokenization limitini kaldır
-      maxFileSize: 100 * 1024 * 1024, // 100MB dosya limiti
       largeFileOptimizations: false, // Büyük dosya optimizasyonlarını kapat
       tabSize: editorSettings.tabSize,
       renderWhitespace: editorSettings.renderWhitespace,

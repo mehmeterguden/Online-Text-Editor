@@ -4,6 +4,15 @@ import Editor from '@monaco-editor/react';
 import { Helmet } from 'react-helmet';
 import { FiPlay, FiTrash2, FiCopy, FiRotateCcw, FiRotateCw, FiCheck, FiAlertCircle, FiDownload, FiUpload, FiCode, FiSearch, FiZoomIn, FiZoomOut, FiSend } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
+import JSCPP from 'JSCPP';
+
+declare const TinyC: {
+  compile: (code: string) => {
+    success: boolean;
+    output: string;
+    error?: string;
+  };
+};
 
 const defaultCode = `#include <stdio.h>
 
@@ -11,6 +20,126 @@ int main() {
     printf("Merhaba Dünya!\\n");
     return 0;
 }`;
+
+const compileWithCheerp = (code: string): Promise<{ success: boolean; output: string; error?: string }> => {
+  return new Promise((resolve) => {
+    try {
+      // Değişken tanımlamalarını topla
+      const variables: { [key: string]: any } = {};
+      const variableDeclarations = code.match(/\b(?:int|float|char|double)\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*;/g) || [];
+      
+      variableDeclarations.forEach(declaration => {
+        const varName = declaration.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*;/)?.[1];
+        if (varName) {
+          variables[varName] = 0; // Varsayılan değer
+        }
+      });
+
+      // C kodunu JavaScript'e dönüştürme
+      let jsCode = code
+        // Başlık dosyalarını kaldır
+        .replace(/#include\s*<[^>]*>/g, '')
+        // main fonksiyonunu özel bir fonksiyona dönüştür
+        .replace(/int\s+main\s*\([^)]*\)\s*{/, '(async function() {')
+        // return 0; ifadesini kaldır
+        .replace(/return\s+0\s*;/, '')
+        // Kapanış parantezini ekle
+        .replace(/}(?!\))$/, '})();');
+
+      // printf fonksiyonunu console.log'a dönüştür (format belirteçleri ile)
+      jsCode = jsCode.replace(/printf\s*\(\s*("(?:[^"\\]|\\.)*")\s*(?:,\s*([^)]*))?\s*\)/g, (match, format, args) => {
+        let str = format.slice(1, -1); // Tırnak işaretlerini kaldır
+        
+        // Format belirteçlerini işle
+        if (args) {
+          const argArray = args.split(',').map(arg => arg.trim());
+          str = str.replace(/%d/g, () => `\${${argArray.shift() || ''}}`);
+          str = str.replace(/%f/g, () => `\${${argArray.shift() || ''}}`);
+          str = str.replace(/%c/g, () => `\${String.fromCharCode(${argArray.shift() || ''})}`);
+          str = str.replace(/%s/g, () => `\${${argArray.shift() || ''}}`);
+        }
+        
+        return `output.push(\`${str}\`)`;
+      });
+
+      // scanf fonksiyonunu async/await prompt'a dönüştür
+      jsCode = jsCode.replace(/scanf\s*\(\s*"([^\"]+)"\s*,\s*&([^)]+)\)/g, (match, format, vars) => {
+        const varArray = vars.split(',').map(v => v.trim());
+        const formatArray = format.match(/%[dfs]/g) || [];
+        
+        let result = 'await new Promise(resolve => {';
+        result += `setIsWaitingInput(true);`;
+        result += `const handleInput = (input) => {`;
+        result += `  setIsWaitingInput(false);`;
+        
+        formatArray.forEach((fmt, idx) => {
+          const varName = varArray[idx];
+          result += `  window.${varName} = input;`;
+          switch (fmt) {
+            case '%d':
+              result += `  ${varName} = parseInt(input) || 0;`;
+              break;
+            case '%f':
+              result += `  ${varName} = parseFloat(input) || 0.0;`;
+              break;
+            case '%s':
+              result += `  ${varName} = input;`;
+              break;
+          }
+        });
+        
+        result += `  output.push(\`Girdi: \${input}\`);`;
+        result += `  resolve();`;
+        result += `};`;
+        result += `setProgramInputs(prev => [...prev, handleInput]);`;
+        result += `});`;
+        
+        return result;
+      });
+
+      // Çıktıyı toplamak için dizi
+      const output: string[] = [];
+      
+      // Hata yakalama için try-catch bloğu ekle
+      jsCode = `
+        try {
+          const output = [];
+          ${jsCode}
+          return { success: true, output: output.join('\\n') };
+        } catch (error) {
+          return { 
+            success: false, 
+            output: '', 
+            error: error.message || 'Program çalıştırılırken bir hata oluştu'
+          };
+        }
+      `;
+
+      // JavaScript kodunu çalıştırma
+      const result = new Function('setIsWaitingInput', 'setProgramInputs', jsCode);
+      const programResult = result(setIsWaitingInput, setProgramInputs);
+
+      if (programResult.success) {
+        resolve({ 
+          success: true, 
+          output: programResult.output 
+        });
+      } else {
+        resolve({ 
+          success: false, 
+          output: '', 
+          error: programResult.error 
+        });
+      }
+    } catch (error) {
+      resolve({ 
+        success: false, 
+        output: '', 
+        error: error.message || 'Program derlenirken bir hata oluştu' 
+      });
+    }
+  });
+};
 
 const CCompiler: React.FC = () => {
   const [code, setCode] = useState(defaultCode);
@@ -20,6 +149,9 @@ const CCompiler: React.FC = () => {
   const [monacoInstance, setMonacoInstance] = useState<any>(null);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
   const { theme } = useTheme();
+  const [currentTheme, setCurrentTheme] = useState<'custom-light' | 'custom-dark'>(
+    document.documentElement.classList.contains('dark') ? 'custom-dark' : 'custom-light'
+  );
   const [editorWidth, setEditorWidth] = useState<number>(62.5); // 8/5 * 100 / 2
   const resizingRef = useRef<boolean>(false);
   const startXRef = useRef<number>(0);
@@ -28,7 +160,7 @@ const CCompiler: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [userInput, setUserInput] = useState<string>('');
   const [isWaitingInput, setIsWaitingInput] = useState<boolean>(false);
-  const [programInputs, setProgramInputs] = useState<string[]>([]);
+  const [programInputs, setProgramInputs] = useState<Array<(input: string) => void>>([]);
   const [currentInputIndex, setCurrentInputIndex] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,38 +174,76 @@ const CCompiler: React.FC = () => {
     setMonacoInstance(monaco);
 
     // Özel tema renkleri tanımlama
-    monaco.editor.defineTheme('custom-light', {
-      base: 'vs',
-      inherit: true,
-      rules: [],
-      colors: {
-        'editor.background': '#28293e',
-        'editor.foreground': '#E5E7EB',
-        'editor.lineHighlightBackground': '#373951',
-        'editorLineNumber.foreground': '#9CA3AF',
-        'editor.selectionBackground': '#60a5fa40',
-        'editor.inactiveSelectionBackground': '#60a5fa20',
-        'editorLineNumber.activeForeground': '#E5E7EB',
-      }
-    });
+    const defineThemes = () => {
+      monaco.editor.defineTheme('custom-light', {
+        base: 'vs',
+        inherit: true,
+        rules: [
+          { token: 'keyword', foreground: '2563eb', fontStyle: 'bold' },        // primary-600
+          { token: 'string', foreground: 'dc2626', fontStyle: 'italic' },       // red-600
+          { token: 'number', foreground: '059669' },                            // emerald-600
+          { token: 'comment', foreground: '6b7280', fontStyle: 'italic' },      // gray-500
+          { token: 'type', foreground: '7c3aed' },                             // violet-600
+          { token: 'function', foreground: 'ea580c' },                         // orange-600
+          { token: 'variable', foreground: '0284c7' },                         // sky-600
+          { token: 'operator', foreground: '4b5563' },                         // gray-600
+          { token: 'preprocessor', foreground: 'c026d3' }                      // fuchsia-600
+        ],
+        colors: {
+          'editor.background': '#f9fafb',                                      // gray-50
+          'editor.foreground': '#111827',                                      // gray-900
+          'editor.lineHighlightBackground': '#f3f4f6',                         // gray-100
+          'editorLineNumber.foreground': '#9ca3af',                           // gray-400
+          'editor.selectionBackground': '#bfdbfe',                            // blue-100
+          'editor.inactiveSelectionBackground': '#e5e7eb',                    // gray-200
+          'editorLineNumber.activeForeground': '#4b5563',                     // gray-600
+          'editor.findMatchBackground': '#fef3c7',                            // amber-100
+          'editor.findMatchHighlightBackground': '#fef9c3',                   // yellow-100
+          'editorCursor.foreground': '#2563eb',                               // primary-600
+          'editorWhitespace.foreground': '#e5e7eb',                          // gray-200
+          'editorIndentGuide.background': '#e5e7eb'                          // gray-200
+        }
+      });
 
-    monaco.editor.defineTheme('custom-dark', {
-      base: 'vs-dark',
-      inherit: true,
-      rules: [],
-      colors: {
-        'editor.background': '#28293e',
-        'editor.foreground': '#E5E7EB',
-        'editor.lineHighlightBackground': '#373951',
-        'editorLineNumber.foreground': '#9CA3AF',
-        'editor.selectionBackground': '#3B82F640',
-        'editor.inactiveSelectionBackground': '#3B82F620',
-        'editorLineNumber.activeForeground': '#E5E7EB',
-      }
-    });
+      monaco.editor.defineTheme('custom-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [
+          { token: 'keyword', foreground: '60a5fa', fontStyle: 'bold' },      // blue-400
+          { token: 'string', foreground: 'fca5a5' },                          // red-300
+          { token: 'number', foreground: '6ee7b7' },                          // emerald-300
+          { token: 'comment', foreground: '9ca3af', fontStyle: 'italic' },    // gray-400
+          { token: 'type', foreground: 'a78bfa' },                           // violet-400
+          { token: 'function', foreground: 'fb923c' },                       // orange-400
+          { token: 'variable', foreground: '38bdf8' },                       // sky-400
+          { token: 'operator', foreground: 'd1d5db' },                       // gray-300
+          { token: 'preprocessor', foreground: 'e879f9' }                    // fuchsia-400
+        ],
+        colors: {
+          'editor.background': '#1f2937',                                    // gray-800
+          'editor.foreground': '#f9fafb',                                    // gray-50
+          'editor.lineHighlightBackground': '#374151',                       // gray-700
+          'editorLineNumber.foreground': '#9ca3af',                         // gray-400
+          'editor.selectionBackground': '#3b82f6',                          // blue-500 with opacity
+          'editor.inactiveSelectionBackground': '#4b5563',                  // gray-600
+          'editorLineNumber.activeForeground': '#e5e7eb',                   // gray-200
+          'editor.findMatchBackground': '#92400e',                          // amber-800
+          'editor.findMatchHighlightBackground': '#854d0e',                 // yellow-800
+          'editorCursor.foreground': '#60a5fa',                             // blue-400
+          'editorWhitespace.foreground': '#4b5563',                        // gray-600
+          'editorIndentGuide.background': '#4b5563'                        // gray-600
+        }
+      });
+    };
+
+    // Temaları tanımla
+    defineThemes();
 
     // Temayı hemen uygula
-    monaco.editor.setTheme('custom-dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    const initialTheme = isDark ? 'custom-dark' : 'custom-light';
+    setCurrentTheme(initialTheme);
+    monaco.editor.setTheme(initialTheme);
     
     editor.updateOptions({
       readOnly: false,
@@ -89,6 +259,7 @@ const CCompiler: React.FC = () => {
       folding: false,
       lineDecorationsWidth: 8,
       padding: { top: 8, bottom: 8 },
+      theme: initialTheme
     });
 
     // CTRL + Scroll ile zoom özelliği
@@ -110,8 +281,81 @@ const CCompiler: React.FC = () => {
 
   useEffect(() => {
     if (editor && monacoInstance) {
-      // Temayı uygula
-      monacoInstance.editor.setTheme(document.documentElement.classList.contains('dark') ? 'custom-dark' : 'custom-light');
+      const isDark = document.documentElement.classList.contains('dark');
+      const newTheme = isDark ? 'custom-dark' : 'custom-light';
+      
+      // Temaları yeniden tanımla
+      monacoInstance.editor.defineTheme('custom-light', {
+        base: 'vs',
+        inherit: true,
+        rules: [
+          { token: 'keyword', foreground: '2563eb', fontStyle: 'bold' },        // primary-600
+          { token: 'string', foreground: 'dc2626', fontStyle: 'italic' },       // red-600
+          { token: 'number', foreground: '059669' },                            // emerald-600
+          { token: 'comment', foreground: '6b7280', fontStyle: 'italic' },      // gray-500
+          { token: 'type', foreground: '7c3aed' },                             // violet-600
+          { token: 'function', foreground: 'ea580c' },                         // orange-600
+          { token: 'variable', foreground: '0284c7' },                         // sky-600
+          { token: 'operator', foreground: '4b5563' },                         // gray-600
+          { token: 'preprocessor', foreground: 'c026d3' }                      // fuchsia-600
+        ],
+        colors: {
+          'editor.background': '#f9fafb',                                      // gray-50
+          'editor.foreground': '#111827',                                      // gray-900
+          'editor.lineHighlightBackground': '#f3f4f6',                         // gray-100
+          'editorLineNumber.foreground': '#9ca3af',                           // gray-400
+          'editor.selectionBackground': '#bfdbfe',                            // blue-100
+          'editor.inactiveSelectionBackground': '#e5e7eb',                    // gray-200
+          'editorLineNumber.activeForeground': '#4b5563',                     // gray-600
+          'editor.findMatchBackground': '#fef3c7',                            // amber-100
+          'editor.findMatchHighlightBackground': '#fef9c3',                   // yellow-100
+          'editorCursor.foreground': '#2563eb',                               // primary-600
+          'editorWhitespace.foreground': '#e5e7eb',                          // gray-200
+          'editorIndentGuide.background': '#e5e7eb'                          // gray-200
+        }
+      });
+
+      monacoInstance.editor.defineTheme('custom-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [
+          { token: 'keyword', foreground: '60a5fa', fontStyle: 'bold' },      // blue-400
+          { token: 'string', foreground: 'fca5a5' },                          // red-300
+          { token: 'number', foreground: '6ee7b7' },                          // emerald-300
+          { token: 'comment', foreground: '9ca3af', fontStyle: 'italic' },    // gray-400
+          { token: 'type', foreground: 'a78bfa' },                           // violet-400
+          { token: 'function', foreground: 'fb923c' },                       // orange-400
+          { token: 'variable', foreground: '38bdf8' },                       // sky-400
+          { token: 'operator', foreground: 'd1d5db' },                       // gray-300
+          { token: 'preprocessor', foreground: 'e879f9' }                    // fuchsia-400
+        ],
+        colors: {
+          'editor.background': '#1f2937',                                    // gray-800
+          'editor.foreground': '#f9fafb',                                    // gray-50
+          'editor.lineHighlightBackground': '#374151',                       // gray-700
+          'editorLineNumber.foreground': '#9ca3af',                         // gray-400
+          'editor.selectionBackground': '#3b82f6',                          // blue-500 with opacity
+          'editor.inactiveSelectionBackground': '#4b5563',                  // gray-600
+          'editorLineNumber.activeForeground': '#e5e7eb',                   // gray-200
+          'editor.findMatchBackground': '#92400e',                          // amber-800
+          'editor.findMatchHighlightBackground': '#854d0e',                 // yellow-800
+          'editorCursor.foreground': '#60a5fa',                             // blue-400
+          'editorWhitespace.foreground': '#4b5563',                        // gray-600
+          'editorIndentGuide.background': '#4b5563'                        // gray-600
+        }
+      });
+
+      // Temayı güncelle
+      setCurrentTheme(newTheme);
+      monacoInstance.editor.setTheme(newTheme);
+      
+      // Editör seçeneklerini güncelle
+      editor.updateOptions({
+        theme: newTheme
+      });
+
+      // Editörü yeniden oluştur
+      editor.layout();
     }
   }, [theme, editor, monacoInstance]);
 
@@ -121,92 +365,45 @@ const CCompiler: React.FC = () => {
     }
   };
 
+  const handleUserInput = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userInput.trim() || !programInputs[currentInputIndex]) return;
+
+    const currentHandler = programInputs[currentInputIndex];
+    currentHandler(userInput);
+    
+    setUserInput('');
+    setCurrentInputIndex(prev => prev + 1);
+  };
+
   const compileAndRun = async () => {
     setIsCompiling(true);
     setProgramInputs([]);
     setCurrentInputIndex(0);
     setIsWaitingInput(false);
+    setOutput('Derleniyor...');
+
     try {
-      let simulatedOutput = '';
-      const lines = code.split('\n');
+      const result = await compileWithCheerp(code);
       
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        
-        // scanf fonksiyonu kontrolü
-        if (line.includes('scanf')) {
-          setIsWaitingInput(true);
-          setOutput(simulatedOutput + '\nProgram girdi bekliyor...');
-          return;
-        }
-        
-        // printf fonksiyonu kontrolü
-        if (line.includes('printf')) {
-          const printfRegex = /printf\s*\(\s*"([^"]*)"\s*\)/g;
-          let match;
-          while ((match = printfRegex.exec(line)) !== null) {
-            simulatedOutput += match[1].replace('\\n', '\n');
-          }
+      if (!result.success) {
+        const errorMessage = result.error || 'Derleme hatası oluştu';
+        setOutput(`Hata:\n${errorMessage}`);
+        showNotification(errorMessage, 'error');
+      } else {
+        setOutput(result.output || 'Program başarıyla çalıştırıldı.');
+        if (!result.output) {
+          showNotification('Program başarıyla çalıştırıldı');
         }
       }
-
-      setOutput(simulatedOutput || 'Program çalıştırıldı.');
-      showNotification('Program başarıyla çalıştırıldı');
     } catch (error) {
-      setOutput('Hata: Program çalıştırılamadı.');
-      showNotification('Program çalıştırılırken bir hata oluştu', 'error');
+      const errorMessage = error.message || 'Program çalıştırılırken bir hata oluştu';
+      console.error('Derleme hatası:', error);
+      setOutput(`Hata: ${errorMessage}`);
+      showNotification(errorMessage, 'error');
     } finally {
       setIsCompiling(false);
     }
-  };
-
-  const handleUserInput = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!userInput.trim()) return;
-
-    const newInputs = [...programInputs, userInput];
-    setProgramInputs(newInputs);
-    setCurrentInputIndex(prev => prev + 1);
-
-    let simulatedOutput = output;
-    simulatedOutput += `\n${userInput}`; // Kullanıcı girdisini göster
-
-    // scanf sonrası printf varsa onu işle
-    const lines = code.split('\n');
-    let foundScanf = false;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      
-      if (line.includes('scanf')) {
-        foundScanf = true;
-        continue;
-      }
-      
-      if (foundScanf && line.includes('printf')) {
-        const printfRegex = /printf\s*\(\s*"([^"]*)"\s*\)/g;
-        let match;
-        while ((match = printfRegex.exec(line)) !== null) {
-          simulatedOutput += match[1].replace('\\n', '\n');
-        }
-        
-        // Sonraki scanf'i kontrol et
-        const remainingLines = lines.slice(i + 1);
-        const hasMoreScanf = remainingLines.some(line => line.includes('scanf'));
-        
-        if (hasMoreScanf) {
-          simulatedOutput += '\nProgram girdi bekliyor...';
-          setOutput(simulatedOutput);
-          setUserInput('');
-          return;
-        }
-      }
-    }
-
-    setOutput(simulatedOutput);
-    setIsWaitingInput(false);
-    setUserInput('');
-    showNotification('Girdi işlendi');
   };
 
   const clearCode = () => {
@@ -459,6 +656,7 @@ const CCompiler: React.FC = () => {
                   value={code}
                   onChange={handleEditorChange}
                   onMount={handleEditorDidMount}
+                  theme={currentTheme}
                   options={{
                     minimap: { enabled: false },
                     fontSize: 16,
@@ -472,6 +670,7 @@ const CCompiler: React.FC = () => {
                     glyphMargin: false,
                     folding: false,
                     lineDecorationsWidth: 8,
+                    theme: currentTheme
                   }}
                 />
               </div>
@@ -496,25 +695,26 @@ const CCompiler: React.FC = () => {
                   <FiCopy className="w-4 h-4" />
                 </button>
               </div>
-              <div style={{ backgroundColor: '#28293e' }} className="h-[calc(100vh-280px)] p-4 overflow-auto flex flex-col">
-                <pre className="font-mono text-base whitespace-pre-wrap text-gray-100 flex-grow">
+              <div className="h-[calc(100vh-280px)] p-4 overflow-auto flex flex-col bg-light-bg dark:bg-dark-bg">
+                <pre className="font-mono text-base whitespace-pre-wrap text-light-text dark:text-dark-text flex-grow">
                   {output || 'Program çıktısı burada görüntülenecek...'}
                 </pre>
                 
                 {isWaitingInput && (
-                  <form onSubmit={handleUserInput} className="mt-4 flex gap-2 items-center border-t border-gray-700 pt-4">
+                  <form onSubmit={handleUserInput} className="mt-4 flex gap-2 items-center border-t border-light-border dark:border-dark-border pt-4">
                     <input
                       ref={inputRef}
                       type="text"
                       value={userInput}
                       onChange={(e) => setUserInput(e.target.value)}
-                      className="flex-grow bg-[#373951] text-gray-100 px-3 py-2 rounded-md border border-gray-600 focus:border-primary-500 focus:outline-none"
+                      className="flex-grow bg-light-bg-secondary dark:bg-dark-bg-secondary text-light-text dark:text-dark-text px-3 py-2 rounded-md border border-light-border dark:border-dark-border focus:border-primary-500 focus:outline-none"
                       placeholder="Program girdi bekliyor..."
                       autoFocus
                     />
                     <button
                       type="submit"
                       className="flex items-center gap-2 px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-md transition-colors"
+                      disabled={!userInput.trim()}
                     >
                       <FiSend className="w-4 h-4" />
                       <span>Gönder</span>
