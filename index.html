@@ -105,14 +105,290 @@
       </header>
 
       <main role="main">
+        <section class="settings-panel" aria-label="Editör ayarları">
+          <div class="settings-panel-container bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-7xl mx-4">
+            <div class="settings-panel-content p-6">
+              <div class="settings-header flex items-center justify-between mb-6">
+                <h2 class="settings-title text-2xl font-semibold text-gray-900 dark:text-gray-100">Editör Ayarları</h2>
+                <div class="settings-actions flex items-center gap-2">
+                  <button id="reset-settings" class="settings-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group" data-tip="Ayarları sıfırla">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 group-hover:text-blue-500" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="1 4 1 10 7 10"></polyline>
+                      <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                  </button>
+                  <button id="close-settings" class="settings-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group no-tooltip">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 group-hover:text-red-500" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="settings-layout flex gap-8">
+                <div class="settings-main w-2/3">
+                  <div class="settings-sections space-y-8">
+                    <div class="settings-group space-y-6">
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="font-family-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Yazı Tipi</span>
+                          </label>
+                          <select id="font-family-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="Editörde kullanılacak yazı tipini seçin">
+                            <option value="JetBrains Mono">JetBrains Mono</option>
+                            <option value="Fira Code">Fira Code</option>
+                            <option value="Source Code Pro">Source Code Pro</option>
+                            <option value="Consolas">Consolas</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Menlo">Menlo</option>
+                            <option value="Ubuntu Mono">Ubuntu Mono</option>
+                            <option value="Roboto Mono">Roboto Mono</option>
+                            <option value="IBM Plex Mono">IBM Plex Mono</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="font-size-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Yazı Boyutu</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok küçük (12px)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Küçük (14px)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (16px)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Büyük (18px)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok büyük (20px)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel yazı boyutu girin (8-72 arası)">
+                                <input type="number" min="8" max="72" step="1" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="15.0">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="line-height-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Satır Yüksekliği</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok sıkışık (1.2x)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Sıkışık (1.4x)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (1.6x)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Geniş (1.8x)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok geniş (2.0x)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel satır yüksekliği girin (1-3 arası)">
+                                <input type="number" min="1" max="3" step="0.1" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="1.5">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="letter-spacing-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Harf Aralığı</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-blue-500 text-white" data-tip="Çok sıkışık (0px)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Sıkışık (0.3px)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (0.5px)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Geniş (0.8px)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok geniş (1px)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel harf aralığı girin (0-2 arası)">
+                                <input type="number" min="0" max="2" step="0.05" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="0.0">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-x-6 gap-y-3">
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Uzun satırları otomatik olarak alt satıra kaydır" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Kelime Kaydırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sol tarafta satır numaralarını göster">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Satır Numaraları</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sağ tarafta kod haritasını göster">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Mini Harita</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sayfa kaydırma hareketlerini yumuşat">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Yumuşak Kaydırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Parantez çiftlerini renklendir" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Parantez Renklendirme</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Dikey girinti çizgilerini göster" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Girinti Kılavuzları</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Parantezleri otomatik olarak kapat" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Parantez Kapatma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Tırnak işaretlerini otomatik olarak kapat" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Tırnak Kapatma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Seçili metni otomatik olarak parantez/tırnak içine al" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Sarmalama</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Yapıştırılan metni otomatik olarak düzenle">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Yapıştırırken Düzenle</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Bağlantıları tıklanabilir yap" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Tıklanabilir Bağlantılar</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Ctrl + Fare tekerleği ile yakınlaştırma/uzaklaştırma" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Fare ile Yakınlaştırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Belirsiz Unicode karakterlerini vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Belirsiz Karakterleri Vurgula</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Görünmez Unicode karakterlerini vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Görünmez Karakterleri Vurgula</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Temel ASCII dışındaki karakterleri vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">ASCII Dışı Karakterleri Vurgula</span>
+                        </label>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="whitespace-visibility-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Görünmez Karakterler</span>
+                          </label>
+                          <select id="whitespace-visibility-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="Boşluk ve sekme karakterlerinin görünürlüğünü ayarla">
+                            <option value="none">Gösterme</option>
+                            <option value="boundary">Sınırlarda Göster</option>
+                            <option value="all">Hepsini Göster</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="tab-size-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Tab Boyutu</span>
+                          </label>
+                          <div class="settings-input-group">
+                            <input type="number" min="1" max="8" step="1" id="tab-size-input" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="2.0">
+                            <div class="number-input-controls rounded-r-lg overflow-hidden">
+                              <button type="button" class="number-input-up">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="18 15 12 9 6 15"></polyline>
+                                </svg>
+                              </button>
+                              <button type="button" class="number-input-down">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="imlece-stili-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>İmleç Stili</span>
+                          </label>
+                          <select id="imlece-stili-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="İmleç görünümünü ayarla">
+                            <option value="line">Çizgi</option>
+                            <option value="block">Blok</option>
+                            <option value="underline">Alt Çizgi</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="imlece-genislik-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>İmleç Genişliği</span>
+                          </label>
+                          <div class="settings-input-group">
+                            <input type="number" min="1" max="5" step="1" id="imlece-genislik-input" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="2.0">
+                            <div class="number-input-controls rounded-r-lg overflow-hidden">
+                              <button type="button" class="number-input-up">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="18 15 12 9 6 15"></polyline>
+                                </svg>
+                              </button>
+                              <button type="button" class="number-input-down">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-preview w-1/3 space-y-4">
+                  <h3 class="preview-title text-lg font-medium text-gray-900 dark:text-gray-100">Önizleme</h3>
+                  <div class="preview-container border rounded-lg overflow-hidden dark:border-gray-700">
+                    <!-- Editor placeholder - actual editor will be rendered by React -->
+                    <div id="editor-preview-placeholder" style="width: 100%; height: 600px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <article class="editor-interface">
           <section class="editor-stats" aria-label="Metin istatistikleri">
             <div class="stats-container">
               <dl>
-                <dt>Satır:</dt><dd>1</dd>
-                <dt>Cümle:</dt><dd>0</dd>
-                <dt>Kelime:</dt><dd>0</dd>
-                <dt>Karakter:</dt><dd>0</dd>
+                <dt>Satır:</dt>
+                <dt>Cümle:</dt>
+                <dt>Kelime:</dt>
+                <dt>Karakter:</dt>
               </dl>
             </div>
             <div class="editor-actions" role="toolbar" aria-label="Editör işlemleri">
@@ -247,7 +523,7 @@
                 <li>Alfabetik düzenleme</li>
                 <li>Sayısal sıralama</li>
                 <li>Özel sıralama seçenekleri</li>
-          </ul>
+              </ul>
             </article>
           </div>
 
@@ -273,7 +549,7 @@
               <li>Sıralama Araçları</li>
               <li>URL Kodlama</li>
               <li>HTML Temizleme</li>
-          </ul>
+            </ul>
           </section>
 
           <nav class="footer-links" aria-label="Alt navigasyon">
@@ -282,7 +558,7 @@
               <li><button aria-label="Editör ayarlarını aç">Editör Ayarları</button></li>
               <li><a href="/nasil-kullanilir" title="Metin Editörü nasıl kullanılır?">Nasıl Kullanılır?</a></li>
               <li><button aria-label="Gizlilik politikasını görüntüle">Gizlilik Politikası</button></li>
-          </ul>
+            </ul>
           </nav>
 
           <section class="footer-contact">
@@ -295,7 +571,7 @@
           </section>
         </div>
       </footer>
-        </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
