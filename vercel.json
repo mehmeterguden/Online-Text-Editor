@@ -62,9 +62,9 @@
       "permanent": true
     }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/css/(.*)", "dest": "/public/css/$1" }
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" },
+    { "src": "public/**/*", "use": "@vercel/static" }
   ],
   "trailingSlash": true
 } 
