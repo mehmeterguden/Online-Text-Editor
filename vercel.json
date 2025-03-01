@@ -6,7 +6,7 @@
     },
     {
       "source": "/nasil-kullanilir/",
-      "destination": "/"
+      "destination": "/nasil-kullanilir.html"
     },
     {
       "source": "/c-compiler",
@@ -14,10 +14,6 @@
     },
     {
       "source": "/c-compiler/",
-      "destination": "/"
-    },
-    {
-      "source": "/(.*)",
       "destination": "/"
     }
   ],
@@ -61,10 +57,6 @@
       "destination": "https://metineditoru.com/:path*",
       "permanent": true
     }
-  ],
-  "builds": [
-    { "src": "package.json", "use": "@vercel/static-build" },
-    { "src": "public/**/*", "use": "@vercel/static" }
   ],
   "trailingSlash": true
 } 
