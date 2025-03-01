@@ -44,18 +44,5 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.metineditoru.com"
-        }
-      ],
-      "destination": "https://metineditoru.com/:path*",
-      "permanent": true
-    }
-  ],
   "trailingSlash": true
 } 
