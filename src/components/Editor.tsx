@@ -59,10 +59,23 @@ export function TextEditor({ value, onChange, settings }: TextEditorProps) {
           rules: [],
           colors: {}
         });
-        // Yapıştırma işlemini engelleme
-        window.addEventListener('paste', (e) => {
-          if (e.preventDefault) e.preventDefault();
-        });
+      }}
+      onMount={(editor) => {
+        // Ensure paste functionality works by removing any event listeners that might prevent it
+        const originalOnKeyDown = editor.onKeyDown;
+        editor.onKeyDown = function(listener) {
+          return originalOnKeyDown.call(this, (e) => {
+            // Make sure paste events are not prevented
+            if (e.ctrlKey && e.code === "KeyV") {
+              // Allow default paste behavior
+              const originalPreventDefault = e.preventDefault;
+              e.preventDefault = function() {
+                // Do nothing, effectively disabling preventDefault for paste
+              };
+            }
+            return listener(e);
+          });
+        };
       }}
     />
   )
