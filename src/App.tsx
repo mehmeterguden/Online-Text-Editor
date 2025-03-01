@@ -83,6 +83,22 @@ function App() {
       preventDefaultOnPaste: false
     })
 
+    // Ensure paste functionality works by overriding the onKeyDown method
+    const originalOnKeyDown = editor.onKeyDown;
+    editor.onKeyDown = function(listener) {
+      return originalOnKeyDown.call(this, (e) => {
+        // Make sure paste events are not prevented
+        if (e.ctrlKey && e.code === "KeyV") {
+          // Allow default paste behavior
+          const originalPreventDefault = e.preventDefault;
+          e.preventDefault = function() {
+            // Do nothing, effectively disabling preventDefault for paste
+          };
+        }
+        return listener(e);
+      });
+    };
+
     // Sağ tıklama menüsü için olay dinleyici ekliyorum
     editor.onContextMenu((event: any) => {
       event.preventDefault();
@@ -110,6 +126,16 @@ function App() {
         contextMenu.remove();
       }, { once: true });
     });
+
+    // Remove any global paste event listeners that might be preventing paste
+    const oldAddEventListener = window.addEventListener;
+    window.addEventListener = function(type, listener, options) {
+      if (type === 'paste') {
+        // Don't add paste event listeners that might prevent default behavior
+        return;
+      }
+      return oldAddEventListener.call(this, type, listener, options);
+    };
 
     // Editöre otomatik odaklan
     editor.focus()
