@@ -134,11 +134,35 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
     if (isOpen) {
       const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
       setPreviewTheme(currentTheme)
+      // Ayarlar açıldığında URL'e #ayarlar ekle
+      window.location.hash = 'ayarlar'
+    } else {
+      // Ayarlar kapandığında URL'den #ayarlar'ı kaldır
+      if (window.location.hash === '#ayarlar') {
+        window.history.pushState('', document.title, window.location.pathname + window.location.search)
+      }
     }
   }, [isOpen, theme])
 
+  // URL'de #ayarlar varsa ve ayarlar kapalıysa aç
+  useEffect(() => {
+    if (window.location.hash === '#ayarlar' && !isOpen) {
+      // onOpen fonksiyonunu props olarak almadığımız için, bu özelliği kullanmak isteyen
+      // komponentin URL'i kontrol etmesi gerekecek
+      console.log('URL contains #ayarlar but settings are closed')
+    }
+  }, [isOpen])
+
   const handleReset = () => {
     onUpdate(defaultEditorSettings)
+  }
+
+  const handleClose = () => {
+    // Ayarları kapatırken URL'den #ayarlar'ı kaldır
+    if (window.location.hash === '#ayarlar') {
+      window.history.pushState('', document.title, window.location.pathname + window.location.search)
+    }
+    onClose()
   }
 
   if (!isOpen) return null
@@ -162,7 +186,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                 <FiRotateCcw className="w-5 h-5 sm:w-6 sm:h-6 group-hover:text-blue-500" />
               </button>
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group no-tooltip"
               >
                 <FiX className="w-5 h-5 sm:w-6 sm:h-6 group-hover:text-red-500" />
@@ -592,6 +616,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
               <div className="border rounded-lg overflow-hidden dark:border-gray-700">
                 <Editor
                   height="300px"
+                  className="h-[300px] lg:h-[600px]"
                   defaultLanguage="markdown"
                   defaultValue={SAMPLE_TEXT}
                   theme={monacoTheme}

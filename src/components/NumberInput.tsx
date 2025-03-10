@@ -44,14 +44,14 @@ export function NumberInput({ value, onChange, min, max, step = 1, tooltip }: Nu
         <button 
           type="button" 
           onClick={increment} 
-          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors flex items-center justify-center"
         >
           <FiChevronUp className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
         <button 
           type="button" 
           onClick={decrement} 
-          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border-t border-gray-300 dark:border-gray-600"
+          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border-t border-gray-300 dark:border-gray-600 flex items-center justify-center"
         >
           <FiChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
