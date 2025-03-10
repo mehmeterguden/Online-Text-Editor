@@ -30,7 +30,7 @@ export function NumberInput({ value, onChange, min, max, step = 1, tooltip }: Nu
   }
 
   return (
-    <div className="number-input-wrapper" data-tip={tooltip}>
+    <div className="number-input-wrapper relative" data-tip={tooltip}>
       <input
         type="number"
         value={Number(value).toFixed(1)}
@@ -38,14 +38,22 @@ export function NumberInput({ value, onChange, min, max, step = 1, tooltip }: Nu
         min={min}
         max={max}
         step={step}
-        className="w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
+        className="w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-sm sm:text-base"
       />
-      <div className="number-input-controls rounded-r-lg overflow-hidden">
-        <button type="button" onClick={increment} className="number-input-up">
-          <FiChevronUp className="w-4 h-4" />
+      <div className="number-input-controls absolute right-0 top-0 h-full flex flex-col border-l border-gray-300 dark:border-gray-600">
+        <button 
+          type="button" 
+          onClick={increment} 
+          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+        >
+          <FiChevronUp className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
-        <button type="button" onClick={decrement} className="number-input-down">
-          <FiChevronDown className="w-4 h-4" />
+        <button 
+          type="button" 
+          onClick={decrement} 
+          className="flex-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors border-t border-gray-300 dark:border-gray-600"
+        >
+          <FiChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
         </button>
       </div>
     </div>

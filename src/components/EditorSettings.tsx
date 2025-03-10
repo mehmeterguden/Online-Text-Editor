@@ -146,11 +146,11 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
   const monacoTheme = previewTheme === 'dark' ? 'vs-dark' : 'vs-light'
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 overflow-y-auto py-8">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 overflow-y-auto py-4 sm:py-8">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-7xl mx-4">
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+        <div className="p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">
               Editör Ayarları
             </h2>
             <div className="flex items-center gap-2">
@@ -159,25 +159,25 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group"
                 data-tip="Ayarları sıfırla"
               >
-                <FiRotateCcw className="w-6 h-6 group-hover:text-blue-500" />
+                <FiRotateCcw className="w-5 h-5 sm:w-6 sm:h-6 group-hover:text-blue-500" />
               </button>
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group no-tooltip"
               >
-                <FiX className="w-6 h-6 group-hover:text-red-500" />
+                <FiX className="w-5 h-5 sm:w-6 sm:h-6 group-hover:text-red-500" />
               </button>
             </div>
           </div>
 
-          <div className="flex gap-8">
+          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
             {/* Sol Taraf - Ayarlar */}
-            <div className="w-2/3">
-              <div className="space-y-8">
+            <div className="w-full lg:w-2/3">
+              <div className="space-y-6 sm:space-y-8">
                 {/* Temel Ayarlar */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Yazı Tipi ve Boyutu */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="space-y-2">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         <span>Yazı Tipi</span>
@@ -185,7 +185,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                       <select
                         value={settings.fontFamily}
                         onChange={(e) => onUpdate({ fontFamily: e.target.value })}
-                        className="select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg"
+                        className="select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg text-sm sm:text-base"
                         data-tip="Editörde kullanılacak yazı tipini seçin"
                       >
                         <option value="JetBrains Mono">JetBrains Mono</option>
@@ -204,13 +204,13 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         <span>Yazı Boyutu</span>
                       </label>
-                      <div className="flex gap-2">
+                      <div className="flex flex-col sm:flex-row gap-2">
                         <div className="grid grid-cols-5 gap-2 flex-1">
                           {fontSizeOptions.map((option) => (
                             <button
                               key={option.label}
                               onClick={() => onUpdate({ fontSize: option.value })}
-                              className={`px-3 py-2 rounded-lg transition-colors ${
+                              className={`px-2 sm:px-3 py-2 rounded-lg transition-colors text-sm ${
                                 settings.fontSize === option.value
                                   ? 'bg-blue-500 text-white'
                                   : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -221,7 +221,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                             </button>
                           ))}
                         </div>
-                        <div className="w-24">
+                        <div className="w-full sm:w-24">
                           <NumberInput
                             value={settings.fontSize}
                             onChange={(value) => onUpdate({ fontSize: value })}
@@ -235,18 +235,18 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                   </div>
 
                   {/* Satır Yüksekliği ve Harf Aralığı */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="space-y-2">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         <span>Satır Yüksekliği</span>
                       </label>
-                      <div className="flex gap-2">
+                      <div className="flex flex-col sm:flex-row gap-2">
                         <div className="grid grid-cols-5 gap-2 flex-1">
                           {lineHeightOptions.map((option) => (
                             <button
                               key={option.label}
                               onClick={() => onUpdate({ lineHeight: option.value })}
-                              className={`px-3 py-2 rounded-lg transition-colors ${
+                              className={`px-2 sm:px-3 py-2 rounded-lg transition-colors text-sm ${
                                 settings.lineHeight === option.value
                                   ? 'bg-blue-500 text-white'
                                   : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -257,7 +257,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                             </button>
                           ))}
                         </div>
-                        <div className="w-24">
+                        <div className="w-full sm:w-24">
                           <NumberInput
                             value={settings.lineHeight}
                             onChange={(value) => onUpdate({ lineHeight: value })}
@@ -274,13 +274,13 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         <span>Harf Aralığı</span>
                       </label>
-                      <div className="flex gap-2">
+                      <div className="flex flex-col sm:flex-row gap-2">
                         <div className="grid grid-cols-5 gap-2 flex-1">
                           {letterSpacingOptions.map((option) => (
                             <button
                               key={option.label}
                               onClick={() => onUpdate({ letterSpacing: option.value })}
-                              className={`px-3 py-2 rounded-lg transition-colors ${
+                              className={`px-2 sm:px-3 py-2 rounded-lg transition-colors text-sm ${
                                 settings.letterSpacing === option.value
                                   ? 'bg-blue-500 text-white'
                                   : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -291,7 +291,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                             </button>
                           ))}
                         </div>
-                        <div className="w-24">
+                        <div className="w-full sm:w-24">
                           <NumberInput
                             value={settings.letterSpacing}
                             onChange={(value) => onUpdate({ letterSpacing: value })}
@@ -306,7 +306,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                   </div>
 
                   {/* Editör Özellikleri */}
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                     <label className="flex items-center space-x-3">
                       <input
                         type="checkbox"
@@ -521,7 +521,7 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
                   </div>
 
                   {/* Gelişmiş Ayarlar */}
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     <div className="space-y-2">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         <span>Görünmez Karakterler</span>
@@ -585,13 +585,13 @@ export function EditorSettingsPopup({ settings, onUpdate, onClose, isOpen }: Edi
             </div>
 
             {/* Sağ Taraf - Önizleme */}
-            <div className="w-1/3 space-y-4">
+            <div className="w-full lg:w-1/3 space-y-4">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                 Önizleme
               </h3>
               <div className="border rounded-lg overflow-hidden dark:border-gray-700">
                 <Editor
-                  height="600px"
+                  height="300px"
                   defaultLanguage="markdown"
                   defaultValue={SAMPLE_TEXT}
                   theme={monacoTheme}
