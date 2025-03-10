@@ -6,7 +6,7 @@ import { EditorSettingsPopup } from './components/EditorSettings'
 import { useTextOperations } from './features/textOperations/hooks/useTextOperations'
 import { useEditorSettings } from './features/editor/hooks/useEditorSettings'
 import { useTheme } from './hooks/useTheme'
-import { FiDownload, FiPrinter, FiSearch, FiMoon, FiSun, FiTrash2, FiSettings, FiRotateCcw, FiRotateCw, FiX } from 'react-icons/fi'
+import { FiDownload, FiPrinter, FiSearch, FiMoon, FiSun, FiTrash2, FiSettings, FiRotateCcw, FiRotateCw, FiX, FiMenu } from 'react-icons/fi'
 import { TestSystem } from './utils/testSystem'
 import { Loading } from './components/Loading'
 import { Toast } from './components/Toast'
@@ -34,6 +34,7 @@ interface ToastState {
 function App() {
   const [showSettings, setShowSettings] = useState(false)
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const { editorSettings, updateEditorSettings } = useEditorSettings()
   const {
@@ -267,19 +268,32 @@ function App() {
 
   const stats = getTextStats()
 
+  // Mobil menüyü kapatmak için ESC tuşu dinleyicisini güncelle
   const handleEscapeKey = useCallback((event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setShowSettings(false)
       setShowPrivacyPolicy(false)
+      setShowMobileMenu(false)
     }
   }, [])
 
+  // Mobil menüyü kapatmak için tıklama dinleyicisi
   useEffect(() => {
-    document.addEventListener('keydown', handleEscapeKey)
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
+        setShowMobileMenu(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleEscapeKey);
+    
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey)
-    }
-  }, [handleEscapeKey])
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [handleEscapeKey]);
 
   const showToast = useCallback((
     message: string, 
@@ -684,10 +698,20 @@ function App() {
       <header className="sticky top-0 z-50 bg-light-bg-secondary dark:bg-dark-bg-secondary border-b border-light-border dark:border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-primary-500">
+            <h1 className="text-2xl font-bold text-primary-500">
               Metin Editörü
             </h1>
-            <div className="flex items-center gap-3">
+            
+            {/* Mobil Menü Butonu */}
+            <button
+              className="lg:hidden mobile-menu-button flex items-center justify-center w-10 h-10 rounded-lg bg-gray-50/80 dark:bg-gray-700/80 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              <FiMenu className="w-6 h-6 text-gray-600 dark:text-gray-300" />
+            </button>
+
+            {/* Masaüstü Menü */}
+            <div className="hidden lg:flex items-center gap-3">
               <Link
                 to="/nasil-kullanilir/"
                 className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-primary-500/50 dark:hover:border-primary-400/50 transition-all group"
@@ -703,10 +727,7 @@ function App() {
                 className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:border-primary-500/50 dark:hover:border-primary-400/50 transition-all group"
                 title="Ayarlar"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 dark:text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+                <FiSettings className="h-5 w-5 text-gray-600 dark:text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Ayarlar</span>
               </button>
               <button
@@ -716,21 +737,62 @@ function App() {
               >
                 {theme === 'dark' ? (
                   <>
-                    <svg className="h-5 w-5 text-yellow-500 group-hover:text-yellow-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                    <FiSun className="h-5 w-5 text-yellow-500 group-hover:text-yellow-600 transition-colors" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-yellow-600 transition-colors">Aydınlık</span>
                   </>
                 ) : (
                   <>
-                    <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
+                    <FiMoon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-600 transition-colors" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 transition-colors">Karanlık</span>
                   </>
                 )}
               </button>
             </div>
+
+            {/* Mobil Menü */}
+            {showMobileMenu && (
+              <div className="lg:hidden mobile-menu absolute top-full right-0 mt-2 w-56 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 py-2 px-2">
+                <Link
+                  to="/nasil-kullanilir/"
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Yardım</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    setShowSettings(true)
+                    setShowMobileMenu(false)
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  <FiSettings className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Ayarlar</span>
+                </button>
+                <button
+                  onClick={() => {
+                    toggleTheme()
+                    setShowMobileMenu(false)
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <FiSun className="h-5 w-5 text-yellow-500" />
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Aydınlık Mod</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiMoon className="h-5 w-5 text-indigo-500" />
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Karanlık Mod</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>

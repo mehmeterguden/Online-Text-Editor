@@ -118,6 +118,20 @@
            border-b border-gray-200 dark:border-gray-700;
   }
 
+  @media (max-width: 640px) {
+    .editor-stats {
+      @apply flex-wrap;
+    }
+    
+    .editor-stats > div {
+      @apply w-full justify-between;
+    }
+
+    .card-base {
+      @apply w-[calc(100vw-2rem)] sm:w-auto mx-auto;
+    }
+  }
+
   footer {
     @apply bg-gray-100 dark:bg-gray-800 
            text-gray-900 dark:text-gray-100

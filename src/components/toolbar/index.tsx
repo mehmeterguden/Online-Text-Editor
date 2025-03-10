@@ -25,24 +25,24 @@ export const Toolbar = memo(function Toolbar(props: ToolbarProps) {
   return (
     <div className="space-y-4">
       <div className="card-base p-4">
-        <div className="flex flex-nowrap gap-4 overflow-x-auto pb-2">
-          <div className="select-none">
+        <div className="flex flex-wrap sm:flex-nowrap gap-4">
+          <div className="select-none w-full sm:w-auto">
             <CaseTools onConvertCase={props.onConvertCase} />
           </div>
           <Separator />
-          <div className="select-none">
+          <div className="select-none w-full sm:w-auto">
             <CleaningTools onCleanText={props.onCleanText} />
           </div>
           <Separator />
-          <div className="select-none">
+          <div className="select-none w-full sm:w-auto">
             <SortingTools onSortLines={props.onSortLines} />
           </div>
           <Separator />
-          <div className="select-none">
+          <div className="select-none w-full sm:w-auto">
             <CharacterTools onConvertCharacters={props.onConvertCharacters} />
           </div>
           <Separator />
-          <div className="select-none">
+          <div className="select-none w-full sm:w-auto">
             <URLTools onUrlEncodeDecode={props.onUrlEncodeDecode} />
           </div>
         </div>

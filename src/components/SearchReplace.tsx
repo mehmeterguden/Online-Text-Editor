@@ -172,7 +172,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
                 <textarea
                   value={searchText}
                   onChange={(e) => handleSearchTextChange(e.target.value)}
-                  className="input w-full pl-10 pr-4 py-2 min-h-[80px] border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent resize-y"
+                  className="input w-full pl-10 pr-4 py-2 min-h-[120px] md:min-h-[150px] border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent resize-y"
                   placeholder="Aramak istediğiniz metni girin..."
                 />
                 <FiSearch className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
@@ -243,7 +243,7 @@ export const SearchReplace: FC<SearchReplaceProps> = ({ text, onTextChange, onHi
                 <textarea
                   value={replaceText}
                   onChange={(e) => setReplaceText(e.target.value)}
-                  className="input w-full pl-10 pr-4 py-2 min-h-[80px] border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent resize-y"
+                  className="input w-full pl-10 pr-4 py-2 min-h-[120px] md:min-h-[150px] border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent resize-y"
                   placeholder="Değiştirmek istediğiniz metni girin..."
                 />
                 <FiEdit2 className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
