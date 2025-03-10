@@ -689,7 +689,7 @@ function App() {
   }, [text, setText, handleTextOperation])
 
   return (
-    <div className="min-h-screen bg-white dark:bg-dark">
+    <div className="min-h-screen bg-white dark:bg-dark overflow-x-hidden">
       <Helmet>
         <title>Metin Editörü - Ücretsiz Online Metin Düzenleyici</title>
         <meta name="description" content="Ücretsiz online metin düzenleyici. Metinlerinizi düzenleyin, dönüştürün ve biçimlendirin." />
