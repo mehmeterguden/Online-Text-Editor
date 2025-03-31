@@ -1016,151 +1016,318 @@ function App() {
 
         {/* SEO Bölümü */}
         <section className="max-w-[1400px] mx-auto px-4 py-16 mt-12 border-t border-light-border dark:border-dark-border">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-16 text-gray-800 dark:text-white">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-blue-500 dark:from-primary-400 dark:to-blue-400">
+              Ücretsiz Online Metin Editörü
+            </span>
+          </h1>
+          
           <div className="grid gap-16 md:grid-cols-2">
             {/* Metin Düzenleme Özellikleri */}
             <div className="space-y-8">
-              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text mb-8 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
-                Profesyonel Metin Düzenleme
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white relative pb-4 after:absolute after:left-0 after:bottom-0 after:h-1 after:w-20 after:rounded-full after:bg-gradient-to-r after:from-primary-500 after:to-primary-600 dark:after:from-primary-400 dark:after:to-primary-500">
+                Profesyonel Metin Düzenleme Araçları
               </h2>
-              <div className="space-y-6">
-                <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                      </svg>
-                  </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
-                        Gelişmiş Düzenleme Araçları
-                      </h3>
-                      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Metin biçimlendirme ve düzenleme
-                </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Büyük/küçük harf dönüşümleri
-                </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Akıllı karakter değiştirme
-                </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          HTML etiket temizleme
-                </li>
-              </ul>
-            </div>
-                    </div>
+              
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Metin Editörü, metinleriniz üzerinde hızlı ve etkili değişiklikler yapmanıza olanak tanıyan profesyonel bir çevrimiçi araçtır. Büyük-küçük harf dönüşümleri, karakter değiştirme, satır sıralama ve daha birçok özellikleri ile metin düzenleme işlemlerinizi anında gerçekleştirebilirsiniz.
+              </p>
+              
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg group">
+                  <div className="w-12 h-12 mb-4 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                   </div>
-
-                <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
-                        Güvenli ve Hızlı İşlem
-                      </h3>
-                      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Tarayıcı tabanlı işlemler
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Anlık sonuç alma
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Veri güvenliği
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Sunucu gecikmesi yok
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">Hızlı Metin Dönüşümü</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Büyük/küçük harf değiştirme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Başlık ve cümle formatı
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Türkçe-İngilizce karakter dönüşümü
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Satır sıralama (alfabetik, uzunluk, rastgele)
+                    </li>
+                  </ul>
                 </div>
-                    </div>
+                
+                <div className="p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg group">
+                  <div className="w-12 h-12 mb-4 rounded-xl bg-green-50 dark:bg-green-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                   </div>
-
-            {/* Kapsamlı Özellikler */}
-            <div className="space-y-8">
-              <h2 className="text-2xl font-bold text-light-text dark:text-dark-text mb-8 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-400 dark:to-primary-500 bg-clip-text text-transparent">
-                Kapsamlı Özellikler
-              </h2>
-              <div className="space-y-6">
-                <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
-                        Akıllı Dönüşümler
-                      </h3>
-                      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Türkçe-İngilizce karakter dönüşümü
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          URL kodlama/çözme
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Özel format düzenlemeleri
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Toplu metin işlemleri
-                        </li>
-                      </ul>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">Temizleme ve Arama</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      HTML etiket temizleme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Özel karakterleri silme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Bul ve değiştir (regex destekli)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Metin formatını temizleme
+                    </li>
+                  </ul>
                 </div>
+                
+                <div className="p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg group">
+                  <div className="w-12 h-12 mb-4 rounded-xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">Satır İşlemleri</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Satır başına/sonuna metin ekleme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Tekrarlanan satırları silme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Satır numaralandırma
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Boş satırları temizleme
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg group">
+                  <div className="w-12 h-12 mb-4 rounded-xl bg-amber-50 dark:bg-amber-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">Metin Formatı</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Otomatik satır kaydırma
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Boşluk normalleştirme
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Markdown desteği
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+                      Girinti ve sekme ayarları
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-800 p-6 rounded-2xl border border-primary-100 dark:border-gray-700 mt-10">
+                <h3 className="text-xl font-semibold text-primary-700 dark:text-primary-400 mb-3">Neden Metin Editörü?</h3>
+                <ul className="space-y-2 text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Tarayıcı tabanlı, kurulum gerektirmeyen anlık çözüm</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Hiçbir veri sunucuda saklanmaz, veri güvenliği</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Kolay kullanım, profesyonel IDE teması ve özelleştirmeler</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-primary-500 mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Performans odaklı mimarisi ile büyük metinlerde bile hızlı işlem</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
-                <div className="group p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 hover:shadow-lg">
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-7 h-7 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                    </svg>
-                  </span>
-                  <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 group-hover:text-primary-500 dark:group-hover:text-primary-400">
-                        Metin Organizasyonu
-                      </h3>
-                      <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Satır sıralama ve filtreleme
-                </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Alfabetik düzenleme
-                </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Sayısal sıralama
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-                          Özel sıralama seçenekleri
-                </li>
-              </ul>
+            {/* Kapsamlı Özellikler */}
+            <div className="space-y-8">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white relative pb-4 after:absolute after:left-0 after:bottom-0 after:h-1 after:w-20 after:rounded-full after:bg-gradient-to-r after:from-primary-500 after:to-primary-600 dark:after:from-primary-400 dark:after:to-primary-500">
+                Kapsamlı Metin Düzenleme Özellikleri
+              </h2>
+              
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Metin Editörü ile metinlerinizi istediğiniz gibi düzenleyip, herhangi bir programlama bilgisine ihtiyaç duymadan profesyonel sonuçlar elde edebilirsiniz. Kullanıcı dostu arayüzü ve kapsamlı özellikleriyle her türlü metin düzenleme ihtiyacınızı karşılar.
+              </p>
+              
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="px-6 py-5 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Büyük/Küçük Harf Dönüşümleri</h3>
+                </div>
+                <div className="p-6 space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-800 dark:text-white">HEPSİ BÜYÜK</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Metindeki tüm harfleri büyük harfe dönüştürür.</p>
                     </div>
                   </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-800 dark:text-white">hepsi küçük</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Metindeki tüm harfleri küçük harfe dönüştürür.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-800 dark:text-white">Kelimelerin İlk Harfi Büyük</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Her kelimenin ilk harfini büyük harfe dönüştürür.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="font-medium text-gray-800 dark:text-white">Cümlelerin İlk Harfi Büyük</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Her cümlenin ilk harfini büyük harfe dönüştürür.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="px-6 py-5 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Bul ve Değiştir</h3>
+                </div>
+                <div className="p-6 space-y-4">
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Metin içerisinde belirli ifadeleri arayıp yenileriyle değiştirebilirsiniz. Kurallı ifade (regex) desteği sayesinde karmaşık arama desenleri oluşturabilirsiniz.
+                  </p>
+                  
+                  <div className="flex flex-col space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                      <p className="text-sm font-medium text-gray-800 dark:text-white">Büyük/küçük harf duyarlı arama</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                      <p className="text-sm font-medium text-gray-800 dark:text-white">Tüm metinde veya seçili bölgede değiştirme</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                      <p className="text-sm font-medium text-gray-800 dark:text-white">Tam kelime eşleşmesi</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                      <p className="text-sm font-medium text-gray-800 dark:text-white">Regex (düzenli ifade) desteği</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Satır İşlemleri</h3>
+                  <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Satırları alfabetik, uzunluk veya rastgele sıralama</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Satır başına veya sonuna metin ekleme</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Tekrarlayan satırları silme</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Satır numaralarını ekleme/çıkarma</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl transition-shadow">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Metin Temizleme</h3>
+                  <ul className="space-y-3 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>HTML etiketlerini kaldırma</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Fazla boşlukları ve sekmeleri temizleme</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>Özel karakterleri temizleme</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <svg className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                      <span>URL, e-posta, emoji ve kodları temizleme</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
