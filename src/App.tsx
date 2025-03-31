@@ -324,7 +324,9 @@ function App() {
     showToast(`${operation} tamamlandı`, 'success', details, operationType)
   }, [showToast])
 
-  const getAffectedText = (type: string, count: number) => {
+  const getAffectedText = (type: string, 
+    // @ts-ignore: Parameter 'count' is declared but its value is never read
+    count: number) => {
     switch (type) {
       case 'case': return `karakter dönüştürüldü`
       case 'sort': return `satır sıralandı`
@@ -967,7 +969,7 @@ function App() {
               // Önceki tüm dekorasyonları temizle
               const oldDecorations = editor.getModel().getAllDecorations();
               editor.getModel().deltaDecorations(
-                oldDecorations.map(d => d.id),
+                oldDecorations.map((d: any) => d.id),
                 []
               );
               
