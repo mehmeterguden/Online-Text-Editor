@@ -696,6 +696,18 @@ function App() {
     }
   }, [text, setText, handleTextOperation])
 
+  // Gizlilik politikası modalını açmak için event listener
+  useEffect(() => {
+    const handleShowPrivacyPolicy = () => {
+      setShowPrivacyPolicy(true);
+    };
+
+    window.addEventListener('showPrivacyPolicy', handleShowPrivacyPolicy);
+    return () => {
+      window.removeEventListener('showPrivacyPolicy', handleShowPrivacyPolicy);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-dark overflow-x-hidden">
       <Helmet>
@@ -1450,131 +1462,149 @@ function App() {
         {/* Gizlilik Politikası Modal */}
         {showPrivacyPolicy && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 overflow-y-auto py-8"
+            className="fixed inset-0 bg-black/75 backdrop-blur-sm flex items-start justify-center z-[9999] overflow-y-auto py-8"
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 setShowPrivacyPolicy(false)
               }
             }}
           >
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl mx-4 relative">
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl mx-4 relative">
+              {/* Sabit Kapatma Butonu */}
+              <button
+                onClick={() => setShowPrivacyPolicy(false)}
+                className="fixed top-4 right-4 p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700 z-[10000]"
+              >
+                <FiX className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+              </button>
+
+              <div className="p-8 max-h-[80vh] overflow-y-auto">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                     Gizlilik Politikası
                   </h2>
-                  <button
-                    onClick={() => setShowPrivacyPolicy(false)}
-                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    <FiX className="w-6 h-6 text-gray-500 dark:text-gray-400" />
-                  </button>
-              </div>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    Son Güncelleme: 30 Nisan 2025
+                  </p>
+                </div>
                 
-                <div className="prose dark:prose-invert max-w-none space-y-6">
-                  <section>
-                    <h3>1. Giriş ve Tanımlar</h3>
-                    <p>
+                <div className="prose dark:prose-invert max-w-none space-y-8">
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">1. Giriş ve Tanımlar</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
                       Bu gizlilik politikası, Metin Editörü ("uygulama", "biz", "bizim") tarafından sağlanan hizmetlerin kullanımı sırasında uygulanan veri işleme prensiplerini açıklamaktadır. Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve ilgili mevzuat kapsamında hazırlanmıştır.
                     </p>
                   </section>
 
-                  <section>
-                    <h3>2. Veri Sorumlusu</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">2. Veri Sorumlusu</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       Metin Editörü, kişisel verilerin işlenmesi konusunda veri sorumlusu olarak hareket etmektedir. İletişim bilgilerimiz:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>E-posta: iletisim@metineditoru.com</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>3. Toplanan Veriler ve Kullanım Amaçları</h3>
-                    <h4 className="text-base font-medium mt-4 mb-2">3.1. Otomatik Olarak Toplanan Veriler</h4>
-                    <ul>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">3. Toplanan Veriler ve Kullanım Amaçları</h3>
+                    
+                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 mb-3">3.1. Otomatik Olarak Toplanan Veriler</h4>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Tarayıcı teması tercihi (açık/koyu tema)</li>
                       <li>Editör ayarları (yazı tipi, boyut, vb.)</li>
+                      <li>Tarayıcı bilgileri (sürüm, işletim sistemi)</li>
+                      <li>IP adresi (anonimleştirilmiş)</li>
                     </ul>
                     
-                    <h4 className="text-base font-medium mt-4 mb-2">3.2. Kullanıcı Tarafından Sağlanan Veriler</h4>
-                    <ul>
+                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 mb-3">3.2. Kullanıcı Tarafından Sağlanan Veriler</h4>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Düzenlenen metin içeriği (yalnızca tarayıcı belleğinde geçici olarak tutulur)</li>
                       <li>Editör özelleştirme tercihleri</li>
+                      <li>Geri bildirim formu aracılığıyla iletilen bilgiler (isteğe bağlı)</li>
+                      <li>E-posta adresi (geri bildirim yanıtları için, isteğe bağlı)</li>
                     </ul>
 
-                    <h4 className="text-base font-medium mt-4 mb-2">3.3. Kullanım Amaçları</h4>
-                    <ul>
+                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 mb-3">3.3. Kullanım Amaçları</h4>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Editör hizmetinin sağlanması ve işlevselliğinin sürdürülmesi</li>
                       <li>Kullanıcı tercihlerinin hatırlanması ve kullanıcı deneyiminin iyileştirilmesi</li>
                       <li>Teknik sorunların tespit edilmesi ve çözülmesi</li>
+                      <li>Geri bildirimlerin değerlendirilmesi ve hizmet kalitesinin artırılması</li>
+                      <li>Geri bildirim sağlayan kullanıcılara e-posta yoluyla yanıt verilmesi (isteğe bağlı)</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>4. Veri İşleme Prensipleri</h3>
-                    <h4 className="text-base font-medium mt-4 mb-2">4.1. Yerel İşleme</h4>
-                    <ul>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">4. Veri İşleme Prensipleri</h3>
+                    
+                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 mb-3">4.1. Yerel İşleme</h4>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Tüm metin düzenleme işlemleri kullanıcının tarayıcısında gerçekleştirilir</li>
                       <li>Düzenlenen metinler sunucularımıza gönderilmez veya saklanmaz</li>
                       <li>Hiçbir kullanıcı verisi üçüncü taraflarla paylaşılmaz</li>
+                      <li>Veri işleme faaliyetleri KVKK'nın 5. maddesinde belirtilen şartlara uygun olarak gerçekleştirilir</li>
                     </ul>
 
-                    <h4 className="text-base font-medium mt-4 mb-2">4.2. Yerel Depolama Kullanımı</h4>
-                    <ul>
+                    <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 mb-3">4.2. Yerel Depolama Kullanımı</h4>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Kullanıcı tercihleri tarayıcının yerel depolama alanında (localStorage) saklanır</li>
                       <li>Yerel depolama verileri yalnızca kullanıcının cihazında tutulur</li>
                       <li>Veriler şifrelenmeden saklanır ve tarayıcı geçmişi/önbellek temizlendiğinde silinir</li>
+                      <li>Yerel depolama kullanımı KVKK'nın 5. maddesinde belirtilen "açık rıza" şartına uygun olarak gerçekleştirilir</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>5. Kullanıcı Hakları</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">5. Kullanıcı Hakları</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       KVKK'nın 11. maddesi uyarınca kullanıcılarımız aşağıdaki haklara sahiptir:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Kişisel verilerin işlenip işlenmediğini öğrenme</li>
                       <li>Kişisel veriler işlenmişse buna ilişkin bilgi talep etme</li>
                       <li>Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme</li>
                       <li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme</li>
                       <li>Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme</li>
                       <li>KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde kişisel verilerin silinmesini veya yok edilmesini isteme</li>
+                      <li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle kişinin kendisi aleyhine bir sonucun ortaya çıkmasına itiraz etme</li>
+                      <li>Kişisel verilerin kanuna aykırı olarak işlenmesi sebebiyle zarara uğraması hâlinde zararın giderilmesini talep etme</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>6. Güvenlik Önlemleri</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">6. Güvenlik Önlemleri</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       Uygulamamız, kullanıcı verilerinin güvenliğini sağlamak için aşağıdaki önlemleri almaktadır:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Tüm metin işleme faaliyetleri kullanıcının tarayıcısında gerçekleştirilir</li>
                       <li>Hiçbir veri sunuculara iletilmez veya depolanmaz</li>
                       <li>Yerel depolama verileri yalnızca gerekli kullanıcı tercihlerini içerir</li>
                       <li>Uygulama, güvenli HTTPS protokolü üzerinden sunulur</li>
                       <li>Düzenli güvenlik değerlendirmeleri ve güncellemeleri yapılır</li>
+                      <li>KVKK'nın 12. maddesinde belirtilen teknik ve idari tedbirler alınır</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>7. Çerezler ve Benzer Teknolojiler</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">7. Çerezler ve Benzer Teknolojiler</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       Uygulamamız çerez kullanmamaktadır. Kullanıcı tercihleri yalnızca tarayıcının yerel depolama alanında (localStorage) saklanır. Bu veriler:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Tema tercihi (açık/koyu)</li>
                       <li>Editör ayarları (yazı tipi, boyut, vb.)</li>
                       <li>Arayüz tercihleri</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>8. Üçüncü Taraf Hizmetleri</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">8. Üçüncü Taraf Hizmetleri</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       Uygulamamız hiçbir üçüncü taraf hizmet kullanmamaktadır:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Analitik araçları kullanılmaz</li>
                       <li>Reklam servisleri kullanılmaz</li>
                       <li>Sosyal medya entegrasyonu bulunmaz</li>
@@ -1582,41 +1612,48 @@ function App() {
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>9. Veri Saklama ve Silme</h3>
-                    <p>
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">9. Veri Saklama ve Silme</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
                       Uygulamamızda veri saklama politikası aşağıdaki şekildedir:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>Düzenlenen metinler yalnızca tarayıcı belleğinde geçici olarak tutulur</li>
                       <li>Tarayıcı kapatıldığında veya sekme yenilendiğinde metin içeriği silinir</li>
                       <li>Kullanıcı tercihleri tarayıcı yerel depolama alanında saklanır ve kullanıcı tarafından silinebilir</li>
                       <li>Sunucularımızda hiçbir kullanıcı verisi saklanmaz</li>
+                      <li>KVKK'nın 7. maddesinde belirtilen silme, yok etme veya anonim hale getirme işlemleri otomatik olarak gerçekleştirilir</li>
                     </ul>
                   </section>
 
-                  <section>
-                    <h3>10. Politika Güncellemeleri</h3>
-                    <p>
-                      Bu gizlilik politikası, yasal gereklilikler veya hizmet değişiklikleri doğrultusunda güncellenebilir. Önemli değişiklikler olması durumunda, kullanıcılarımız uygulama arayüzünde bilgilendirilecektir.
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">10. Politika Güncellemeleri</h3>
+                    <p className="text-gray-700 dark:text-gray-300">
+                      Bu gizlilik politikası, yasal gereklilikler veya hizmet değişiklikleri doğrultusunda güncellenebilir. Önemli değişiklikler olması durumunda, kullanıcılarımız uygulama arayüzünde bilgilendirilecektir. KVKK'nın 10. maddesi uyarınca, politika değişiklikleri kullanıcılara bildirilecektir.
                     </p>
                   </section>
 
-                  <section>
-                    <h3>11. İletişim</h3>
-                    <p>
-                      Gizlilik politikamız hakkında sorularınız ve talepleriniz için bizimle iletişime geçebilirsiniz:
+                  <section className="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">11. İletişim ve Geri Bildirim</h3>
+                    <p className="text-gray-700 dark:text-gray-300 mb-4">
+                      Gizlilik politikamız hakkında sorularınız, talepleriniz veya geri bildirimleriniz için bizimle iletişime geçebilirsiniz:
                     </p>
-                    <ul>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
                       <li>E-posta: iletisim@metineditoru.com</li>
+                      <li>Geri bildirim formu üzerinden (isteğe bağlı e-posta yanıtı alabilirsiniz)</li>
+                    </ul>
+                    <p className="mt-6 text-gray-700 dark:text-gray-300">
+                      Geri bildirim formunu kullanırken:
+                    </p>
+                    <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                      <li>E-posta adresinizi paylaşmanız durumunda, geri bildiriminize yanıt vermek için kullanılacaktır</li>
+                      <li>E-posta yoluyla yanıt almak istemiyorsanız, e-posta adresinizi paylaşmadan geri bildirimde bulunabilirsiniz</li>
+                      <li>E-posta adresiniz yalnızca geri bildiriminize yanıt vermek amacıyla kullanılacak ve üçüncü taraflarla paylaşılmayacaktır</li>
+                      <li>KVKK'nın 5. maddesinde belirtilen "açık rıza" şartına uygun olarak işlenecektir</li>
                     </ul>
                   </section>
-
-                  <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mt-8">
-                    Son Güncelleme: 13.02.2025
-                  </p>
-            </div>
-          </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
