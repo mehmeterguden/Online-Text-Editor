@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { toTurkishUpperCase, toTurkishLowerCase, toTurkishTitleCase, toTurkishSentenceCase } from '../../../utils/turkishCase'
 
 export function useTextOperations() {
   const [text, setText] = useState('')
@@ -9,22 +10,16 @@ export function useTextOperations() {
     let result = text
     switch (type) {
       case 'upper':
-        result = text.toUpperCase()
+        result = toTurkishUpperCase(text)
         break
       case 'lower':
-        result = text.toLowerCase()
+        result = toTurkishLowerCase(text)
         break
       case 'title':
-        result = text.split('\n').map(line => 
-          line.split(' ').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-          ).join(' ')
-        ).join('\n')
+        result = text.split('\n').map(line => toTurkishTitleCase(line)).join('\n')
         break
       case 'sentence':
-        result = text.split('\n').map(line => 
-          line.charAt(0).toUpperCase() + line.slice(1).toLowerCase()
-        ).join('\n')
+        result = toTurkishSentenceCase(text)
         break
     }
     setText(result)

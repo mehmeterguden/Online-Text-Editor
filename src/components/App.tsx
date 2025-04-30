@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Toolbar } from './Toolbar'
-import { Editor } from './Editor'
+import { TextEditor } from './Editor'
 import { Header } from './layout/Header'
-import { getFeatureById, allCleaningFeatures } from '../features/cleaning'
+import { allCleaningFeatures } from '../features/cleaning'
+import { toTurkishUpperCase, toTurkishLowerCase, toTurkishTitleCase, toTurkishSentenceCase } from '../utils/turkishCase'
 
 export function App() {
   const [text, setText] = useState('')
@@ -10,36 +11,26 @@ export function App() {
   const handleConvertCase = (type: 'upper' | 'lower' | 'title' | 'sentence') => {
     switch (type) {
       case 'upper':
-        setText(text.toUpperCase())
+        setText(toTurkishUpperCase(text))
         break
       case 'lower':
-        setText(text.toLowerCase())
+        setText(toTurkishLowerCase(text))
         break
       case 'title':
         setText(
           text
             .split('\n')
-            .map(line =>
-              line
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join(' ')
-            )
+            .map(line => toTurkishTitleCase(line))
             .join('\n')
         )
         break
       case 'sentence':
-        setText(
-          text
-            .split('\n')
-            .map(line => line.charAt(0).toUpperCase() + line.slice(1).toLowerCase())
-            .join('\n')
-        )
+        setText(toTurkishSentenceCase(text))
         break
     }
   }
 
-  const handleSortLines = (type: 'asc' | 'desc' | 'length' | 'random') => {
+  const handleSortLines = (type: 'asc' | 'desc' | 'random' | 'length-asc' | 'length-desc') => {
     const lines = text.split('\n')
     switch (type) {
       case 'asc':
@@ -48,8 +39,11 @@ export function App() {
       case 'desc':
         setText(lines.sort().reverse().join('\n'))
         break
-      case 'length':
+      case 'length-asc':
         setText(lines.sort((a, b) => a.length - b.length).join('\n'))
+        break
+      case 'length-desc':
+        setText(lines.sort((a, b) => b.length - a.length).join('\n'))
         break
       case 'random':
         setText(lines.sort(() => Math.random() - 0.5).join('\n'))
@@ -116,7 +110,42 @@ export function App() {
             onCleanText={handleCleanText}
             text={text}
           />
-          <Editor value={text} onChange={setText} />
+          <TextEditor 
+            value={text} 
+            onChange={setText} 
+            settings={{
+              fontSize: 14,
+              fontFamily: 'monospace',
+              lineHeight: 1.5,
+              letterSpacing: 0,
+              lineNumbers: true,
+              wordWrap: true,
+              minimap: true,
+              tabSize: 2,
+              renderWhitespace: 'none',
+              syntaxHighlighting: true,
+              autoClosingBrackets: true,
+              autoClosingQuotes: true,
+              formatOnPaste: true,
+              formatOnType: true,
+              cursorStyle: 'line',
+              cursorWidth: 1,
+              cursorSmoothCaretAnimation: true,
+              smoothScrolling: true,
+              selectionHighlight: true,
+              matchBrackets: 'always',
+              bracketPairColorization: true,
+              guides: true,
+              autoSurround: true,
+              links: true,
+              mouseWheelZoom: true,
+              unicodeHighlight: {
+                ambiguousCharacters: true,
+                invisibleCharacters: true,
+                nonBasicASCII: true
+              }
+            }}
+          />
         </div>
       </div>
     </div>

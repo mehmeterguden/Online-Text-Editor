@@ -1,5 +1,3 @@
-import { CaseType } from '../types'
-
 // Türkçe karakter dönüşüm haritaları
 const TURKISH_TO_UPPER: { [key: string]: string } = {
   'a': 'A', 'b': 'B', 'c': 'C', 'ç': 'Ç', 'd': 'D', 'e': 'E',
@@ -18,27 +16,24 @@ const TURKISH_TO_LOWER: { [key: string]: string } = {
 }
 
 // Türkçe karakter dönüşüm fonksiyonları
-const toTurkishUpperCase = (text: string): string => {
+export const toTurkishUpperCase = (text: string): string => {
   return text.split('').map(char => TURKISH_TO_UPPER[char] || char).join('')
 }
 
-const toTurkishLowerCase = (text: string): string => {
+export const toTurkishLowerCase = (text: string): string => {
   return text.split('').map(char => TURKISH_TO_LOWER[char] || char).join('')
 }
 
-export const convertCase = (text: string, type: CaseType): string => {
-  switch (type) {
-    case 'upper':
-      return toTurkishUpperCase(text)
-    case 'lower':
-      return toTurkishLowerCase(text)
-    case 'title':
-      return text.replace(/\w\S*/g, (txt) => 
-        toTurkishUpperCase(txt.charAt(0)) + toTurkishLowerCase(txt.substr(1))
-      )
-    case 'sentence':
-      return text.replace(/(^\w|\.\s+\w)/g, (letter) => toTurkishUpperCase(letter))
-    default:
-      return text
-  }
+// Başlık formatı için yardımcı fonksiyon
+export const toTurkishTitleCase = (text: string): string => {
+  return text.split(' ').map(word => 
+    toTurkishUpperCase(word.charAt(0)) + toTurkishLowerCase(word.slice(1))
+  ).join(' ')
+}
+
+// Cümle formatı için yardımcı fonksiyon
+export const toTurkishSentenceCase = (text: string): string => {
+  return text.split('\n').map(line => 
+    toTurkishUpperCase(line.charAt(0)) + toTurkishLowerCase(line.slice(1))
+  ).join('\n')
 } 
