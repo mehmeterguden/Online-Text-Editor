@@ -827,7 +827,34 @@ function App() {
             settings={editorSettings}
             onUpdate={updateEditorSettings}
           />
-          
+                <div className="w-full" id="ad-wrapper">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div className="w-full max-w-[728px] h-[90px] mx-auto" id="ad-container">
+                      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237902702924607" crossOrigin="anonymous"></script>
+                      <ins className="adsbygoogle"
+                           style={{ display: 'inline-block', width: '100%', height: '90px' }}
+                           data-ad-client="ca-pub-4237902702924607"
+                           data-ad-slot="2779502114"></ins>
+                      <script>
+                        {`
+                          (adsbygoogle = window.adsbygoogle || []).push({});
+                          // Reklam yüklenmediğinde tüm alanı gizle
+                          window.addEventListener('load', function() {
+                            setTimeout(function() {
+                              const adContainer = document.getElementById('ad-container');
+                              const adWrapper = document.getElementById('ad-wrapper');
+                              if (adContainer && !adContainer.querySelector('iframe')) {
+                                if (adWrapper) {
+                                  adWrapper.style.display = 'none';
+                                }
+                              }
+                            }, 2000);
+                          });
+                        `}
+                      </script>
+                    </div>
+                  </div>
+                </div>
           {/* Ana Editör */}
           <div className="card-base">
             <div className="editor-stats flex items-center justify-between px-4 py-3 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-t-lg">
