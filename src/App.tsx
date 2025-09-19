@@ -1464,7 +1464,7 @@ function App() {
                 Profesyonel metin düzenleme araçları ile metinlerinizi hızlı ve etkili bir şekilde düzenleyin, biçimlendirin ve dönüştürün.
               </p>
               <a
-                href="https://github.com/mehmeterguden/Metin-Editoru"
+                href="https://github.com/mehmeterguden/Online-Text-Editor"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-sm font-medium rounded-lg transition-colors duration-200 border border-gray-600 dark:border-gray-500"
