@@ -24,5 +24,6 @@
     "declarationMap": false
   },
   "include": ["src"],
+  "exclude": ["**/*.d.ts", "node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 } 
