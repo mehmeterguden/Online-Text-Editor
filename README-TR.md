@@ -8,13 +8,13 @@
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-purple.svg)](https://vitejs.dev/)
-[![Canlı Demo](https://img.shields.io/badge/Canlı%20Demo-metineditoru.com-green.svg)](https://metineditoru.com)
+[![Website](https://img.shields.io/badge/Website-metineditoru.com-green.svg)](https://metineditoru.com)
 
 [🇹🇷 Türkçe](#) | [🇺🇸 English](README.md)
 
 ---
 
-**Zengin metin düzenleme, kod vurgulama, gerçek zamanlı istatistikler ve güçlü metin işleme araçları ile metin düzenleme deneyiminizi dönüştürün.**
+**Bu, metineditoru.com'un kaynak kodudur - zengin metin düzenleme, kod vurgulama, gerçek zamanlı istatistikler ve kapsamlı metin işleme araçları içeren güçlü bir online metin editörü.**
 
 > **Not**: Bu proje şeffaflık ve güven oluşturma amaçlarıyla açık kaynak yapılmıştır. Kaynak kodu sadece görüntüleme, öğrenme ve eğitim amaçlı kullanım için mevcuttur. CC BY-NC-SA 4.0 lisansı altında ticari kullanım, para kazanma veya rekabet eden hizmetler oluşturma izni verilmez.
 
@@ -239,6 +239,6 @@ Bu proje aşağıdaki açık kaynak kütüphaneleri kullanır:
 
 <div align="center">
 
-[🚀 Canlı Demo](https://metineditoru.com) • [🐛 Hata Bildir](https://github.com/mehmeterguden/Online-Text-Editor/issues) • [💡 Özellik İste](https://github.com/mehmeterguden/Online-Text-Editor/issues)
+[🌐 Website'i Ziyaret Et](https://metineditoru.com) • [🐛 Hata Bildir](https://github.com/mehmeterguden/Online-Text-Editor/issues) • [💡 Özellik İste](https://github.com/mehmeterguden/Online-Text-Editor/issues)
 
 </div>

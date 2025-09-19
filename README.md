@@ -8,13 +8,13 @@
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-purple.svg)](https://vitejs.dev/)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-metineditoru.com-green.svg)](https://metineditoru.com)
+[![Website](https://img.shields.io/badge/Website-metineditoru.com-green.svg)](https://metineditoru.com)
 
 [🇹🇷 Türkçe](README-TR.md) | [🇺🇸 English](#)
 
 ---
 
-**Transform your text editing experience with our advanced online editor featuring rich text editing, code highlighting, real-time statistics, and powerful text processing tools.**
+**This is the source code of metineditoru.com - a powerful online text editor featuring rich text editing, code highlighting, real-time statistics, and comprehensive text processing tools.**
 
 > **Note**: This project is open-sourced for transparency and trust-building purposes. The source code is available for viewing, learning, and educational use only. Commercial use, monetization, or creating competing services is not permitted under the CC BY-NC-SA 4.0 license.
 
@@ -239,6 +239,6 @@ This project uses the following open-source libraries:
 
 <div align="center">
 
-[🚀 Live Demo](https://metineditoru.com) • [🐛 Report Bug](https://github.com/mehmeterguden/Online-Text-Editor/issues) • [💡 Request Feature](https://github.com/mehmeterguden/Online-Text-Editor/issues)
+[🌐 Visit Website](https://metineditoru.com) • [🐛 Report Bug](https://github.com/mehmeterguden/Online-Text-Editor/issues) • [💡 Request Feature](https://github.com/mehmeterguden/Online-Text-Editor/issues)
 
 </div>
