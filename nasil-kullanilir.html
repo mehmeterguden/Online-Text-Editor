@@ -35,16 +35,33 @@
     <link rel="stylesheet" href="/css/inter.min.css">
     <link rel="stylesheet" href="/css/jetbrains-mono.min.css">
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4237902702924607"
-     crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XWGKBRTKR0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XWGKBRTKR0');
-</script>
+    <script>
+      // Load environment variables
+      const GOOGLE_ADSENSE_CLIENT_ID = '%VITE_GOOGLE_ADSENSE_CLIENT_ID%';
+      const GOOGLE_ANALYTICS_ID = '%VITE_GOOGLE_ANALYTICS_ID%';
+      
+      // Load Google AdSense if client ID is available
+      if (GOOGLE_ADSENSE_CLIENT_ID && GOOGLE_ADSENSE_CLIENT_ID !== '%VITE_GOOGLE_ADSENSE_CLIENT_ID%') {
+        const adsenseScript = document.createElement('script');
+        adsenseScript.async = true;
+        adsenseScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADSENSE_CLIENT_ID}`;
+        adsenseScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adsenseScript);
+      }
+      
+      // Load Google Analytics if ID is available
+      if (GOOGLE_ANALYTICS_ID && GOOGLE_ANALYTICS_ID !== '%VITE_GOOGLE_ANALYTICS_ID%') {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
+        document.head.appendChild(gtagScript);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GOOGLE_ANALYTICS_ID);
+      }
+    </script>
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">

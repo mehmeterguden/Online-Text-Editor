@@ -27,6 +27,28 @@ export default defineConfig({
           next()
         })
       }
+    },
+    {
+      name: 'env-inject',
+      transformIndexHtml: {
+        enforce: 'pre',
+        transform(html, context) {
+          // Replace environment variable placeholders in HTML
+          const envVars = {
+            '%VITE_GOOGLE_ADSENSE_CLIENT_ID%': process.env.VITE_GOOGLE_ADSENSE_CLIENT_ID || '',
+            '%VITE_GOOGLE_ANALYTICS_ID%': process.env.VITE_GOOGLE_ANALYTICS_ID || '',
+            '%VITE_SITE_URL%': process.env.VITE_SITE_URL || 'https://metineditoru.com',
+            '%VITE_SITE_NAME%': process.env.VITE_SITE_NAME || 'Metin Editörü'
+          }
+          
+          let transformedHtml = html
+          Object.entries(envVars).forEach(([placeholder, value]) => {
+            transformedHtml = transformedHtml.replace(new RegExp(placeholder, 'g'), value)
+          })
+          
+          return transformedHtml
+        }
+      }
     }
   ],
   resolve: {

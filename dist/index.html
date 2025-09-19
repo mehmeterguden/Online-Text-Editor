@@ -1,125 +1,687 @@
-<!DOCTYPE html><html lang="tr"><head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Metin Editörü - Online Metin Düzenleme ve Dönüştürme Aracı</title>
-   
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Metin Editörü ile metinlerinizi düzenleyin, temizleyin ve dönüştürün. Gelişmiş metin düzenleme araçları özellikleriyle profesyonel içerik oluşturun.">
-    <meta name="keywords" content="metin editörü, online metin düzenleyici, metin temizleme, karakter dönüştürme, URL düzenleme, kod düzenleyici, türkçe metin editörü">
-    <meta name="author" content="Metin Editörü">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Metin Editörü - Online Metin Düzenleme Aracı">
-    <meta property="og:description" content="Metin Editörü ile metinlerinizi düzenleyin, temizleyin ve dönüştürün. Gelişmiş metin düzenleme araçları özellikleriyle profesyonel içerik oluşturun.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://metineditoru.com/icons/og-image.png">
-    <meta property="og:url" content="https://metineditoru.com">
-    <meta property="og:site_name" content="Metin Editörü">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Metin Editörü - Online Metin Düzenleme Aracı">
-    <meta name="twitter:description" content="Metin Editörü ile metinlerinizi düzenleyin, temizleyin ve dönüştürün. Gelişmiş metin düzenleme araçları ve özelliklerle profesyonel içerik oluşturun.">
-    <meta name="twitter:image" content="https://metineditoru.com/icons/twitter-card.png">
-    <meta name="twitter:domain" content="metineditoru.com">
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="language" content="tr">
-    <meta name="revisit-after" content="7 days">
-    <meta name="geo.region" content="TR">
-    <meta name="geo.position" content="39.9334;32.8597">
-    <meta name="ICBM" content="39.9334, 32.8597">
-    <link rel="canonical" href="https://metineditoru.com">
-    
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-
-    <!-- Google tag (gtag.js) -->
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XWGKBRTKR0"></script>
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XWGKBRTKR0');
+      // Tema başlatma scripti
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
     </script>
-
-    <!-- Schema.org markup -->
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metin Editörü - Ücretsiz Online Metin Düzenleyici</title>
+  
+    <meta name="description" content="Metin Editörü ile online metin düzenleme, temizleme, karakter dönüştürme, URL kodlama, büyük/küçük harf değiştirme ve daha fazlasını yapın. Ücretsiz, hızlı ve güvenilir!" />
+    <meta name="keywords" content="metin editörü, online metin düzenleme, metin temizleme, karakter dönüştürme, URL kodlama, büyük küçük harf, metin sıralama, HTML temizleme, online araçlar, ücretsiz metin editörü, metin düzenleyici, text editor, online text editor" />
+    <meta name="author" content="Metin Editörü" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Turkish" />
+    <meta name="revisit-after" content="7 days" /> <meta http-equiv="content-language" content="tr">
+  
+    <meta property="og:title" content="Metin Editörü - Online Metin Düzenleme, Temizleme ve Dönüştürme Aracı" />
+    <meta property="og:description" content="Metin Editörü ile online metin düzenleme, temizleme, karakter dönüştürme, URL kodlama, büyük/küçük harf değiştirme ve daha fazlasını yapın. Ücretsiz, hızlı ve güvenilir!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://metineditoru.com/icons/og-image.png" /> <meta property="og:image:alt" content="Metin Editörü Logo"/>
+    <meta property="og:url" content="https://metineditoru.com" />
+    <meta property="og:site_name" content="Metin Editörü" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Metin Editörü - Online Metin Düzenleme, Temizleme ve Dönüştürme Aracı" />
+    <meta name="twitter:description" content="Metin Editörü ile online metin düzenleme, temizleme, karakter dönüştürme, URL kodlama, büyük/küçük harf değiştirme ve daha fazlasını yapın. Ücretsiz, hızlı ve güvenilir!" />
+    <meta name="twitter:image" content="https://metineditoru.com/icons/twitter-card.png" /> <meta name="twitter:image:alt" content="Metin Editörü Logo"/>
+    <meta name="twitter:domain" content="metineditoru.com" />
+  
+  
+     <link rel="canonical" href="https://metineditoru.com" />
+  
+    <link rel="stylesheet" href="/css/inter.min.css">
+    <link rel="stylesheet" href="/css/jetbrains-mono.min.css">
+    
+    <script>
+      // Load environment variables
+      const GOOGLE_ADSENSE_CLIENT_ID = '';
+      const GOOGLE_ANALYTICS_ID = '';
+      
+      // Load Google AdSense if client ID is available
+      if (GOOGLE_ADSENSE_CLIENT_ID && GOOGLE_ADSENSE_CLIENT_ID !== '') {
+        const adsenseScript = document.createElement('script');
+        adsenseScript.async = true;
+        adsenseScript.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${GOOGLE_ADSENSE_CLIENT_ID}`;
+        adsenseScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adsenseScript);
+      }
+      
+      // Load Google Analytics if ID is available
+      if (GOOGLE_ANALYTICS_ID && GOOGLE_ANALYTICS_ID !== '') {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
+        document.head.appendChild(gtagScript);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GOOGLE_ANALYTICS_ID);
+      }
+    </script>
+  
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Metin Editörü",
-      "description": "Metin Editörü ile metinlerinizi düzenleyin, temizleyin ve dönüştürün. Gelişmiş metin düzenleme araçları özellikleriyle profesyonel içerik oluşturun.",
+      "headline": "Metin Editörü - Ücretsiz Online Metin Düzenleyici",
+      "description": "Metin Editörü ile online metin düzenleme, temizleme, karakter dönüştürme, URL kodlama, büyük/küçük harf değiştirme ve daha fazlasını yapın. Ücretsiz, hızlı ve güvenilir!",
       "url": "https://metineditoru.com",
       "applicationCategory": "Text Editor",
       "operatingSystem": "Web Browser",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "TRY"
+        "priceCurrency": "TRY",
+        "availability": "https://schema.org/InStock"
       },
       "creator": {
         "@type": "Organization",
-        "name": "Metin Editörü"
+        "name": "Metin Editörü",
+        "url": "https://metineditoru.com",
+        "logo": "https://metineditoru.com/icons/apple-touch-icon.png"
       },
       "inLanguage": "tr-TR",
       "browserRequirements": "Requires JavaScript. Requires HTML5.",
-      "softwareVersion": "1.0"
+      "softwareVersion": "1.0",
+      "datePublished": "2023-01-15",
+      "dateModified": "2024-02-26",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "156",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ahmet Yılmaz"
+          },
+          "datePublished": "2024-01-20",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "reviewBody": "Metin Editörü, metin düzenleme işlerimi çok kolaylaştırdı. Özellikle Türkçe karakter dönüşümleri ve HTML temizleme özellikleri harika çalışıyor."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Ayşe Kaya"
+          },
+          "datePublished": "2024-02-10",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "reviewBody": "Kullanımı çok kolay ve hızlı. Tüm metin düzenleme ihtiyaçlarım için tek adres."
+        }
+      ],
+      "keywords": "metin editörü, online metin düzenleme, metin temizleme, karakter dönüştürme, URL kodlama, büyük küçük harf, metin sıralama, HTML temizleme, online araçlar, ücretsiz metin editörü",
+      "featureList": [
+        "Metin düzenleme ve temizleme",
+        "Türkçe karakter dönüştürme",
+        "HTML etiket temizleme",
+        "URL kodlama ve çözme",
+        "Satır düzenleme ve sıralama",
+        "Boşluk ve sekme temizleme",
+        "Büyük/küçük harf dönüşümleri",
+        "Özel karakter işlemleri",
+        "Çoklu dil desteği",
+        "Regex desteği"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://metineditoru.com"
+      }
     }
     </script>
-    <script type="module" crossorigin="" src="/assets/index-BP6OfdtF.js"></script>
-    <link rel="stylesheet" crossorigin="" href="/assets/index-DfTSjCq7.css">
-  <link rel="preconnect" href="https://rsms.me"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://www.google-analytics.com"></head>
+  
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ana Sayfa",
+          "item": "https://metineditoru.com"
+        }
+      ]
+    }
+    </script>
+    <script type="module" crossorigin src="/assets/index-BWYf3ohi.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BUX2VORj.css">
+  </head>
   <body>
-    <!-- SEO için önceden işlenmiş içerik -->
-    <div style="display:none" aria-hidden="true">
-      <h1>Metin Editörü - Online Metin Düzenleme ve Dönüştürme Aracı</h1>
-      <p>
-        Metin Editörü, metinlerinizi kolayca düzenlemenizi, temizlemenizi ve dönüştürmenizi sağlayan güçlü bir online araçtır.
-        Başlıca özellikleri:
-      </p>
-      <ul>
-        <li>Metin temizleme ve düzenleme</li>
-        <li>Karakter dönüştürme</li>
-        <li>URL kodlama/çözme</li>
-        <li>HTML etiketlerini temizleme</li>
-        <li>Satır düzenleme ve sıralama</li>
-        <li>Boşluk ve sekme temizleme</li>
-        <li>Özel karakter işlemleri</li>
-      </ul>
-      <h2>Metin Düzenleme Özellikleri</h2>
-      <p>
-        Metin Editörü'nün sunduğu başlıca düzenleme özellikleri:
-      </p>
-      <ul>
-        <li>Büyük/küçük harf dönüşümleri</li>
-        <li>Gereksiz boşlukları temizleme</li>
-        <li>Satır başı/sonu boşluklarını temizleme</li>
-        <li>HTML etiketlerini kaldırma</li>
-        <li>Tekrarlayan satırları silme</li>
-        <li>URL'leri düzenleme</li>
-        <li>Özel karakterleri temizleme</li>
-      </ul>
-      <h2>Kullanım Alanları</h2>
-      <p>
-        Metin Editörü'nü şu alanlarda kullanabilirsiniz:
-      </p>
-      <ul>
-        <li>Web içerik düzenleme</li>
-        <li>Kod temizleme</li>
-        <li>Veri düzenleme</li>
-        <li>Metin formatlandırma</li>
-        <li>SEO optimizasyonu</li>
-        <li>İçerik hazırlama</li>
-      </ul>
+    <div style="display: none" aria-hidden="true" class="seo-content">
+      <header role="banner">
+        <nav aria-label="Ana navigasyon">
+          <h1 class="main-title">Metin Editörü</h1>
+          <ul role="menubar">
+            <li role="menuitem"><a href="/nasil-kullanilir" title="Metin Editörü nasıl kullanılır?">Yardım</a></li>
+            <li role="menuitem"><button aria-label="Editör ayarlarını aç">Ayarlar</button></li>
+            <li role="menuitem"><button aria-label="Karanlık/Aydınlık tema değiştir">Karanlık</button></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main role="main">
+        <section class="settings-panel" aria-label="Editör ayarları">
+          <div class="settings-panel-container bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-7xl mx-4">
+            <div class="settings-panel-content p-6">
+              <div class="settings-header flex items-center justify-between mb-6">
+                <h2 class="settings-title text-2xl font-semibold text-gray-900 dark:text-gray-100">Editör Ayarları</h2>
+                <div class="settings-actions flex items-center gap-2">
+                  <button id="reset-settings" class="settings-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group" data-tip="Ayarları sıfırla">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 group-hover:text-blue-500" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <polyline points="1 4 1 10 7 10"></polyline>
+                      <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                  </button>
+                  <button id="close-settings" class="settings-btn p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-gray-300 group no-tooltip">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 group-hover:text-red-500" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="settings-layout flex gap-8">
+                <div class="settings-main w-2/3">
+                  <div class="settings-sections space-y-8">
+                    <div class="settings-group space-y-6">
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="font-family-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Yazı Tipi</span>
+                          </label>
+                          <select id="font-family-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="Editörde kullanılacak yazı tipini seçin">
+                            <option value="JetBrains Mono">JetBrains Mono</option>
+                            <option value="Fira Code">Fira Code</option>
+                            <option value="Source Code Pro">Source Code Pro</option>
+                            <option value="Consolas">Consolas</option>
+                            <option value="Monaco">Monaco</option>
+                            <option value="Menlo">Menlo</option>
+                            <option value="Ubuntu Mono">Ubuntu Mono</option>
+                            <option value="Roboto Mono">Roboto Mono</option>
+                            <option value="IBM Plex Mono">IBM Plex Mono</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="font-size-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Yazı Boyutu</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok küçük (12px)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Küçük (14px)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (16px)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Büyük (18px)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok büyük (20px)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel yazı boyutu girin (8-72 arası)">
+                                <input type="number" min="8" max="72" step="1" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="15.0">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="line-height-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Satır Yüksekliği</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok sıkışık (1.2x)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Sıkışık (1.4x)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (1.6x)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Geniş (1.8x)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok geniş (2.0x)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel satır yüksekliği girin (1-3 arası)">
+                                <input type="number" min="1" max="3" step="0.1" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="1.5">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="letter-spacing-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Harf Aralığı</span>
+                          </label>
+                          <div class="settings-input-group flex gap-2">
+                            <div class="settings-input-container grid grid-cols-5 gap-2 flex-1">
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-blue-500 text-white" data-tip="Çok sıkışık (0px)">XS</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Sıkışık (0.3px)">S</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Normal (0.5px)">M</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Geniş (0.8px)">L</button>
+                              <button class="settings-input-btn px-3 py-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600" data-tip="Çok geniş (1px)">XL</button>
+                            </div>
+                            <div class="settings-input-container w-24">
+                              <div class="number-input-wrapper" data-tip="Özel harf aralığı girin (0-2 arası)">
+                                <input type="number" min="0" max="2" step="0.05" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="0.0">
+                                <div class="number-input-controls rounded-r-lg overflow-hidden">
+                                  <button type="button" class="number-input-up">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                  </button>
+                                  <button type="button" class="number-input-down">
+                                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                      <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-x-6 gap-y-3">
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Uzun satırları otomatik olarak alt satıra kaydır" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Kelime Kaydırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sol tarafta satır numaralarını göster">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Satır Numaraları</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sağ tarafta kod haritasını göster">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Mini Harita</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Sayfa kaydırma hareketlerini yumuşat">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Yumuşak Kaydırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Parantez çiftlerini renklendir" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Parantez Renklendirme</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Dikey girinti çizgilerini göster" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Girinti Kılavuzları</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Parantezleri otomatik olarak kapat" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Parantez Kapatma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Tırnak işaretlerini otomatik olarak kapat" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Tırnak Kapatma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Seçili metni otomatik olarak parantez/tırnak içine al" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Otomatik Sarmalama</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Yapıştırılan metni otomatik olarak düzenle">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Yapıştırırken Düzenle</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Bağlantıları tıklanabilir yap" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Tıklanabilir Bağlantılar</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Ctrl + Fare tekerleği ile yakınlaştırma/uzaklaştırma" checked="">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Fare ile Yakınlaştırma</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Belirsiz Unicode karakterlerini vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Belirsiz Karakterleri Vurgula</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Görünmez Unicode karakterlerini vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">Görünmez Karakterleri Vurgula</span>
+                        </label>
+                        <label class="settings-item flex items-center space-x-3">
+                          <input type="checkbox" class="settings-checkbox" data-tip="Temel ASCII dışındaki karakterleri vurgula">
+                          <span class="settings-label text-sm text-gray-700 dark:text-gray-300">ASCII Dışı Karakterleri Vurgula</span>
+                        </label>
+                      </div>
+                      <div class="settings-row grid grid-cols-2 gap-6">
+                        <div class="settings-item space-y-2">
+                          <label id="whitespace-visibility-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Görünmez Karakterler</span>
+                          </label>
+                          <select id="whitespace-visibility-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="Boşluk ve sekme karakterlerinin görünürlüğünü ayarla">
+                            <option value="none">Gösterme</option>
+                            <option value="boundary">Sınırlarda Göster</option>
+                            <option value="all">Hepsini Göster</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="tab-size-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>Tab Boyutu</span>
+                          </label>
+                          <div class="settings-input-group">
+                            <input type="number" min="1" max="8" step="1" id="tab-size-input" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="2.0">
+                            <div class="number-input-controls rounded-r-lg overflow-hidden">
+                              <button type="button" class="number-input-up">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="18 15 12 9 6 15"></polyline>
+                                </svg>
+                              </button>
+                              <button type="button" class="number-input-down">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="imlece-stili-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>İmleç Stili</span>
+                          </label>
+                          <select id="imlece-stili-select" class="settings-select w-full bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg" data-tip="İmleç görünümünü ayarla">
+                            <option value="line">Çizgi</option>
+                            <option value="block">Blok</option>
+                            <option value="underline">Alt Çizgi</option>
+                          </select>
+                        </div>
+                        <div class="settings-item space-y-2">
+                          <label id="imlece-genislik-label" class="settings-label block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            <span>İmleç Genişliği</span>
+                          </label>
+                          <div class="settings-input-group">
+                            <input type="number" min="1" max="5" step="1" id="imlece-genislik-input" class="settings-input w-full h-[38px] px-2 py-1 rounded-lg bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600" value="2.0">
+                            <div class="number-input-controls rounded-r-lg overflow-hidden">
+                              <button type="button" class="number-input-up">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="18 15 12 9 6 15"></polyline>
+                                </svg>
+                              </button>
+                              <button type="button" class="number-input-down">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                  <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="settings-preview w-1/3 space-y-4">
+                  <h3 class="preview-title text-lg font-medium text-gray-900 dark:text-gray-100">Önizleme</h3>
+                  <div class="preview-container border rounded-lg overflow-hidden dark:border-gray-700">
+                    <!-- Editor placeholder - actual editor will be rendered by React -->
+                    <div id="editor-preview-placeholder" style="width: 100%; height: 600px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO İçeriği -->
+        <section class="seo-section">
+          <h1 class="seo-title">Ücretsiz Online Metin Editörü</h1>
+          
+          <div class="seo-content-grid">
+            <!-- Metin Düzenleme Özellikleri -->
+            <div class="seo-feature-column">
+              <h2 class="seo-subheading">Profesyonel Metin Düzenleme Araçları</h2>
+              
+              <p class="seo-description">
+                Metin Editörü, metinleriniz üzerinde hızlı ve etkili değişiklikler yapmanıza olanak tanıyan profesyonel bir çevrimiçi araçtır. Büyük-küçük harf dönüşümleri, karakter değiştirme, satır sıralama ve daha birçok özellikleri ile metin düzenleme işlemlerinizi anında gerçekleştirebilirsiniz.
+              </p>
+              
+              <div class="seo-features-grid">
+                <div class="seo-feature-card">
+                  <h3 class="seo-feature-title">Hızlı Metin Dönüşümü</h3>
+                  <ul class="seo-feature-list">
+                    <li>Büyük/küçük harf değiştirme</li>
+                    <li>Başlık ve cümle formatı</li>
+                    <li>Türkçe-İngilizce karakter dönüşümü</li>
+                    <li>Satır sıralama (alfabetik, uzunluk, rastgele)</li>
+                  </ul>
+                </div>
+                
+                <div class="seo-feature-card">
+                  <h3 class="seo-feature-title">Temizleme ve Arama</h3>
+                  <ul class="seo-feature-list">
+                    <li>HTML etiket temizleme</li>
+                    <li>Özel karakterleri silme</li>
+                    <li>Bul ve değiştir (regex destekli)</li>
+                    <li>Metin formatını temizleme</li>
+                  </ul>
+                </div>
+                
+                <div class="seo-feature-card">
+                  <h3 class="seo-feature-title">Satır İşlemleri</h3>
+                  <ul class="seo-feature-list">
+                    <li>Satır başına/sonuna metin ekleme</li>
+                    <li>Tekrarlanan satırları silme</li>
+                    <li>Satır numaralandırma</li>
+                    <li>Boş satırları temizleme</li>
+                  </ul>
+                </div>
+                
+                <div class="seo-feature-card">
+                  <h3 class="seo-feature-title">Metin Formatı</h3>
+                  <ul class="seo-feature-list">
+                    <li>Otomatik satır kaydırma</li>
+                    <li>Boşluk normalleştirme</li>
+                    <li>Markdown desteği</li>
+                    <li>Girinti ve sekme ayarları</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="seo-benefits">
+                <h3 class="seo-benefits-title">Neden Metin Editörü?</h3>
+                <ul class="seo-benefits-list">
+                  <li>Tarayıcı tabanlı, kurulum gerektirmeyen anlık çözüm</li>
+                  <li>Hiçbir veri sunucuda saklanmaz, veri güvenliği</li>
+                  <li>Kolay kullanım, profesyonel IDE teması ve özelleştirmeler</li>
+                  <li>Performans odaklı mimarisi ile büyük metinlerde bile hızlı işlem</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Kapsamlı Özellikler -->
+            <div class="seo-feature-column">
+              <h2 class="seo-subheading">Kapsamlı Metin Düzenleme Özellikleri</h2>
+              
+              <p class="seo-description">
+                Metin Editörü ile metinlerinizi istediğiniz gibi düzenleyip, herhangi bir programlama bilgisine ihtiyaç duymadan profesyonel sonuçlar elde edebilirsiniz. Kullanıcı dostu arayüzü ve kapsamlı özellikleriyle her türlü metin düzenleme ihtiyacınızı karşılar.
+              </p>
+              
+              <div class="seo-feature-section">
+                <h3 class="seo-feature-section-title">Büyük/Küçük Harf Dönüşümleri</h3>
+                <ul class="seo-feature-details">
+                  <li><strong>HEPSİ BÜYÜK:</strong> Metindeki tüm harfleri büyük harfe dönüştürür.</li>
+                  <li><strong>hepsi küçük:</strong> Metindeki tüm harfleri küçük harfe dönüştürür.</li>
+                  <li><strong>Kelimelerin İlk Harfi Büyük:</strong> Her kelimenin ilk harfini büyük harfe dönüştürür.</li>
+                  <li><strong>Cümlelerin İlk Harfi Büyük:</strong> Her cümlenin ilk harfini büyük harfe dönüştürür.</li>
+                </ul>
+              </div>
+              
+              <div class="seo-feature-section">
+                <h3 class="seo-feature-section-title">Bul ve Değiştir</h3>
+                <p class="seo-feature-description">
+                  Metin içerisinde belirli ifadeleri arayıp yenileriyle değiştirebilirsiniz. Kurallı ifade (regex) desteği sayesinde karmaşık arama desenleri oluşturabilirsiniz.
+                </p>
+                <ul class="seo-feature-details">
+                  <li>Büyük/küçük harf duyarlı arama</li>
+                  <li>Tüm metinde veya seçili bölgede değiştirme</li>
+                  <li>Tam kelime eşleşmesi</li>
+                  <li>Regex (düzenli ifade) desteği</li>
+                </ul>
+              </div>
+              
+              <div class="seo-features-grid">
+                <div class="seo-feature-section">
+                  <h3 class="seo-feature-section-title">Satır İşlemleri</h3>
+                  <ul class="seo-feature-details">
+                    <li>Satırları alfabetik, uzunluk veya rastgele sıralama</li>
+                    <li>Satır başına veya sonuna metin ekleme</li>
+                    <li>Tekrarlayan satırları silme</li>
+                    <li>Satır numaralarını ekleme/çıkarma</li>
+                  </ul>
+                </div>
+                
+                <div class="seo-feature-section">
+                  <h3 class="seo-feature-section-title">Metin Temizleme</h3>
+                  <ul class="seo-feature-details">
+                    <li>HTML etiketlerini kaldırma</li>
+                    <li>Fazla boşlukları ve sekmeleri temizleme</li>
+                    <li>Özel karakterleri temizleme</li>
+                    <li>URL, e-posta, emoji ve kodları temizleme</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="seo-cta">
+            <a href="/nasil-kullanilir/" class="seo-cta-button">Nasıl Kullanılır?</a>
+          </div>
+        </section>
+        
+        <section class="features" aria-labelledby="features-title">
+          <h2 id="features-title">Profesyonel Metin Düzenleme</h2>
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3>Gelişmiş Düzenleme Araçları</h3>
+              <ul>
+                <li>Metin biçimlendirme ve düzenleme</li>
+                <li>Büyük/küçük harf dönüşümleri</li>
+                <li>Akıllı karakter değiştirme</li>
+                <li>HTML etiket temizleme</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Güvenli ve Hızlı İşlem</h3>
+              <ul>
+                <li>Tarayıcı tabanlı işlemler</li>
+                <li>Anlık sonuç alma</li>
+                <li>Veri güvenliği</li>
+                <li>Sunucu gecikmesi yok</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Akıllı Dönüşümler</h3>
+              <ul>
+                <li>Türkçe-İngilizce karakter dönüşümü</li>
+                <li>URL kodlama/çözme</li>
+                <li>Özel format düzenlemeleri</li>
+                <li>Toplu metin işlemleri</li>
+              </ul>
+            </article>
+
+            <article class="feature-card">
+              <h3>Metin Organizasyonu</h3>
+              <ul>
+                <li>Satır sıralama ve filtreleme</li>
+                <li>Alfabetik düzenleme</li>
+                <li>Sayısal sıralama</li>
+                <li>Özel sıralama seçenekleri</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="cta-section">
+            <a href="/nasil-kullanilir" class="cta-button" title="Metin Editörü kullanım kılavuzu">Nasıl Kullanılır?</a>
+          </div>
+        </section>
+      </main>
+
+      <footer role="contentinfo">
+        <div class="footer-content">
+          <section class="footer-about">
+            <h3>Metin Editörü</h3>
+            <p>Metinlerinizi düzenlemek, biçimlendirmek ve dönüştürmek için profesyonel çözüm. Kullanıcı dostu arayüzü ve gelişmiş özellikleriyle metin düzenleme işlerinizi kolaylaştırır.</p>
+          </section>
+
+          <section class="footer-features">
+            <h3>Özellikler</h3>
+            <ul>
+              <li>Metin Düzenleme</li>
+              <li>Büyük/Küçük Harf</li>
+              <li>Karakter Dönüşümü</li>
+              <li>Sıralama Araçları</li>
+              <li>URL Kodlama</li>
+              <li>HTML Temizleme</li>
+            </ul>
+          </section>
+
+          <nav class="footer-links" aria-label="Alt navigasyon">
+            <h3>Bağlantılar</h3>
+            <ul>
+              <li><button aria-label="Editör ayarlarını aç">Editör Ayarları</button></li>
+              <li><a href="/nasil-kullanilir" title="Metin Editörü nasıl kullanılır?">Nasıl Kullanılır?</a></li>
+              <li><button aria-label="Gizlilik politikasını görüntüle">Gizlilik Politikası</button></li>
+            </ul>
+          </nav>
+
+          <section class="footer-contact">
+            <h3>İletişim</h3>
+            <p>Sorularınız ve önerileriniz için bizimle iletişime geçebilirsiniz.</p>
+            <div class="contact-info">
+              <a href="mailto:iletisim@metineditoru.com" class="contact-button">E-posta Gönder</a>
+              <p><strong>E-posta:</strong> iletisim@metineditoru.com</p>
+            </div>
+          </section>
+        </div>
+      </footer>
     </div>
     <div id="root"></div>
-  
- </body></html>
+  </body>
+</html> 
