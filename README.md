@@ -4,7 +4,7 @@
 
 **A powerful, modern, and feature-rich online text editor built with React, TypeScript, and Vite**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-purple.svg)](https://vitejs.dev/)
@@ -17,6 +17,8 @@
 ---
 
 **Transform your text editing experience with our advanced online editor featuring rich text editing, code highlighting, real-time statistics, and powerful text processing tools.**
+
+> **Note**: This project is open-sourced for transparency and trust-building purposes. The source code is available for viewing, learning, and educational use only. Commercial use, monetization, or creating competing services is not permitted under the CC BY-NC-SA 4.0 license.
 
 [🚀 Live Demo](https://metineditoru.com) • [📖 Documentation](#-documentation) • [🤝 Contributing](#-contributing) • [🐛 Report Bug](https://github.com/mehmeterguden/Online-Text-Editor/issues)
 
@@ -338,16 +340,17 @@ We welcome contributions from the community! Here's how you can help:
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License** - see the [LICENSE](LICENSE) file for details.
 
 ### What this means:
 
-- ✅ **Commercial Use**: Use in commercial projects
-- ✅ **Modification**: Modify and adapt the code
-- ✅ **Distribution**: Distribute the software
-- ✅ **Private Use**: Use in private projects
-- ❌ **Liability**: No warranty or liability
-- ❌ **Warranty**: No warranty provided
+- ✅ **View Source**: View and study the source code
+- ✅ **Learn**: Use for educational and learning purposes
+- ✅ **Personal Use**: Use in personal, non-commercial projects
+- ✅ **Share**: Share and distribute with proper attribution
+- ❌ **Commercial Use**: Cannot use for commercial purposes or profit
+- ❌ **Competing Sites**: Cannot create competing text editor websites
+- ❌ **Monetization**: Cannot monetize or earn money from this project
 
 ## 🙏 Acknowledgments
 

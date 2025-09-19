@@ -4,7 +4,7 @@
 
 **React, TypeScript ve Vite ile geliştirilmiş güçlü, modern ve özellik açısından zengin online metin editörü**
 
-[![License: MIT](https://img.shields.io/badge/Lisens-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/Lisens-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3.5-purple.svg)](https://vitejs.dev/)
@@ -17,6 +17,8 @@
 ---
 
 **Zengin metin düzenleme, kod vurgulama, gerçek zamanlı istatistikler ve güçlü metin işleme araçları ile metin düzenleme deneyiminizi dönüştürün.**
+
+> **Not**: Bu proje şeffaflık ve güven oluşturma amaçlarıyla açık kaynak yapılmıştır. Kaynak kodu sadece görüntüleme, öğrenme ve eğitim amaçlı kullanım için mevcuttur. CC BY-NC-SA 4.0 lisansı altında ticari kullanım, para kazanma veya rekabet eden hizmetler oluşturma izni verilmez.
 
 [🚀 Canlı Demo](https://metineditoru.com) • [📖 Dokümantasyon](#-dokümantasyon) • [🤝 Katkıda Bulunma](#-katkıda-bulunma) • [🐛 Hata Bildir](https://github.com/mehmeterguden/Online-Text-Editor/issues)
 
@@ -338,16 +340,17 @@ Topluluktan katkıları memnuniyetle karşılıyoruz! İşte nasıl yardımcı o
 
 ## 📄 Lisans
 
-Bu proje **MIT Lisansı** altında lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakın.
+Bu proje **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License** altında lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
 ### Bu ne anlama geliyor:
 
-- ✅ **Ticari Kullanım**: Ticari projelerde kullanın
-- ✅ **Değişiklik**: Kodu değiştirin ve uyarlayın
-- ✅ **Dağıtım**: Yazılımı dağıtın
-- ✅ **Özel Kullanım**: Özel projelerde kullanın
-- ❌ **Sorumluluk**: Garanti veya sorumluluk yok
-- ❌ **Garanti**: Garanti sağlanmaz
+- ✅ **Kaynak Kodunu Görüntüleme**: Kaynak kodunu görüntüleyebilir ve inceleyebilirsiniz
+- ✅ **Öğrenme**: Eğitim ve öğrenme amaçlı kullanabilirsiniz
+- ✅ **Kişisel Kullanım**: Kişisel, ticari olmayan projelerde kullanabilirsiniz
+- ✅ **Paylaşım**: Uygun atıf ile paylaşabilir ve dağıtabilirsiniz
+- ❌ **Ticari Kullanım**: Ticari amaçlar veya kâr için kullanamazsınız
+- ❌ **Rekabet Eden Siteler**: Rekabet eden metin editörü siteleri oluşturamazsınız
+- ❌ **Para Kazanma**: Bu projeden para kazanamaz veya monetize edemezsiniz
 
 ## 🙏 Teşekkürler
 
